@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Queue;
 import java.util.Set;
 
 /**
@@ -61,11 +63,13 @@ public class Grafo implements IGraph{
            if(getEdge(aux1,aux2)== null){
                Aresta a = new Aresta(aux1, aux2, data);
                arestas.add(a);
-               vertices.get(aux1).getAdjacencias().put(aux2, a);
-               vertices.get(aux2).getAdjacencias().put(aux1, a);
+               aux1.getAdjacencias().put(aux2, a);
+               aux2.getAdjacencias().put(aux1, a);
             }else{
                 throw new RuntimeException("Já existe uma aresta que liga os vértices dados!");
             }
+        }else{
+            System.out.println("Teste");
         }
         // Se não?
         
@@ -78,7 +82,7 @@ public class Grafo implements IGraph{
     }
     
     private Aresta getEdge(Vertice u, Vertice v) {
-        return vertices.get(u).getAdjacencias().get(v);
+        return u.getAdjacencias().get(v);
     }
     
     @Override
@@ -117,6 +121,41 @@ public class Grafo implements IGraph{
     @Override
     public Iterator edgesList(Object key) {
         return vertices.get(key).getAdjacencias().values().iterator();
+    }
+    
+    public void dfs(Object v){
+        dfs(vertices.get(v), new HashSet());
+    }
+    
+    private void dfs(Vertice v, HashSet<Vertice> visited){
+        visited.add(v);
+        
+        for(Vertice u: v.getAdjacencias().keySet()){
+            if(!visited.contains(u)){
+                System.out.println("("+v+","+u+")\n");
+                dfs(u, visited);
+            }
+        }
+    }
+    
+    public void bfs(Object v){
+        HashSet<Vertice> visited = new HashSet();
+        Queue<Vertice> fila = new LinkedList<>();
+        
+        fila.add(vertices.get(v));
+        visited.add(vertices.get(v));
+        
+        for (int i = 0; !fila.isEmpty() ; i++) {
+            Vertice ve = fila.poll();
+            
+            for(Vertice u : ve.getAdjacencias().keySet()){
+                if(!visited.contains(ve)){
+                    System.out.println("("+v+","+u+")\n");
+                    fila.add(u);
+                    visited.add(u);
+                }
+            }
+        }
     }
     
 }

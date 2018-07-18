@@ -49,6 +49,11 @@ public class Vertice {
     }
 
     @Override
+    public String toString() {
+        return "Vertice{" + "elemento=" + elemento + '}';
+    }
+    
+    @Override
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
