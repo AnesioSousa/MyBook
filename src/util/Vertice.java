@@ -1,36 +1,31 @@
 package util;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 /**
- * Classe responsável por criar objetos que são vértices de um grafo. Cada objeto vértice armazena um elemento e tem um mapa de todos os vertices adjacentes a ele.
- *
+ * Classe responsável por criar objetos que são vértices de um grafo. 
+ * Cada objeto vértice armazena um elemento e tem um mapa de todos os vertices adjacentes a ele.
  * @author Anésio Sousa dos Santos Neto
  */
 public class Vertice {
 
     private Object elemento;
-    private HashMap<Vertice, Aresta> arestasSaindo, arestasEntrando;
+    private HashMap<Vertice, Aresta> adjacencias;
 
     /**
-     * Construtor da classe vértices. Método que inicia os atributos da classe. Recebe um elemento por parametro e guarda esse elemento como seu.
-     *
+     * Construtor da classe vértices.
+     * Método que inicia os atributos da classe. Recebe um elemento por 
+     * parametro e guarda esse elemento como seu.
      * @param elem dado que o vértice irá guardar ao ser criado.
-     * @param oGrafoEhDirecionado
      */
-    public Vertice(Object elem, boolean oGrafoEhDirecionado) {
+    public Vertice(Object elem) {
         elemento = elem;
-        arestasSaindo = new HashMap<>();
-        if (oGrafoEhDirecionado) {
-            arestasEntrando = new HashMap<>();
-        } else {
-            arestasEntrando = arestasSaindo;
-        }
+        adjacencias = new HashMap<>();
     }
 
     /**
      * Retorna o elemento que esse vértice guarda.
-     *
      * @return elemento
      */
     public Object getElemento() {
@@ -39,7 +34,6 @@ public class Vertice {
 
     /**
      * Dita qual elemento esse vértice deve guardar.
-     *
      * @param elemento novo elemento
      */
     public void setElemento(Object elemento) {
@@ -47,21 +41,29 @@ public class Vertice {
     }
 
     /**
-     * Retorna o mapa de vértices que se tornaram adjacentes por receberem arestas que saem deste vértice.
-     *
+     * Retorna o mapa de adjacencias que esse vértice possui.
      * @return mapa
      */
-    public HashMap<Vertice, Aresta> getArestasSaindo() {
-        return arestasSaindo;
+    public HashMap<Vertice, Aresta> getAdjacencias() {
+        return adjacencias;
     }
 
-    /**
-     * Retorna o mapa de vértices que se tornaram adjacentes por terem arestas que saem dos mesmos e incidem neste vértice.
-     *
-     * @return
-     */
-    public HashMap<Vertice, Aresta> getArestasEntrando() {
-        return arestasEntrando;
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (obj instanceof Vertice) {
+            Vertice other = (Vertice) obj;
+            if(this.elemento.equals(other.getElemento())){
+                return true;
+            }
+        }
+        return false;
     }
-
+    
+    
 }

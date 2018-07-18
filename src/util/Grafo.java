@@ -11,19 +11,17 @@ import java.util.Set;
  * @author Anésio Sousa dos Santos Neto
  */
 public class Grafo implements IGraph{
-    private boolean ehDirecionado;
     private Set<Vertice> vertices;
     private List<Aresta> arestas; // Acho que não precisa disso. Só se quiser saber todas as amizades dos usuários.
     
-    public Grafo(boolean isDirected){
-        ehDirecionado = isDirected;
+    public Grafo(){
         vertices = new HashSet();
         arestas = new ArrayList<>();
     }
 
     @Override
     public void addVertex(Object key) { // Criar Exception pra se o item à inserir já estiver inserido.
-        Vertice v = new Vertice(key, ehDirecionado);
+        Vertice v = new Vertice(key);
         if(!vertices.add(v)){
             throw new RuntimeException("Já existe um vértice que contém o dado!");
         }
@@ -40,35 +38,35 @@ public class Grafo implements IGraph{
     }
 
     @Override
-    public void removeVertex(Object key) {
-        Vertice aux = new Vertice(key, ehDirecionado);
-        if(!vertices.remove(aux)){
+    public void removeVertex(Object key) { // Recebe um User e remove ele da rede social
+        Vertice vert = new Vertice(key);
+        
+        if(vertices.contains(vert)){
+            for(Aresta e: vert.getAdjacencias().values()){
+                removeEdge(e);
+            }
+            vertices.remove(vert);
+        }else{
             throw new RuntimeException("Não existe vértice que contenha o dado!");
         }
     }
-
+    
+    // DEVE SER OBJECT INVÉS DE VÉRTICE. TIPO, CRIAR UMA AMIZADE ENTRE VÉRTICE USUÁRIO U E V.
     @Override
-    public void addEdge(Vertice u, Vertice v, Object data/*, int peso*/) {  // Tem que testar isso!
-        if(vertices.contains(u) && vertices.contains(v)){
+    public void addEdge(Vertice u, Vertice v, Object data) {
+        if(getEdge(u,v) == null){
             Aresta a = new Aresta(u, v, data);
             arestas.add(a);
-            u.getArestasSaindo().put(v, a);
-            v.getArestasEntrando().put(u, a);
+            u.getAdjacencias().put(v, a);
+            v.getAdjacencias().put(u, a);  
         }else{
-            throw new RuntimeException("Algumas das duas arestas não existe!");
+            throw new RuntimeException("Já existe uma aresta que liga os vértices dados!");
         }
     }
 
     @Override
     public Aresta getEdge(Vertice u, Vertice v) {
-        Aresta a = new Aresta(u,v, null);
-        int pos = arestas.indexOf(a);
-        
-        if(arestas.indexOf(a) != -1){
-            return arestas.get(pos);
-        }
-        // Botar uma exception aqui!
-        return null;
+        return u.getAdjacencias().get(v);
     }
 
     @Override
@@ -80,14 +78,19 @@ public class Grafo implements IGraph{
     public int numEdges() {
         return arestas.size();
     }
-
+    
+    // CRIAR UMA REMOVE EDGE ENTRE DOIS VÉRTICES
+    
+    // tentar deixar isso privado!
     @Override
     public void removeEdge(Aresta a) { // Testar isso! e fazer pra Grafos Direcionados! Só está pra Grafos não direcionados!
         if(arestas.contains(a)){
-            Vertice[] aux = a.getExtremidades();
-            
-            aux[0].getArestasSaindo().remove(aux[0]);
-            aux[1].getArestasSaindo().remove(aux[0]);
+            Vertice aux = a.getOrigem();
+            Vertice aux2 = a.getDestino();
+            if(aux != null && aux2 != null){
+                aux.getAdjacencias().remove(aux2);
+                aux2.getAdjacencias().remove(aux);
+            }
 
             arestas.remove(a);
         }else{
@@ -96,23 +99,8 @@ public class Grafo implements IGraph{
     }
 
     @Override
-    public Iterator outGoingEdges(Vertice v) {
-        return v.getArestasSaindo().entrySet().iterator();
-    }
-
-    @Override
-    public Iterator incomingEdges(Vertice v) {
-        return v.getArestasEntrando().entrySet().iterator();
-    }
-
-    @Override
-    public int outDegree(Vertice v) {
-        return v.getArestasSaindo().size();
-    }
-
-    @Override
-    public int inDegree(Vertice v) {
-        return v.getArestasEntrando().size();
+    public Iterator edgesList(Vertice v) {
+        return v.getAdjacencias().entrySet().iterator();
     }
     
 }

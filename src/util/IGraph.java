@@ -15,7 +15,7 @@ public interface IGraph {
     
     public void removeVertex(Object key);
     
-    public void addEdge(Vertice u, Vertice v, Object data/*, int peso*/);
+    public void addEdge(Vertice u, Vertice v, Object data);
     
     public Aresta getEdge(Vertice u, Vertice v);
     
@@ -25,11 +25,6 @@ public interface IGraph {
     
     public void removeEdge(Aresta a);
     
-    public Iterator outGoingEdges(Vertice v);
+    public Iterator edgesList(Vertice v);
     
-    public int outDegree(Vertice v);
-    
-    public Iterator incomingEdges(Vertice v);
-    
-    public int inDegree(Vertice v);
 }
