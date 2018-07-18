@@ -40,10 +40,6 @@ public class Aresta {
         this.destino = destino;
     }
 
-    /* Tem que rever esse método equals, pois se o grafo não for direcionado, uma aresta
-       que liga um vértice u à um vértice v é igual a uma aresta que liga v to u. Mas o
-       mesmo não ocorre se o grafo for direcionado.
-     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {

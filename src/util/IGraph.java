@@ -15,16 +15,16 @@ public interface IGraph {
     
     public void removeVertex(Object key);
     
-    public void addEdge(Vertice u, Vertice v, Object data);
+    public void addEdge(Object u, Object v, Object data);
     
-    public Aresta getEdge(Vertice u, Vertice v);
+    public Object getEdge(Object u, Object v);
     
     public Iterator edges();
     
     public int numEdges();
     
-    public void removeEdge(Aresta a);
+    public void removeEdge(Object u, Object v);
     
-    public Iterator edgesList(Vertice v);
+    public Iterator edgesList(Object v);
     
 }
