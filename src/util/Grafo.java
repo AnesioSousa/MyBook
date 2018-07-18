@@ -71,10 +71,10 @@ public class Grafo implements IGraph{
         
     }
     
+    // Esse método retorna o dado que armazena a aresta que liga os vértices de u e v
     @Override
     public Object getEdge(Object u, Object v){
-        // Esse método deve retornar o dado que armazena a aresta que liga os vértices de u e v
-        return null;
+        return vertices.get(u).getAdjacencias().get(vertices.get(v)).getDado();
     }
     
     private Aresta getEdge(Vertice u, Vertice v) {
