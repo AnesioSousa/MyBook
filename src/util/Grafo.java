@@ -2,9 +2,12 @@ package util;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Queue;
 
 /**
  *
@@ -122,7 +125,7 @@ public class Grafo implements IGraph{
         return vertices.get(key).getAdjacencias().values().iterator();
     }
     
-    /*public void dfs(Object v){
+    public void dfs(Object v){
         dfs(vertices.get(v), new HashSet());
     }
     
@@ -155,6 +158,6 @@ public class Grafo implements IGraph{
                 }
             }
         }
-    }*/
+    }
     
 }
