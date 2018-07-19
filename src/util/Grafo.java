@@ -2,13 +2,9 @@ package util;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Queue;
-import java.util.Set;
 
 /**
  *
@@ -49,11 +45,13 @@ public class Grafo implements IGraph{
             for(Aresta e: vertices.get(key).getAdjacencias().values()){
                 removeEdge(e);
             }
+            vertices.remove(key);
         }else{
             throw new RuntimeException("Não existe vértice que contenha o dado!");
         }
     }
     
+    // Só deve ser possível adicionar uma aresta à dois vértices válidos!
     @Override
     public void addEdge(Object u, Object v, Object data){ 
         if(vertices.containsKey(u) && vertices.containsKey(v)){
@@ -78,6 +76,7 @@ public class Grafo implements IGraph{
     // Esse método retorna o dado que armazena a aresta que liga os vértices de u e v
     @Override
     public Object getEdge(Object u, Object v){
+        // Verificar se existem vértices que contenham u e v!
         return vertices.get(u).getAdjacencias().get(vertices.get(v)).getDado();
     }
     
@@ -111,8 +110,8 @@ public class Grafo implements IGraph{
     }
     
     private void removeEdge(Aresta a) {  // Remove a aresta recebida dos vértices adjacentes
-        vertices.get(a.getOrigem()).getAdjacencias().remove(a.getDestino());
-        vertices.get(a.getDestino()).getAdjacencias().remove(a.getOrigem());
+        a.getOrigem().getAdjacencias().remove(a.getDestino());
+        a.getDestino().getAdjacencias().remove(a.getOrigem());
 
         // Remove a aresta da lista de arestas
         arestas.remove(a);
@@ -123,7 +122,7 @@ public class Grafo implements IGraph{
         return vertices.get(key).getAdjacencias().values().iterator();
     }
     
-    public void dfs(Object v){
+    /*public void dfs(Object v){
         dfs(vertices.get(v), new HashSet());
     }
     
@@ -156,6 +155,6 @@ public class Grafo implements IGraph{
                 }
             }
         }
-    }
+    }*/
     
 }

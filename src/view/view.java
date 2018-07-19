@@ -7,9 +7,9 @@ public class view {
     public static void main(String[] args) {
         Grafo g = new Grafo();
         User a = new User("Anésio Sousa");
-        User b = new User("Gabriela Nudes");
-        User c = new User("Jacinto Pinto");
-        User d = new User("Michael Penis");
+        User b = new User("Gustavo da Costa");
+        User c = new User("Marcus de Jesus");
+        User d = new User("Michael Jackson");
         
         g.addVertex(a);
         g.addVertex(b);
@@ -26,6 +26,6 @@ public class view {
         
         System.out.println(g.getEdge(a, b);*/
         
-        g.dfs(a);
+        //g.dfs(a);
     }
 }
