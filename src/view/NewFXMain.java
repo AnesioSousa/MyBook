@@ -22,20 +22,38 @@ import javafx.stage.Stage;
  */
 public class NewFXMain extends Application {
     
-    @Override
-    public void start(Stage stage) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("FXMLPadrao.fxml"));
+    private static Stage stage;
     
+    private static Scene loginScene;
+    private static Scene cadastroScene;
+    
+    @Override
+    public void start(Stage primaryStage) throws IOException {
+        stage = primaryStage;
         
+        primaryStage.setTitle("Bem vindo ao MyBook!");
+        Parent login = FXMLLoader.load(getClass().getResource("Login.fxml"));
+        Parent cadastro = FXMLLoader.load(getClass().getResource("Cadastro.fxml"));
         
-        Scene scene = new Scene(root);
+        loginScene = new Scene(login);
+        cadastroScene = new Scene(cadastro);
         
-        stage.setTitle("Hello World!");
-        stage.setScene(scene);
-        stage.setResizable(false);
-        stage.show();
+        primaryStage.setScene(loginScene);
+        primaryStage.setResizable(false);
+        primaryStage.show();
     }
 
+    public static void changeScreen(String scr){ // É possível receber Enum invés de String
+        switch(scr){
+            case "login":
+                stage.setScene(loginScene);
+                break;
+            case "cadastro":
+                stage.setScene(cadastroScene);
+                break;     
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */

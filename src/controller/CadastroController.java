@@ -1,21 +1,24 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import view.NewFXMain;
 
 /**
  * FXML Controller class
  *
- * @author anesio
+ * @author Neto
  */
-public class FXMLPadraoController implements Initializable {
-
+public class CadastroController implements Initializable {
+    
+    @FXML
+    protected void btnVoltar(ActionEvent e){
+        NewFXMain.changeScreen("login");
+    }
+    
     /**
      * Initializes the controller class.
      */
