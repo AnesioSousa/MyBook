@@ -26,6 +26,7 @@ public class view {
         
         System.out.println(g.getEdge(a, b);*/
         
-        //g.dfs(a);
+        g.dfs(a);
+        
     }
 }
