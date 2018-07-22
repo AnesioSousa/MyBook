@@ -21,7 +21,6 @@ import javafx.stage.Stage;
  * @author anesio
  */
 public class NewFXMain extends Application {
-    
     private static Stage stage;
     
     private static Scene loginScene;

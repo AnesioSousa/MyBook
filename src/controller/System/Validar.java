@@ -1,4 +1,4 @@
-package controller.controllersSystem;
+package controller.System;
 
 import util.Grafo;
 
@@ -11,7 +11,7 @@ public final class Validar {
     
     public static boolean login(String login){
         
-        return false;
+        return true;
     }
     
     public static boolean sessao(String login, String password){

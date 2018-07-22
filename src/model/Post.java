@@ -6,15 +6,11 @@ package model;
  */
 public abstract class Post {
     protected String date;
-    protected String texto;
-    
-    public void postar(Usuario user){
-        
-    }    
+    protected String texto; 
     
     public void salvarPostagemEmDisco(){
         
     }
     
-    public abstract void exibir();
+    public abstract void exibir(Usuario user);
 }

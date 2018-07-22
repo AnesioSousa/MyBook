@@ -1,4 +1,4 @@
-package controller.controllersView;
+package controller.View;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -10,17 +10,14 @@ import view.NewFXMain;
 /**
  * FXML Controller class
  *
- * @author anesio
+ * @author Neto
  */
-public class LoginController implements Initializable {
+public class CadastroController implements Initializable {
 
     @FXML
-    protected void btNovoAction(ActionEvent e){
-        System.out.println("Testando!");
-        NewFXMain.changeScreen("cadastro");
-        
+    protected void btnVoltar(ActionEvent e){
+        NewFXMain.changeScreen("login");
     }
-    
     
     /**
      * Initializes the controller class.
@@ -29,6 +26,5 @@ public class LoginController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
-    
     
 }

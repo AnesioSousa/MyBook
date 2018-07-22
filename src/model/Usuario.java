@@ -10,18 +10,18 @@ public class Usuario {
     private String password;
     private String email; // Tentar fazer uma forma de validação depois (usando Pattern) se possível.
     private String genero;
-    private Perfil perfil; // << Aqui entra a questão do owner
+    private Perfil perfil;
     private String nascimento;
     private String endereco;
     private String telefone;
 
-    public Usuario(String nome, String login, String password, String email, String genero, Perfil perfil, String nascimento, String endereco, String telefone) {
+    public Usuario(String nome, String login, String password, String email, String genero, String nascimento, String endereco, String telefone, boolean estadoPerfil) {
         this.nome = nome;
         this.login = login;
         this.password = password;
         this.email = email;
         this.genero = genero;
-        this.perfil = perfil;
+        this.perfil = new Perfil(this, estadoPerfil);
         this.nascimento = nascimento;
         this.endereco = endereco;
         this.telefone = telefone;

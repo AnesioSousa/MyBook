@@ -6,7 +6,7 @@ import util.Grafo;
 public class view {  
     public static void main(String[] args) {
         Grafo g = Grafo.getInstance();
-        Usuario a = new Usuario("Anésio Sousa");
+        /*Usuario a = new Usuario("Anésio Sousa");
         Usuario b = new Usuario("Gustavo da Costa");
         Usuario c = new Usuario("Marcus de Jesus");
         Usuario d = new Usuario("Michael Jackson");
@@ -24,9 +24,9 @@ public class view {
         /*System.out.println(g.numEdges());
         System.out.println(g.numVertices());
         
-        System.out.println(g.getEdge(a, b);*/
+        System.out.println(g.getEdge(a, b);
         
-        g.dfs(a);
+        g.dfs(a);*/
         
     }
 }

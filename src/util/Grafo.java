@@ -43,6 +43,10 @@ public final class Grafo implements IGraph{
     public Iterator vertices() {
         return vertices.values().iterator();
     }
+    
+    public boolean containsVertex(Object data){
+        return vertices.containsKey(data);
+    }
 
     @Override
     public int numVertices() {

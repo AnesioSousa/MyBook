@@ -1,4 +1,4 @@
-package controller.controllersView;
+package controller.View;
 
 import java.net.URL;
 import java.util.ResourceBundle;

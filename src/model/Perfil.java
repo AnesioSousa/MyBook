@@ -7,25 +7,25 @@ import java.util.LinkedList;
  * @author Anésio Sousa dos Santos Neto
  */
 public class Perfil {
-    private Usuario user; // <<Ver questão do owner
+    private Usuario owner;
     private int arquivos; // <<Rever isso daqui
     private LinkedList<Post> postagens;
     private LinkedList<Usuario> amigos;
     private boolean privado;
 
     public Perfil(Usuario user, boolean privado) {
-        this.user = user; // <<Ver questão do owner
+        this.owner = user;
         this.postagens = new LinkedList<>();
         this.amigos = new LinkedList<>();
         this.privado = privado;
     }
 
-    public Usuario getUser() {
-        return user;
+    public Usuario getOwner() {
+        return owner;
     }
 
-    public void setUser(Usuario user) {
-        this.user = user;
+    public void setOwner(Usuario owner) {
+        this.owner = owner;
     }
 
     public LinkedList<Post> getPostagens() {
@@ -46,7 +46,7 @@ public class Perfil {
 
     @Override
     public String toString() {
-        return "Perfil{" + "user=" + user + ", estado=" + privado + '}';
+        return "Perfil{" + "user=" + owner + ", estado=" + privado + '}';
     }
 
     @Override
@@ -59,7 +59,7 @@ public class Perfil {
         }
         if (obj instanceof Perfil) {
             Perfil other = (Perfil) obj;
-            if(this.user.equals(other.getUser())){
+            if(this.owner.equals(other.getOwner())){
                 return true;
             }
         }
