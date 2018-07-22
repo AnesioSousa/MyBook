@@ -13,15 +13,23 @@ import java.util.Queue;
  *
  * @author Anésio Sousa dos Santos Neto
  */
-public class Grafo implements IGraph{
+public final class Grafo implements IGraph{
+    private static Grafo INSTANCE = null;
     private Map<Object, Vertice> vertices;
     private List<Aresta> arestas; // Acho que não precisa disso. Só se quiser saber todas as amizades dos usuários.
     
-    public Grafo(){
+    private Grafo(){
         vertices = new HashMap();
         arestas = new ArrayList<>();
     }
-
+    
+    public static Grafo getInstance(){
+        if(INSTANCE == null){
+            INSTANCE = new Grafo();
+        }
+        return INSTANCE;
+    }
+    
     @Override
     public void addVertex(Object key) { // Criar Exception pra se o item à inserir já estiver inserido.
         if(!vertices.containsKey(key)){
@@ -52,6 +60,10 @@ public class Grafo implements IGraph{
         }else{
             throw new RuntimeException("Não existe vértice que contenha o dado!");
         }
+    }
+    
+    public void removeAllVertex(){
+        vertices.clear();
     }
     
     // Só deve ser possível adicionar uma aresta à dois vértices válidos!
@@ -110,6 +122,10 @@ public class Grafo implements IGraph{
         }else{
             throw new RuntimeException("Não existe tal aresta!");
         }
+    }
+    
+    public void removeAllEdges(){
+        arestas.clear();
     }
     
     private void removeEdge(Aresta a) {  // Remove a aresta recebida dos vértices adjacentes

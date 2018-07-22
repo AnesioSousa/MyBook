@@ -17,7 +17,7 @@ public class GrafoTest {
     
     @Before
     public void setUp() {
-        g = new Grafo();
+        g = Grafo.getInstance();
         u = null;
         v = null;
         z = null;
@@ -25,6 +25,8 @@ public class GrafoTest {
     
     @After
     public void tearDown() {
+        g.removeAllEdges();
+        g.removeAllVertex();
     }
 
     /**

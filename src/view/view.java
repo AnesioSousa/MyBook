@@ -5,7 +5,7 @@ import util.Grafo;
 
 public class view {  
     public static void main(String[] args) {
-        Grafo g = new Grafo();
+        Grafo g = Grafo.getInstance();
         User a = new User("Anésio Sousa");
         User b = new User("Gustavo da Costa");
         User c = new User("Marcus de Jesus");
