@@ -1,7 +1,7 @@
 package util;
 
 import java.util.Iterator;
-import model.User;
+import model.Usuario;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
