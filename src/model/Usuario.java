@@ -15,6 +15,16 @@ public class Usuario {
     private String endereco;
     private String telefone;
 
+    public Usuario(String login) {
+        this.login = login;
+    }
+    
+    public Usuario(String nome, String login, String password) {
+        this.nome = nome;
+        this.login = login;
+        this.password = password;
+    }
+    
     public Usuario(String nome, String login, String password, String email, String genero, String nascimento, String endereco, String telefone, boolean estadoPerfil) {
         this.nome = nome;
         this.login = login;
@@ -92,8 +102,26 @@ public class Usuario {
     }
 
     @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (obj instanceof Usuario) {
+            Usuario other = (Usuario) obj;
+            if(this.login.equals(other.getLogin())){
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    @Override
     public String toString() {
-        return login;
+        return "Usuario{" + "login=" + login + '}';
     }
     
 }

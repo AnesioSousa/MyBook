@@ -17,7 +17,7 @@ public class GrafoTest {
     
     @Before
     public void setUp() {
-        g = Grafo.getInstance();
+        g = new Grafo();
         u = null;
         v = null;
         z = null;
@@ -34,7 +34,7 @@ public class GrafoTest {
      */
     @Test
     public void testAddVertex() {
-        v = "Teste";
+        v = new Usuario("Gugou");
         g.addVertex(v);
         
         int esperado = 1;
@@ -42,7 +42,13 @@ public class GrafoTest {
         assertSame(esperado, resultado);
         
         Iterator<Vertice> itr = g.vertices();
-        assertEquals("Teste", itr.next().getElemento());
+        Usuario u = (Usuario) itr.next().getElemento();
+        
+        assertEquals("Gugou", u.getLogin());
+        
+        u = new Usuario("Gugou");
+    
+        g.addVertex(u);
     }
     
     /**

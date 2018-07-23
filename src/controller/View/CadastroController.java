@@ -10,7 +10,7 @@ import view.NewFXMain;
 /**
  * FXML Controller class
  *
- * @author Neto
+ * @author Anésio Sousa dos Santos Neto
  */
 public class CadastroController implements Initializable {
 

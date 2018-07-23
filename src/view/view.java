@@ -1,24 +1,41 @@
 package view;
 
+import facade.Facade;
 import model.Usuario;
 import util.Grafo;
 
 public class view {  
     public static void main(String[] args) {
-        Grafo g = Grafo.getInstance();
-        /*Usuario a = new Usuario("Anésio Sousa");
-        Usuario b = new Usuario("Gustavo da Costa");
-        Usuario c = new Usuario("Marcus de Jesus");
-        Usuario d = new Usuario("Michael Jackson");
+        Facade f = Facade.getInstance();
         
-        g.addVertex(a);
-        g.addVertex(b);
-        g.addVertex(c);
-        g.addVertex(d);
+        /*Usuario u = f.registrarUser("Anésio", "Mrsplinter00", "teste123", "anesios98@gmail.com", "masculino", "05/02/98", "Rua angico n11", "34885210", true);
+        Usuario j = f.registrarUser("Anésio", "Mrsplinter00", "teste123", "anesios98@gmail.com", "masculino", "05/02/98", "Rua angico n11", "34885210", true);
         
-        g.addEdge(a, b, "Cu");
+        System.out.println(u);
+        System.out.println(j);*/
+        
+        Grafo g = new Grafo();
+        
+        Usuario a = new Usuario("Anésio Sousa", "mrsplinter00", "123");
+        Usuario b = new Usuario("Gustavo da Costa", "guCosta", "4321");
+        
+        //Usuario c = new Usuario("Marcus de Jesus");
+        //Usuario d = new Usuario("Michael Jackson");
+        
+        System.out.println(g.addVertex(a));
+        System.out.println(g.addVertex(b));
+        //g.addVertex(c);
+        //g.addVertex(d);
+        
+        
+        
+        
+        
+        
+        
+        /*g.addEdge(a, b, "Cu");
         g.addEdge(b, d, "Teste1");
-        g.addEdge(a, c, "Teste2");
+        g.addEdge(a, c, "Teste2");*/
         
         
         /*System.out.println(g.numEdges());

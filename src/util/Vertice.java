@@ -1,7 +1,6 @@
 package util;
 
 import java.util.HashMap;
-import java.util.Objects;
 
 /**
  * Classe responsável por criar objetos que são vértices de um grafo. 

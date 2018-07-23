@@ -1,5 +1,6 @@
 package controller.System;
 
+import java.util.Iterator;
 import model.Usuario;
 import util.Grafo;
 
@@ -8,14 +9,33 @@ import util.Grafo;
  * @author Anésio Sousa dos Santos Neto
  */
 public class ControllerUser {
-    Grafo g = Grafo.getInstance();
+    Grafo g = new Grafo();
     
-    public void inserirUserNoGrafo(Usuario user){
-        g.addVertex(user);
+    public Usuario cadastrarUser(String nome, String login, String password, String email, String genero, String nascimento, String endereco, String telefone, boolean estadoPerfil){
+        Usuario user = new Usuario(nome, login, password, email, genero, nascimento, endereco, telefone, estadoPerfil);
+        
+        if(!g.containsVertex(user)){
+            g.addVertex(user);
+            return user;
+        }
+
+        return null;
     }
     
-    public void removerUserDoGrafo(Usuario user){
-        g.removeVertex(user);
+    public Usuario removerUser(Usuario user){
+        return (Usuario) g.removeVertex(user);
+    }
+    
+    public Usuario obterUser(String login){
+        Iterator<Usuario> itr = g.keySet();
+        
+        while(itr.hasNext()){
+            if(itr.next().getLogin().equals(login)){
+                return itr.next();
+            }
+        }
+        
+        return null;
     }
     
     public void adicionarAmizade(Usuario userA, Usuario userB){
