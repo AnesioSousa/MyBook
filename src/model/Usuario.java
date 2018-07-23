@@ -1,5 +1,6 @@
 package model;
 
+import java.util.Objects;
 /**
  *
  * @author Anésio Sousa dos Santos Neto
@@ -13,10 +14,6 @@ public class Usuario {
     private String nascimento;
     private String endereco;
     private String telefone;
-
-    public Usuario(String email) {
-        this.email = email;
-    }
     
     public Usuario(String nome, String email, String password, String genero, String nascimento, String endereco, String telefone, boolean estadoPerfil) {
         this.nome = nome;
@@ -85,6 +82,13 @@ public class Usuario {
         this.telefone = telefone;
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 71 * hash + Objects.hashCode(this.email);
+        return hash;
+    }
+    
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {

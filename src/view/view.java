@@ -25,7 +25,7 @@ public class view {
         }
         
         System.out.println(a);
-        System.out.println(b);
+        //System.out.println(b);
         
         //Usuario c = new Usuario("Marcus de Jesus");
         //Usuario d = new Usuario("Michael Jackson");

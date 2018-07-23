@@ -13,7 +13,7 @@ import util.Grafo;
  * @author Anésio Sousa dos Santos Neto
  */
 public class ControllerUser {
-    LinkedList<Usuario> users;
+    LinkedList<Usuario> users; // Talvez nem precise usar isso.
     Grafo grafo;
 
     public ControllerUser() {
@@ -47,18 +47,19 @@ public class ControllerUser {
         }
     }
     
-    private Usuario obterUser(String email){
+    public Usuario obterUser(String email){
         Iterator<Usuario> itr = users.iterator();
         
         while(itr.hasNext()){
-            if(itr.next().getEmail().equals(email)){
-                return itr.next();
+            Usuario u = itr.next();
+            if(u.getEmail().equals(email)){ 
+                return u;
             }
         }
         return null;
     }
     
-    public void adicionarAmizade(Usuario userA, Usuario userB){
+    /*public void adicionarAmizade(Usuario userA, Usuario userB){
         grafo.addEdge(userA, userB, null);
     }
     
@@ -68,5 +69,5 @@ public class ControllerUser {
     
     public void modificarVinculo(Usuario userA, Usuario userB){
         
-    }
+    }*/
 }
