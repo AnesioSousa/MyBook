@@ -14,14 +14,11 @@ public class Usuario {
     private String endereco;
     private String telefone;
 
-    
-    public Usuario(String nome, String email, String password) {
-        this.nome = nome;
+    public Usuario(String email) {
         this.email = email;
-        this.password = password;
     }
     
-    public Usuario(String nome, String password, String email, String genero, String nascimento, String endereco, String telefone, boolean estadoPerfil) {
+    public Usuario(String nome, String email, String password, String genero, String nascimento, String endereco, String telefone, boolean estadoPerfil) {
         this.nome = nome;
         this.password = password;
         this.email = email;
@@ -108,8 +105,7 @@ public class Usuario {
 
     @Override
     public String toString() {
-        return "Usuario{" + "email=" + email + '}';
+        return "Usuario{" + "nome=" + nome + ", email=" + email + '}';
     }
-    
     
 }

@@ -24,9 +24,9 @@ public final class Grafo {
     }
     
     public Object addVertex(Object key) { // Criar Exception pra se o item à inserir já estiver inserido.
-        Iterator itr = keySet();
+        Iterator itr = keySet();   
         while(itr.hasNext()){
-            if(itr.next().equals(key)){
+            if(itr.next().equals(key)){ // Ver se isso é realmente necessário, já que eu já faço um tratamento na lista de users
                 return null;
             }
         }
@@ -41,10 +41,6 @@ public final class Grafo {
     
     public Iterator keySet(){
         return vertices.keySet().iterator();
-    }
-    
-    public boolean containsVertex(Object data){
-        return vertices.containsKey(data);
     }
 
     public int numVertices() {

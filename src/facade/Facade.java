@@ -22,15 +22,15 @@ public final class Facade {
         return INSTANCE;
     }
     
-    public Usuario registrarUser(String nome, String login, String password, String email, String genero, String nascimento, String endereco, String telefone, boolean estadoPerfil){
-        return ctrlUser.cadastrarUser(nome, login, password, email, genero, nascimento, endereco, telefone, estadoPerfil);
-    }
+   /* public Usuario registrarUser(String nome, String login, String password, String email, String genero, String nascimento, String endereco, String telefone, boolean estadoPerfil){
+        return ctrlUser.cadastrarUser(nome, password, email, genero, nascimento, endereco, telefone, estadoPerfil);
+    }*/
     
-    public Usuario excluirUser(String login, String password){
+    /*public Usuario excluirUser(String login, String password){
         // <<<<< Tem que passar pela verificação dos dados primeiro, e depois passa pro controller remover >>>>>>.
         Usuario aux = ctrlUser.obterUser(login);
         ctrlUser.removerUser(aux);
         
         return null;
-    }
+    }*/
 }

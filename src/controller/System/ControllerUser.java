@@ -1,6 +1,10 @@
 package controller.System;
 
+import exceptions.SenhaIncorretaException;
+import exceptions.UsuarioJaCadastradoException;
+import exceptions.UsuarioNaoCadastradoException;
 import java.util.Iterator;
+import java.util.LinkedList;
 import model.Usuario;
 import util.Grafo;
 
@@ -9,41 +13,57 @@ import util.Grafo;
  * @author Anésio Sousa dos Santos Neto
  */
 public class ControllerUser {
-    Grafo g = new Grafo();
-    
-    public Usuario cadastrarUser(String nome, String login, String password, String email, String genero, String nascimento, String endereco, String telefone, boolean estadoPerfil){
-        Usuario user = new Usuario(nome, password, email, genero, nascimento, endereco, telefone, estadoPerfil);
-        
-        if(!g.containsVertex(user)){
-            g.addVertex(user);
-            return user;
-        }
+    LinkedList<Usuario> users;
+    Grafo grafo;
 
-        return null;
+    public ControllerUser() {
+        users = new LinkedList<>();
+        grafo =  new Grafo();
     }
     
-    public Usuario removerUser(Usuario user){
-        return (Usuario) g.removeVertex(user);
+    public Usuario cadastrarUser(String nome, String email, String password, String genero, String nascimento, String endereco, String telefone, boolean estadoPerfil) throws UsuarioJaCadastradoException{
+        if(obterUser(email) == null){
+            Usuario user = new Usuario(nome, email, password, genero, nascimento, endereco, telefone, estadoPerfil);
+            users.add(user);
+            grafo.addVertex(user);
+            return user;
+        }else{
+            throw new UsuarioJaCadastradoException();
+        }
     }
     
-    public Usuario obterUser(String email){
-        Iterator<Usuario> itr = g.keySet();
+    public Usuario removerUser(String email, String password) throws UsuarioNaoCadastradoException, SenhaIncorretaException{
+        Usuario u = obterUser(email);
+        if(u != null){
+            if(!u.getPassword().equals(password)){
+                throw new SenhaIncorretaException();
+            }else{
+                grafo.removeVertex(u);
+                users.remove(u);
+                return u;
+            }
+        }else{
+            throw new UsuarioNaoCadastradoException();
+        }
+    }
+    
+    private Usuario obterUser(String email){
+        Iterator<Usuario> itr = users.iterator();
         
         while(itr.hasNext()){
             if(itr.next().getEmail().equals(email)){
                 return itr.next();
             }
         }
-        
         return null;
     }
     
     public void adicionarAmizade(Usuario userA, Usuario userB){
-        g.addEdge(userA, userB, null);
+        grafo.addEdge(userA, userB, null);
     }
     
     public void desfazerAmizade(Usuario userA, Usuario userB){
-        g.removeEdge(userA, userB);
+        grafo.removeEdge(userA, userB);
     }
     
     public void modificarVinculo(Usuario userA, Usuario userB){
