@@ -23,18 +23,18 @@ public class GrafoTest {
         z = null;
     }
     
-    @After
+    /*@After
     public void tearDown() {
         g.removeAllEdges();
         g.removeAllVertex();
-    }
+    }*/
 
     /**
      * Teste do método addVertex, da classe Grafo.
      */
     @Test
     public void testAddVertex() {
-        v = new Usuario("Gugou");
+        v = "Teste";
         g.addVertex(v);
         
         int esperado = 1;
@@ -42,13 +42,14 @@ public class GrafoTest {
         assertSame(esperado, resultado);
         
         Iterator<Vertice> itr = g.vertices();
-        Usuario u = (Usuario) itr.next().getElemento();
+        assertEquals("Teste", itr.next().getElemento());
         
-        assertEquals("Gugou", u.getLogin());
-        
-        u = new Usuario("Gugou");
-    
+        u = "Teste";
         g.addVertex(u);
+        
+        esperado = 1;
+        resultado = g.numVertices();
+        assertSame(esperado, resultado);
     }
     
     /**

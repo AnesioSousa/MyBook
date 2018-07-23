@@ -12,7 +12,7 @@ public class ControllerUser {
     Grafo g = new Grafo();
     
     public Usuario cadastrarUser(String nome, String login, String password, String email, String genero, String nascimento, String endereco, String telefone, boolean estadoPerfil){
-        Usuario user = new Usuario(nome, login, password, email, genero, nascimento, endereco, telefone, estadoPerfil);
+        Usuario user = new Usuario(nome, password, email, genero, nascimento, endereco, telefone, estadoPerfil);
         
         if(!g.containsVertex(user)){
             g.addVertex(user);
@@ -26,11 +26,11 @@ public class ControllerUser {
         return (Usuario) g.removeVertex(user);
     }
     
-    public Usuario obterUser(String login){
+    public Usuario obterUser(String email){
         Iterator<Usuario> itr = g.keySet();
         
         while(itr.hasNext()){
-            if(itr.next().getLogin().equals(login)){
+            if(itr.next().getEmail().equals(email)){
                 return itr.next();
             }
         }

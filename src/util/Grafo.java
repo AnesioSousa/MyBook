@@ -19,17 +19,20 @@ public final class Grafo {
     private List<Aresta> arestas; // Acho que não precisa disso. Só se quiser saber todas as amizades dos usuários.
     
     public Grafo(){
-        vertices = new HashMap();
+        vertices = new HashMap<>();
         arestas = new ArrayList<>();
     }
     
     public Object addVertex(Object key) { // Criar Exception pra se o item à inserir já estiver inserido.
-        if(!vertices.containsKey(key)){
-            vertices.put(key, new Vertice(key));
-            return key;
-        }else{
-            throw new RuntimeException("Já existe um vértice que contém o dado!");
+        Iterator itr = keySet();
+        while(itr.hasNext()){
+            if(itr.next().equals(key)){
+                return null;
+            }
         }
+
+        vertices.put(key, new Vertice(key));
+        return key;
     }
 
     public Iterator vertices() {
