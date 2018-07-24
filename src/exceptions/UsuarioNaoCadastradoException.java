@@ -7,7 +7,7 @@ package exceptions;
 public class UsuarioNaoCadastradoException extends Exception{
 
     public UsuarioNaoCadastradoException() {
-        super("O usuário não cadastrado!");
+        super("Usuário não cadastrado!");
     }
     
 }

@@ -15,12 +15,12 @@ public class Usuario {
     private String endereco;
     private String telefone;
     
-    public Usuario(String nome, String email, String password, String genero, String nascimento, String endereco, String telefone, boolean estadoPerfil) {
+    public Usuario(String nome, String email, String password, String genero, String nascimento, String endereco, String telefone, boolean perfilEhPublico) {
         this.nome = nome;
         this.password = password;
         this.email = email;
         this.genero = genero;
-        this.perfil = new Perfil(this, estadoPerfil);
+        this.perfil = new Perfil(this, perfilEhPublico);
         this.nascimento = nascimento;
         this.endereco = endereco;
         this.telefone = telefone;

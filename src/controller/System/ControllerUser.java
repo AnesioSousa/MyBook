@@ -21,9 +21,9 @@ public class ControllerUser {
         grafo =  new Grafo();
     }
     
-    public Usuario cadastrarUser(String nome, String email, String password, String genero, String nascimento, String endereco, String telefone, boolean estadoPerfil) throws UsuarioJaCadastradoException{
+    public Usuario cadastrarUser(String nome, String email, String password, String genero, String nascimento, String endereco, String telefone, boolean perfilEhPublico) throws UsuarioJaCadastradoException{
         if(obterUser(email) == null){
-            Usuario user = new Usuario(nome, email, password, genero, nascimento, endereco, telefone, estadoPerfil);
+            Usuario user = new Usuario(nome, email, password, genero, nascimento, endereco, telefone, perfilEhPublico);
             users.add(user);
             grafo.addVertex(user);
             return user;
@@ -70,4 +70,9 @@ public class ControllerUser {
     public void modificarVinculo(Usuario userA, Usuario userB){
         
     }*/
+
+    public LinkedList<Usuario> getUsers() {
+        return users;
+    }
+    
 }
