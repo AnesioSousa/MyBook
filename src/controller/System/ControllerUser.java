@@ -1,8 +1,8 @@
 package controller.System;
 
-import exceptions.SenhaIncorretaException;
-import exceptions.UsuarioJaCadastradoException;
-import exceptions.UsuarioNaoCadastradoException;
+import model.exceptions.SenhaIncorretaException;
+import model.exceptions.UsuarioJaCadastradoException;
+import model.exceptions.UsuarioNaoCadastradoException;
 import java.util.Iterator;
 import java.util.LinkedList;
 import model.Usuario;

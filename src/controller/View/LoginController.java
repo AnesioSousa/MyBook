@@ -5,6 +5,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.input.MouseEvent;
 import view.NewFXMain;
 
 /**
@@ -15,7 +16,7 @@ import view.NewFXMain;
 public class LoginController implements Initializable {
 
     @FXML
-    protected void btNovoAction(ActionEvent e){
+    protected void btNovoAction(MouseEvent e){
         System.out.println("Testando!");
         NewFXMain.changeScreen("cadastro");
         

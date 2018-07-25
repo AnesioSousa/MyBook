@@ -1,13 +1,13 @@
 /* Referências:
-   Expected Exceptions Disponível em: <https://github.com/junit-team/junit4/wiki/exception-testing> acesso em : 23/07/18
+   How do you assert that a certain exception is thrown in JUnit 4 tests?
+   Disponível em: <https://stackoverflow.com/questions/156503/how-do-you-assert-that-a-certain-exception-is-thrown-in-junit-4-tests> acesso em : 23/07/18
  */
 package controller.System;
 
-import exceptions.SenhaIncorretaException;
-import exceptions.UsuarioJaCadastradoException;
-import exceptions.UsuarioNaoCadastradoException;
+import model.exceptions.SenhaIncorretaException;
+import model.exceptions.UsuarioJaCadastradoException;
+import model.exceptions.UsuarioNaoCadastradoException;
 import model.Usuario;
-import static org.hamcrest.CoreMatchers.is;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,7 +30,7 @@ public class ControllerUserTest {
     /**
      * Teste do método cadastrarUser, da classe ControllerUser.
      *
-     * @throws exceptions.UsuarioJaCadastradoException
+     * @throws model.exceptions.UsuarioJaCadastradoException
      */
     @Test(expected = UsuarioJaCadastradoException.class)
 
@@ -74,9 +74,9 @@ public class ControllerUserTest {
     /**
      * Teste do método removerUser, da classe ControllerUser. Testa o recebimento de um email não cadastrado.
      *
-     * @throws exceptions.UsuarioNaoCadastradoException
-     * @throws exceptions.SenhaIncorretaException
-     * @throws exceptions.UsuarioJaCadastradoException
+     * @throws model.exceptions.UsuarioNaoCadastradoException
+     * @throws model.exceptions.SenhaIncorretaException
+     * @throws model.exceptions.UsuarioJaCadastradoException
      */
     @Test(expected = UsuarioNaoCadastradoException.class)
     public void testRemoverUser1() throws UsuarioNaoCadastradoException, SenhaIncorretaException, UsuarioJaCadastradoException {
@@ -90,9 +90,9 @@ public class ControllerUserTest {
     /**
      * Teste do método removerUser, da classe ControllerUser. Testa o recebimento de uma senha errada para um email cadastrado.
      *
-     * @throws exceptions.UsuarioNaoCadastradoException
-     * @throws exceptions.SenhaIncorretaException
-     * @throws exceptions.UsuarioJaCadastradoException
+     * @throws model.exceptions.UsuarioNaoCadastradoException
+     * @throws model.exceptions.SenhaIncorretaException
+     * @throws model.exceptions.UsuarioJaCadastradoException
      */
     @Test(expected = SenhaIncorretaException.class)
     public void testRemoverUser2() throws SenhaIncorretaException, UsuarioNaoCadastradoException, UsuarioJaCadastradoException {
@@ -105,9 +105,9 @@ public class ControllerUserTest {
     /**
      * Teste do método removerUser, da classe ControllerUser. Testa o recebimento de uma senha correta para um email cadastrado.
      *
-     * @throws exceptions.UsuarioJaCadastradoException
-     * @throws exceptions.UsuarioNaoCadastradoException
-     * @throws exceptions.SenhaIncorretaException
+     * @throws model.exceptions.UsuarioJaCadastradoException
+     * @throws model.exceptions.UsuarioNaoCadastradoException
+     * @throws model.exceptions.SenhaIncorretaException
      */
     @Test
     public void testRemoverUser3() throws UsuarioJaCadastradoException, UsuarioNaoCadastradoException, SenhaIncorretaException {
@@ -128,7 +128,7 @@ public class ControllerUserTest {
 
     /**
      * Teste do método obterUser, da classe ControllerUser.
-     * @throws exceptions.UsuarioJaCadastradoException
+     * @throws model.exceptions.UsuarioJaCadastradoException
      */
     @Test
     public void testObterUser() throws UsuarioJaCadastradoException {

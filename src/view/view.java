@@ -1,7 +1,7 @@
 package view;
 
 import controller.System.ControllerUser;
-import exceptions.UsuarioJaCadastradoException;
+import model.exceptions.UsuarioJaCadastradoException;
 import model.Usuario;
 import util.Grafo;
 
