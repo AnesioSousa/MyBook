@@ -52,7 +52,7 @@ public class ControllerUserTest {
         assertEquals(expResult, result);
 
         int esperado = 1;
-        int resultado = ctrl.getUsers().size();
+        int resultado = ctrl.getQuantidadeUsers();
         assertSame(esperado, resultado);
 
         nome = "Gustavo Lima";
@@ -67,7 +67,7 @@ public class ControllerUserTest {
         Usuario b = ctrl.cadastrarUser(nome, email, password, genero, nascimento, endereco, telefone, perfilEhPublico);
 
         esperado = 1;
-        resultado = ctrl.getUsers().size();
+        resultado = ctrl.getQuantidadeUsers();
         assertSame(esperado, resultado);
     }
 
@@ -115,13 +115,13 @@ public class ControllerUserTest {
         ctrl.cadastrarUser("Anésio Sousa", "anesios98@gmail.com", "123", "Masculino", "00/00/00", "Rua dos bobos número 0", "(75) 90000-0000", false);
         
         int esperado = 1;
-        int resultado = ctrl.getUsers().size();
+        int resultado = ctrl.getQuantidadeUsers();
         assertSame(esperado, resultado);
 
         ctrl.removerUser("anesios98@gmail.com", "123");
 
         esperado = 0;
-        resultado = ctrl.getUsers().size();
+        resultado = ctrl.getQuantidadeUsers();
         assertSame(esperado, resultado);
         
     }

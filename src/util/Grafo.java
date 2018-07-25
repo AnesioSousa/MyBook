@@ -16,21 +16,14 @@ import java.util.Queue;
 public final class Grafo {
     
     private Map<Object, Vertice> vertices;
-    private List<Aresta> arestas; // Acho que não precisa disso. Só se quiser saber todas as amizades dos usuários.
+    private List<Aresta> arestas; 
     
     public Grafo(){
         vertices = new HashMap<>();
         arestas = new ArrayList<>();
     }
     
-    public Object addVertex(Object key) { // Criar Exception pra se o item à inserir já estiver inserido.
-        Iterator itr = keySet();   
-        while(itr.hasNext()){
-            if(itr.next().equals(key)){ // Ver se isso é realmente necessário, já que eu já faço um tratamento na lista de users
-                return null;
-            }
-        }
-
+    public Object addVertex(Object key) {
         vertices.put(key, new Vertice(key));
         return key;
     }
