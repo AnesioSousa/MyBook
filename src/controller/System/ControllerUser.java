@@ -46,11 +46,7 @@ public class ControllerUser {
             throw new UsuarioNaoCadastradoException();
         }
     }
-    
-    public Usuario obterUser(String email){ 
-        return emailMap.get(email);
-    }
-    
+
     /*public void adicionarAmizade(Usuario userA, Usuario userB){
         grafo.addEdge(userA, userB, null);
     }
@@ -66,5 +62,8 @@ public class ControllerUser {
     public int getQuantidadeUsers() {
         return grafo.numVertices();
     }
-    
+        
+    public Usuario obterUser(String email){ 
+        return emailMap.get(email);
+    }
 }

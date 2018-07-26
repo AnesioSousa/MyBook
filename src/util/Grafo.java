@@ -28,30 +28,22 @@ public final class Grafo {
         return key;
     }
 
+    public Object removeVertex(Object key) {
+        for (Aresta e : vertices.get(key).getAdjacencias().values()) {
+            removeEdge(e);
+        }
+        vertices.remove(key);
+        return key;
+    }
+
     public Iterator vertices() {
         return vertices.values().iterator();
-    }
-    
-    public Iterator keySet(){
-        return vertices.keySet().iterator();
     }
 
     public int numVertices() {
         return vertices.size();
     }
 
-    public Object removeVertex(Object key) { // Recebe um User e remove ele da rede social
-        
-        if(vertices.containsKey(key)){
-            for(Aresta e: vertices.get(key).getAdjacencias().values()){
-                removeEdge(e);
-            }
-            vertices.remove(key);
-            return key;
-        }else{
-            throw new RuntimeException("Não existe vértice que contenha o dado!");
-        }
-    }
     
     public void removeAllVertex(){
         vertices.clear();

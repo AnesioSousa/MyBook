@@ -2,6 +2,9 @@ package facade;
 
 import controller.System.ControllerUser;
 import model.Usuario;
+import model.exceptions.SenhaIncorretaException;
+import model.exceptions.UsuarioJaCadastradoException;
+import model.exceptions.UsuarioNaoCadastradoException;
 
 /**
  *
@@ -21,16 +24,15 @@ public final class Facade {
         }
         return INSTANCE;
     }
+    public boolean checkEmail(String email){
+        return ctrlUser.obterUser(email) != null;
+    }
+      
+    public Usuario registrarUser(String nome, String email, String password, String genero, String nascimento, String endereco, String telefone, boolean estadoPerfil) throws UsuarioJaCadastradoException{
+        return ctrlUser.cadastrarUser(nome, email, password, genero, nascimento, endereco, telefone, estadoPerfil);
+    }
     
-   /* public Usuario registrarUser(String nome, String login, String password, String email, String genero, String nascimento, String endereco, String telefone, boolean estadoPerfil){
-        return ctrlUser.cadastrarUser(nome, password, email, genero, nascimento, endereco, telefone, estadoPerfil);
-    }*/
-    
-    /*public Usuario excluirUser(String login, String password){
-        // <<<<< Tem que passar pela verificação dos dados primeiro, e depois passa pro controller remover >>>>>>.
-        Usuario aux = ctrlUser.obterUser(login);
-        ctrlUser.removerUser(aux);
-        
-        return null;
-    }*/
+    public Usuario excluirUser(String email, String password) throws UsuarioNaoCadastradoException, SenhaIncorretaException{
+        return ctrlUser.removerUser(email, password);
+    }
 }

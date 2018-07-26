@@ -7,11 +7,12 @@
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="controller.View.CadastroController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.View.CadastroController">
    <children>
       <Pane prefHeight="400.0" prefWidth="130.0" style="-fx-background-color: #48A5EA;">
          <children>
@@ -22,32 +23,30 @@
             </Label>
          </children>
       </Pane>
-      <Label layoutX="144.0" layoutY="14.0" text="Cadastre-se no MyBook" wrapText="true">
+      <Label layoutX="144.0" layoutY="8.0" text="Cadastre-se no MyBook" wrapText="true">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <Label layoutX="144.0" layoutY="36.0" text="É gratis e qualquer um pode se juntar" />
-      <TextField layoutX="144.0" layoutY="82.0" minHeight="-Infinity" prefHeight="26.0" prefWidth="200.0" promptText="Example Name" />
-      <PasswordField layoutX="144.0" layoutY="135.0" minHeight="-Infinity" prefHeight="26.0" prefWidth="200.0" promptText="exampleIsCool123" />
-      <DatePicker layoutX="144.0" layoutY="182.0" minHeight="-Infinity" prefHeight="26.0" prefWidth="130.0" promptText="17/11/99" />
-      <Button layoutX="528.0" layoutY="10.0" mnemonicParsing="false" onAction="#btnVoltar" prefHeight="26.0" prefWidth="57.0" text="Voltar" />
-      <TextField layoutX="368.0" layoutY="82.0" minHeight="-Infinity" prefHeight="26.0" prefWidth="200.0" promptText="example@MyBook.com" />
-      <RadioButton layoutX="368.0" layoutY="139.0" mnemonicParsing="false" text="Masculino" />
-      <RadioButton layoutX="473.0" layoutY="139.0" mnemonicParsing="false" text="Feminino" />
-      <TextField layoutX="296.0" layoutY="182.0" minHeight="-Infinity" prefHeight="26.0" prefWidth="272.0" promptText="Endereço" />
-      <TextField layoutX="144.0" layoutY="223.0" minHeight="-Infinity" prefHeight="26.0" prefWidth="155.0" promptText="Telefone" />
+      <Label layoutX="144.0" layoutY="28.0" text="É gratis e qualquer um pode se juntar" />
+      <TextField fx:id="nomeTxtField" layoutX="144.0" layoutY="82.0" minHeight="-Infinity" prefHeight="26.0" prefWidth="200.0" promptText="Example Name" />
+      <PasswordField fx:id="senhaField" layoutX="144.0" layoutY="135.0" minHeight="-Infinity" prefHeight="26.0" prefWidth="200.0" promptText="exampleIsCool123" />
+      <DatePicker fx:id="aniversarioField" layoutX="144.0" layoutY="188.0" minHeight="-Infinity" prefHeight="26.0" prefWidth="130.0" promptText="17/11/99" />
+      <Button layoutX="528.0" layoutY="10.0" mnemonicParsing="false" onAction="#btnVoltar" prefHeight="26.0" prefWidth="57.0" style="-fx-background-color: #48A5EA;" text="Voltar" textFill="WHITE" />
+      <TextField fx:id="emailTxtField" layoutX="362.0" layoutY="82.0" minHeight="-Infinity" prefHeight="26.0" prefWidth="200.0" promptText="example@MyBook.com" />
+      <TextField fx:id="endTxtField" layoutX="298.0" layoutY="188.0" minHeight="-Infinity" prefHeight="26.0" prefWidth="272.0" promptText="Rua dos bobos nº 0" />
+      <TextField fx:id="telTextField" layoutX="145.0" layoutY="241.0" minHeight="-Infinity" prefHeight="26.0" prefWidth="155.0" promptText="(00) 0 0000-0000" />
       <Accordion layoutX="382.0" layoutY="214.0" />
       <Accordion layoutX="331.0" layoutY="201.0" />
-      <RadioButton layoutX="336.0" layoutY="227.0" mnemonicParsing="false" text="Perfil privado" />
-      <Button layoutX="146.0" layoutY="351.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="104.0" style="-fx-background-color: #2FC701;" text="Cadastre-se" textFill="WHITE" />
-      <Button layoutX="450.0" layoutY="272.0" mnemonicParsing="false" text="Limpar campos" />
-      <Label layoutX="144.0" layoutY="62.0" text="Nome">
+      <RadioButton fx:id="perfilSelect" layoutX="331.0" layoutY="245.0" mnemonicParsing="false" text="Privado" />
+      <Button layoutX="146.0" layoutY="351.0" mnemonicParsing="false" onAction="#cadastrar" prefHeight="32.0" prefWidth="104.0" style="-fx-background-color: #2FC701;" text="Cadastre-se" textFill="WHITE" />
+      <Button layoutX="454.0" layoutY="276.0" mnemonicParsing="false" onAction="#limparCampos" style="-fx-background-color: #48A5EA;" text="Limpar campos" textFill="WHITE" />
+      <Label layoutX="144.0" layoutY="64.0" text="Nome">
          <font>
             <Font name="Lucida Sans Demibold" size="13.0" />
          </font>
       </Label>
-      <Label layoutX="368.0" layoutY="62.0" text="Email">
+      <Label layoutX="362.0" layoutY="64.0" text="Email">
          <font>
             <Font name="Lucida Sans Demibold" size="13.0" />
          </font>
@@ -57,5 +56,36 @@
             <Font name="Lucida Sans Demibold" size="13.0" />
          </font>
       </Label>
+      <Label layoutX="362.0" layoutY="117.0" text="Gênero">
+         <font>
+            <Font name="Lucida Sans Demibold" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="144.0" layoutY="167.0" text="Aniversário">
+         <font>
+            <Font name="Lucida Sans Demibold" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="298.0" layoutY="167.0" text="Endereço">
+         <font>
+            <Font name="Lucida Sans Demibold" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="145.0" layoutY="221.0" text="Telefone">
+         <font>
+            <Font name="Lucida Sans Demibold" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="331.0" layoutY="221.0" text="Perfil">
+         <font>
+            <Font name="Lucida Sans Demibold" size="13.0" />
+         </font>
+      </Label>
+      <Button layoutX="564.0" layoutY="81.0" mnemonicParsing="false" text="OK?" />
+      <RadioButton fx:id="genMasculino" layoutX="362.0" layoutY="139.0" mnemonicParsing="false" text="Masculino">
+         <toggleGroup>
+            <ToggleGroup fx:id="genero" />
+         </toggleGroup></RadioButton>
+      <RadioButton fx:id="genFeminino" layoutX="459.0" layoutY="140.0" mnemonicParsing="false" text="Feminino" toggleGroup="$genero" />
    </children>
 </AnchorPane>
