@@ -9,7 +9,7 @@ import javafx.fxml.Initializable;
  * 
  * @author Neto
  */
-public class NavegadorController implements Initializable{
+public class ControllerTelaNavegador implements Initializable{
     
     /**
      * Initializes the controller class.

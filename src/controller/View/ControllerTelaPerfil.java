@@ -9,7 +9,7 @@ import javafx.fxml.Initializable;
  *
  * @author Neto
  */
-public class PerfilController implements Initializable {
+public class ControllerTelaPerfil implements Initializable {
 
     /**
      * Initializes the controller class.

@@ -21,7 +21,7 @@ import view.NewFXMain;
  *
  * @author Anésio Sousa dos Santos Neto
  */
-public class CadastroController implements Initializable {
+public class ControllerTelaCadastro implements Initializable {
     Facade f = Facade.getInstance();
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     @FXML private TextField nomeTxtField;
@@ -89,6 +89,7 @@ public class CadastroController implements Initializable {
             System.out.println(ex);
         }
         System.out.println("Voltando à área de login!");
+        limparCampos(e);
         btnVoltar(e);
     }
     

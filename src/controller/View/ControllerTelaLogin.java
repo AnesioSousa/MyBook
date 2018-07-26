@@ -14,7 +14,7 @@ import view.NewFXMain;
  *
  * @author anesio
  */
-public class LoginController implements Initializable {
+public class ControllerTelaLogin implements Initializable {
     @FXML
     private Label cadastro;
     

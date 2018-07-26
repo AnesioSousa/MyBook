@@ -36,7 +36,7 @@ public class NewFXMain extends Application {
         cadastroScene = new Scene(cadastro);
         
         primaryStage.setScene(loginScene);
-        primaryStage.setResizable(false);
+        //primaryStage.setResizable(false);
         primaryStage.show();
     }
 
