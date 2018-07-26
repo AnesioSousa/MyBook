@@ -14,6 +14,7 @@ public class Usuario {
     private String nascimento;
     private String endereco;
     private String telefone;
+    private long tempoTotalDeUso;
     
     public Usuario(String nome, String email, String password, String genero, String nascimento, String endereco, String telefone, boolean perfilEhPublico) {
         this.nome = nome;
@@ -82,6 +83,15 @@ public class Usuario {
         this.telefone = telefone;
     }
 
+    public long getTempoTotalDeUso() {
+        return tempoTotalDeUso;
+    }
+    
+    // Ver depois isso!
+    public void incrementTempoTotalDeUso(long loginTime) {
+        this.tempoTotalDeUso += loginTime;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 5;

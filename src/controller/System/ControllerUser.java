@@ -13,8 +13,8 @@ import util.Grafo;
  * @author Anésio Sousa dos Santos Neto
  */
 public class ControllerUser {
-    Grafo grafo;
-    Map<String, Usuario> emailMap;
+    private Grafo grafo;
+    private static Map<String, Usuario> emailMap;
 
     public ControllerUser() {
         grafo =  new Grafo();
@@ -32,6 +32,7 @@ public class ControllerUser {
         }
     }
     
+    // Tem que rever isso! esse método é basicamente o "autenticação" do facade!!
     public Usuario removerUser(String email, String password) throws UsuarioNaoCadastradoException, SenhaIncorretaException{
         Usuario user = obterUser(email);
         if(user != null){
@@ -63,7 +64,7 @@ public class ControllerUser {
         return grafo.numVertices();
     }
         
-    public Usuario obterUser(String email){ 
+    public static Usuario obterUser(String email){ 
         return emailMap.get(email);
     }
 }
