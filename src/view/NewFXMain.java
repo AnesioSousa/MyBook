@@ -6,6 +6,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 /**
@@ -18,20 +19,23 @@ public class NewFXMain extends Application {
     
     private static Scene loginScene;
     private static Scene cadastroScene;
+    private static Scene navegadorScene;
     
     @Override
     public void start(Stage primaryStage) throws IOException {
         stage = primaryStage;
-        
         primaryStage.setTitle("Bem vindo ao MyBook!");
+        
         Parent login = FXMLLoader.load(getClass().getResource("Login.fxml"));
         Parent cadastro = FXMLLoader.load(getClass().getResource("Cadastro.fxml"));
+        Parent navegador = FXMLLoader.load(getClass().getResource("Navegador.fxml"));
         
         loginScene = new Scene(login);
         cadastroScene = new Scene(cadastro);
+        navegadorScene = new Scene(navegador);
         
         primaryStage.setScene(loginScene);
-        //primaryStage.setResizable(false);
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
 
@@ -42,7 +46,10 @@ public class NewFXMain extends Application {
                 break;
             case "cadastro":
                 stage.setScene(cadastroScene);
-                break;     
+                break;  
+            case "navegador":
+                stage.setScene(navegadorScene);
+                break;
         }
     }
     

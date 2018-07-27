@@ -10,7 +10,7 @@
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.View.ControllerTelaNavegador">
@@ -25,11 +25,11 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <TextField layoutX="98.0" layoutY="8.0" prefHeight="26.0" prefWidth="439.0" promptText="Pesquisar" />
-            <Button layoutX="540.0" layoutY="8.0" mnemonicParsing="false" text="UserName" />
-            <Button layoutX="616.0" layoutY="8.0" mnemonicParsing="false" text="Solicitações" />
-            <Button layoutX="698.0" layoutY="8.0" mnemonicParsing="false" text="Notificações" />
-            <MenuButton layoutX="800.0" layoutY="8.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="94.0" text="Conta">
+            <TextField fx:id="pesquisaTxtField" layoutX="98.0" layoutY="8.0" prefHeight="26.0" prefWidth="439.0" promptText="Pesquisar" />
+            <Button fx:id="userNameBtn" layoutX="540.0" layoutY="8.0" mnemonicParsing="false" text="UserName" />
+            <Button fx:id="solicitacoesBtn" layoutX="616.0" layoutY="8.0" mnemonicParsing="false" text="Solicitações" />
+            <Button fx:id="notificacoesBtn" layoutX="698.0" layoutY="8.0" mnemonicParsing="false" text="Notificações" />
+            <MenuButton fx:id="contaMenu" layoutX="800.0" layoutY="8.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="94.0" text="Conta">
               <items>
                 <MenuItem mnemonicParsing="false" text="Excluir conta" />
                 <MenuItem mnemonicParsing="false" text="Sair" />
@@ -42,12 +42,12 @@
    <bottom>
       <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <items>
-          <Button mnemonicParsing="false" text="Voltar" />
-            <Button mnemonicParsing="false" text="Avançar" />
+          <Button fx:id="voltarBtn" mnemonicParsing="false" onAction="#paginaAnterior" text="Voltar" />
+            <Button fx:id="avancarBtn" mnemonicParsing="false" onAction="#proximaPagina" text="Avançar" />
         </items>
       </ToolBar>
    </bottom>
    <center>
-      <StackPane prefHeight="359.0" prefWidth="649.0" BorderPane.alignment="CENTER" />
+      <VBox fx:id="contentPanel" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER" />
    </center>
 </BorderPane>

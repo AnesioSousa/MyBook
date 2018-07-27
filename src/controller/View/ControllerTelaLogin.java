@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -24,7 +25,7 @@ public class ControllerTelaLogin implements Initializable {
     @FXML private Label status;
     @FXML private TextField emailTxtField;
     @FXML private PasswordField senhaField;
-    
+
     // Tem que tratar campos vazios!
     @FXML
     protected void fazerLogin(ActionEvent e){
@@ -32,6 +33,7 @@ public class ControllerTelaLogin implements Initializable {
             f.iniciarSessao(emailTxtField.getText(), senhaField.getText());
             status.setText("OK!");
             status.setVisible(true);
+            NewFXMain.changeScreen("navegador");
         } catch (UsuarioNaoCadastradoException | SenhaIncorretaException ex) {
             System.out.println(ex);
             status.setText("NOT OK!");
@@ -44,7 +46,6 @@ public class ControllerTelaLogin implements Initializable {
         NewFXMain.changeScreen("cadastro");
         
     }
-    
     
     /**
      * Initializes the controller class.
