@@ -15,6 +15,8 @@ public class Usuario {
     private String endereco;
     private String telefone;
     private long tempoTotalDeUso;
+    private String urlImagemPerfil;
+    // Solicitações
     
     public Usuario(String nome, String email, String password, String genero, String nascimento, String endereco, String telefone, boolean perfilEhPublico) {
         this.nome = nome;
@@ -90,6 +92,14 @@ public class Usuario {
     // Ver depois isso!
     public void incrementTempoTotalDeUso(long loginTime) {
         this.tempoTotalDeUso += loginTime;
+    }
+
+    public String getUrlImagemPerfil() {
+        return urlImagemPerfil;
+    }
+
+    public void setUrlImagemPerfil(String urlImagemPerfil) {
+        this.urlImagemPerfil = urlImagemPerfil;
     }
     
     @Override

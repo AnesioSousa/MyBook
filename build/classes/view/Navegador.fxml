@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="900.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="controller.View.ControllerTelaNavegador">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.View.ControllerTelaNavegador">
    <top>
       <AnchorPane prefHeight="46.0" prefWidth="900.0" style="-fx-background-color: #48A5EA;" BorderPane.alignment="CENTER">
          <BorderPane.margin>
@@ -31,6 +31,7 @@
             <Button fx:id="notificacoesBtn" layoutX="698.0" layoutY="8.0" mnemonicParsing="false" text="Notificações" />
             <MenuButton fx:id="contaMenu" layoutX="800.0" layoutY="8.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="94.0" text="Conta">
               <items>
+                  <MenuItem mnemonicParsing="false" text="Editar perfil" />
                 <MenuItem mnemonicParsing="false" text="Excluir conta" />
                 <MenuItem mnemonicParsing="false" text="Sair" />
               </items>
