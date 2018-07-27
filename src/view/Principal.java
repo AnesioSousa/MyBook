@@ -33,9 +33,9 @@ public class Principal extends Application {
 
         ControladorDeTelas containerPrincipal = new ControladorDeTelas();
 
-        containerPrincipal.carregarTela(screen1ID, screen1File);
-        containerPrincipal.carregarTela(screen2ID, screen2File);
-        containerPrincipal.carregarTela(screen3ID, screen3File);
+        containerPrincipal.guardarTela(screen1ID, screen1File);
+        containerPrincipal.guardarTela(screen2ID, screen2File);
+        containerPrincipal.guardarTela(screen3ID, screen3File);
 
         containerPrincipal.setScreen(screen1ID);
 

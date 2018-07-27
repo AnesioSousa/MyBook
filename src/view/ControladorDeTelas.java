@@ -1,5 +1,6 @@
 package view;
 
+import java.io.IOException;
 import java.util.HashMap;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -20,7 +21,7 @@ public class ControladorDeTelas extends StackPane {
     }
 
     // Adiciona uma tela à coleção de telas
-    public void adicionarTela(String nome, Node tela) {
+    private void adicionarTela(String nome, Node tela) {
         telas.put(nome, tela);
     }
 
@@ -32,7 +33,7 @@ public class ControladorDeTelas extends StackPane {
     // Carrega o arquivo fxml, adiciona a tela à coleção de telas e finalmente injeta o
     // painel da tela ao controller 
     //finally injects the screenPane to the controller.
-    public boolean carregarTela(String nome, String caminhoDoFXML) {
+    public boolean guardarTela(String nome, String caminhoDoFXML) {
         try {
             FXMLLoader meuCarregador = new FXMLLoader(getClass().getResource(caminhoDoFXML));
             Parent telaCarregada = (Parent) meuCarregador.load();
@@ -40,7 +41,7 @@ public class ControladorDeTelas extends StackPane {
             myScreenControler.setarTelaPai(this);
             adicionarTela(nome, telaCarregada);
             return true;
-        } catch (Exception e) {
+        } catch (IOException e) {
             System.out.println(e.getMessage());
             return false;
         }
