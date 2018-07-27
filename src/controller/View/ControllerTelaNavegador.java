@@ -1,28 +1,33 @@
 package controller.View;
 
+import facade.Facade;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
+import view.ControladorDeTelas;
+import view.Principal;
+import view.TelaControlada;
 
 /**
  * FXML Controller class
  * 
- * @author Neto
+ * @author Anésio Sousa dos Santos Neto
  */
-public class ControllerTelaNavegador{
+public class ControllerTelaNavegador implements TelaControlada{
+    ControladorDeTelas meuControlador;
+    
+    Facade f = Facade.getInstance();
     @FXML private TextField pesquisaTxtField;
     @FXML private Button userNameBtn;
     @FXML private Button solicitacoesBtn;
@@ -35,6 +40,12 @@ public class ControllerTelaNavegador{
     private List<Parent> paginas = new ArrayList<>();   
     private final IntegerProperty idDePaginaAtual = new SimpleIntegerProperty(-1);
     
+    
+    @Override
+    public void setarTelaPai(ControladorDeTelas telaPai) {
+        meuControlador = telaPai;
+    }
+    
     public void initialize() throws Exception{
         construirPaginas();
         inicializarBotoes();
@@ -42,13 +53,14 @@ public class ControllerTelaNavegador{
     }
     
     private void inicializarBotoes() {
-        voltarBtn.disableProperty().bind(idDePaginaAtual.lessThanOrEqualTo(0)); // Desativa o botão de voltar automaticamente caso não haja página atual ou a página atual seja a primeira.
-        avancarBtn.disableProperty().bind(idDePaginaAtual.greaterThanOrEqualTo(paginas.size()-1)); // Desativa o botão de avançar automaticamente caso a página atual seja a última.
+        // Desativa o botão de voltar automaticamente caso não haja página atual ou a página atual seja a primeira.
+        voltarBtn.disableProperty().bind(idDePaginaAtual.lessThanOrEqualTo(0)); 
+        // Desativa o botão de avançar automaticamente caso a página atual seja a última.
+        avancarBtn.disableProperty().bind(idDePaginaAtual.greaterThanOrEqualTo(paginas.size()-1)); 
     }
         
     private void setConteudoInicial() {
         idDePaginaAtual.set(0);
-        System.out.println(paginas.get(1));
         contentPanel.getChildren().add(paginas.get(idDePaginaAtual.get()));
     }
     
@@ -78,11 +90,14 @@ public class ControllerTelaNavegador{
         }
     }
     
-    /*boolean temProximaPagina() {
-        return (IdDePaginaAtual < paginas.size() - 1);
+    @FXML
+    public void deslogar(ActionEvent e){
+        f.encerrarSessão();
+        goToScreen1(e);
     }
-
-    boolean temPaginaAnterior() {
-        return !historico.isEmpty();
-    }*/
+     
+    @FXML
+    private void goToScreen1(ActionEvent event){
+       meuControlador.setScreen(Principal.screen1ID);
+    }
 }

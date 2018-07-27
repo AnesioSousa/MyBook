@@ -32,7 +32,7 @@
       <TextField fx:id="nomeTxtField" layoutX="144.0" layoutY="82.0" minHeight="-Infinity" prefHeight="26.0" prefWidth="200.0" promptText="Example Name" />
       <PasswordField fx:id="senhaField" layoutX="144.0" layoutY="135.0" minHeight="-Infinity" prefHeight="26.0" prefWidth="200.0" promptText="exampleIsCool123" />
       <DatePicker fx:id="aniversarioField" layoutX="144.0" layoutY="188.0" minHeight="-Infinity" prefHeight="26.0" prefWidth="130.0" promptText="17/11/99" />
-      <Button layoutX="528.0" layoutY="10.0" mnemonicParsing="false" onAction="#btnVoltar" prefHeight="26.0" prefWidth="57.0" style="-fx-background-color: #48A5EA; -fx-cursor: hand;" text="Voltar" textFill="WHITE" />
+      <Button layoutX="528.0" layoutY="10.0" mnemonicParsing="false" onAction="#goToScreen1" prefHeight="26.0" prefWidth="57.0" style="-fx-background-color: #48A5EA; -fx-cursor: hand;" text="Voltar" textFill="WHITE" />
       <TextField fx:id="emailTxtField" layoutX="362.0" layoutY="82.0" minHeight="-Infinity" prefHeight="26.0" prefWidth="200.0" promptText="example@MyBook.com" />
       <TextField fx:id="endTxtField" layoutX="298.0" layoutY="188.0" minHeight="-Infinity" prefHeight="26.0" prefWidth="272.0" promptText="Rua dos bobos nº 0" />
       <TextField fx:id="telTextField" layoutX="145.0" layoutY="241.0" minHeight="-Infinity" prefHeight="26.0" prefWidth="155.0" promptText="(00) 0 0000-0000" />

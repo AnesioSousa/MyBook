@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="348.0" prefWidth="323.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="controller.View.ControllerTelaLogin">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="348.0" prefWidth="323.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.View.ControllerTelaLogin">
    <top>
       <ToolBar prefHeight="37.0" prefWidth="600.0" style="-fx-background-color: #48A5EA;" BorderPane.alignment="CENTER">
          <items>
@@ -33,13 +33,13 @@
                </font></PasswordField>
             <Label layoutX="75.0" layoutY="144.0" text="Senha" />
             <Label layoutX="77.0" layoutY="96.0" text="Email" />
-            <Button fx:id="btnEntrar" layoutX="165.0" layoutY="195.0" minHeight="18.0" minWidth="42.0" mnemonicParsing="false" onAction="#fazerLogin" prefHeight="27.0" prefWidth="99.0" style="-fx-background-color: #48A5EA;" text="Entrar" textFill="WHITE" />
+            <Button fx:id="btnEntrar" layoutX="165.0" layoutY="195.0" minHeight="18.0" minWidth="42.0" mnemonicParsing="false" onAction="#fazerLogin" prefHeight="27.0" prefWidth="99.0" style="-fx-background-color: #48A5EA; -fx-cursor: hand;" text="Entrar" textFill="WHITE" />
             <ImageView fitHeight="82.0" fitWidth="88.0" layoutX="122.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/icons8-administrator-male-80.png" />
                </image>
             </ImageView>
-            <Label layoutX="14.0" layoutY="262.0" onMouseClicked="#btNovoAction" onMouseEntered="#sublinharLabel" style="-fx-cursor: hand;" text="Ainda nao tem cadastro?" />
+            <Label layoutX="14.0" layoutY="262.0" onMouseClicked="#goToScreen2" style="-fx-cursor: hand;" text="Ainda nao tem cadastro?" />
             <Label fx:id="status" layoutX="78.0" layoutY="200.0" text="Label" visible="false" />
          </children>
       </AnchorPane>

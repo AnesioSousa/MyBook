@@ -1,14 +1,10 @@
 package controller.View;
 
 import facade.Facade;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
-import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -16,23 +12,20 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
-import javafx.stage.FileChooser;
-import javafx.stage.FileChooser.ExtensionFilter;
-import javafx.stage.Stage;
 import javafx.util.StringConverter;
-import javax.imageio.ImageIO;
 import model.exceptions.UsuarioJaCadastradoException;
-import view.NewFXMain;
+import view.ControladorDeTelas;
+import view.Principal;
+import view.TelaControlada;
 
 /**
  * FXML Controller class
  *
  * @author Anésio Sousa dos Santos Neto
  */
-public class ControllerTelaCadastro implements Initializable {
+public class ControllerTelaCadastro implements Initializable, TelaControlada{
+    ControladorDeTelas meuControlador;
+    
     Facade f = Facade.getInstance();
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     @FXML private TextField nomeTxtField;
@@ -44,11 +37,6 @@ public class ControllerTelaCadastro implements Initializable {
     @FXML private TextField endTxtField;
     @FXML private TextField telTextField;
     @FXML private RadioButton perfilSelect;
-    
-    @FXML
-    protected void btnVoltar(ActionEvent e){
-        NewFXMain.changeScreen("login");
-    }
     
     /* 
     1-Não deixar cadastrar com itens em branco!
@@ -64,6 +52,11 @@ public class ControllerTelaCadastro implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     } 
+
+    @Override
+    public void setarTelaPai(ControladorDeTelas telaPai) {
+        meuControlador = telaPai; 
+    }
     
     @FXML
     protected void cadastrar(ActionEvent e){
@@ -101,7 +94,7 @@ public class ControllerTelaCadastro implements Initializable {
         }
         System.out.println("Voltando à área de login!");
         limparCampos(e);
-        btnVoltar(e);
+        goToScreen1(e);
     }
     
     @FXML
@@ -117,4 +110,9 @@ public class ControllerTelaCadastro implements Initializable {
         perfilSelect.setSelected(false);
     }
 
+    @FXML
+    private void goToScreen1(ActionEvent event){
+       meuControlador.setScreen(Principal.screen1ID);
+    }
+    
 }

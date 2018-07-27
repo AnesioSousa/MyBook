@@ -48,4 +48,13 @@ public final class Facade {
     public boolean checkEmail(String email){
         return ControllerUser.obterUser(email) != null;
     }
+
+    public ControllerUser getCtrlUser() {
+        return ctrlUser;
+    }
+
+    public ControllerSessao getCtrlSession() {
+        return ctrlSession;
+    }
+
 }

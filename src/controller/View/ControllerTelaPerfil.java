@@ -13,6 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javax.imageio.ImageIO;
+import model.Usuario;
 
 /**
  * FXML Controller class
@@ -29,7 +30,8 @@ public class ControllerTelaPerfil implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }
-        @FXML
+    
+    @FXML
     protected void setImage(MouseEvent e) throws IOException{
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Escolha uma foto");
@@ -46,6 +48,10 @@ public class ControllerTelaPerfil implements Initializable {
         foto.setImage(image);
         
         caminhoFoto = file.getAbsolutePath();
+    }
+    
+    public void loadProfile(Usuario user){
+        System.out.println("Teste!");
     }
     
 }

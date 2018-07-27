@@ -23,6 +23,7 @@ public final class ControllerSessao {
     public void logout(){
         finish = System.currentTimeMillis();
         usuarioAtual.incrementTempoTotalDeUso(tempoEmSessao());
+        usuarioAtual = null;
     }
 
     private Usuario autenticar(String email, String senha) throws UsuarioNaoCadastradoException, SenhaIncorretaException{
