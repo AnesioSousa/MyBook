@@ -1,5 +1,6 @@
 package model;
 
+import java.util.LinkedList;
 import java.util.Objects;
 /**
  *
@@ -14,9 +15,8 @@ public class Usuario {
     private String nascimento;
     private String endereco;
     private String telefone;
-    private long tempoTotalDeUso;
     private String urlImagemPerfil;
-    // Solicitações
+    private LinkedList<String> solicitacoes;
     
     public Usuario(String nome, String email, String password, String genero, String nascimento, String endereco, String telefone, boolean perfilEhPublico) {
         this.nome = nome;
@@ -27,6 +27,7 @@ public class Usuario {
         this.nascimento = nascimento;
         this.endereco = endereco;
         this.telefone = telefone;
+        solicitacoes = new LinkedList<>();
     }
 
     public String getNome() {
@@ -85,21 +86,16 @@ public class Usuario {
         this.telefone = telefone;
     }
 
-    public long getTempoTotalDeUso() {
-        return tempoTotalDeUso;
-    }
-    
-    // Ver depois isso!
-    public void incrementTempoTotalDeUso(long loginTime) {
-        this.tempoTotalDeUso += loginTime;
-    }
-
     public String getUrlImagemPerfil() {
         return urlImagemPerfil;
     }
 
     public void setUrlImagemPerfil(String urlImagemPerfil) {
         this.urlImagemPerfil = urlImagemPerfil;
+    }
+
+    public LinkedList<String> getSolicitacoes() {
+        return solicitacoes;
     }
     
     @Override

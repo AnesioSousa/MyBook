@@ -22,7 +22,7 @@ public final class ControllerSessao {
     
     public void logout(){
         finish = System.currentTimeMillis();
-        usuarioAtual.incrementTempoTotalDeUso(tempoEmSessao());
+        //usuarioAtual.incrementTempoTotalDeUso(tempoEmSessao());
         usuarioAtual = null;
     }
 

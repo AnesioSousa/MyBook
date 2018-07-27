@@ -31,7 +31,7 @@ public class ControladorDeTelas extends StackPane {
     }
 
     // Carrega o arquivo fxml, adiciona a tela à coleção de telas e finalmente injeta o
-    // painel da tela ao controller 
+    // painel da tela ao controller. 
     //finally injects the screenPane to the controller.
     public boolean guardarTela(String nome, String caminhoDoFXML) {
         try {

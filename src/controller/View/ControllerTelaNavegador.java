@@ -15,6 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
+import model.Usuario;
 import view.ControladorDeTelas;
 import view.Principal;
 import view.TelaControlada;
@@ -27,9 +28,11 @@ import view.TelaControlada;
 public class ControllerTelaNavegador implements TelaControlada{
     ControladorDeTelas meuControlador;
     
+    private Usuario user;
+    
     Facade f = Facade.getInstance();
     @FXML private TextField pesquisaTxtField;
-    @FXML private Button userNameBtn;
+    @FXML private Button perfilBtn;
     @FXML private Button solicitacoesBtn;
     @FXML private Button notificacoesBtn;
     @FXML private MenuButton contaMenu;
@@ -39,6 +42,15 @@ public class ControllerTelaNavegador implements TelaControlada{
     
     private List<Parent> paginas = new ArrayList<>();   
     private final IntegerProperty idDePaginaAtual = new SimpleIntegerProperty(-1);
+    
+    // Esse método recebe um usuario para inicializar os dados do usuário logado.
+    public void initData(Usuario usuario){
+        user = usuario;
+        perfilBtn.setText(user.getNome()); // Deixar só o primeiro nome aqui depois.
+        // soliciatções
+        // notificações
+    }
+    
     
     
     @Override
