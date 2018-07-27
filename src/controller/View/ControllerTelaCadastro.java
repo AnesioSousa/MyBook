@@ -14,17 +14,14 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.util.StringConverter;
 import model.exceptions.UsuarioJaCadastradoException;
-import view.ControladorDeTelas;
 import view.Principal;
-import view.TelaControlada;
 
 /**
  * FXML Controller class
  *
  * @author Anésio Sousa dos Santos Neto
  */
-public class ControllerTelaCadastro implements Initializable, TelaControlada{
-    ControladorDeTelas meuControlador;
+public class ControllerTelaCadastro implements Initializable{
     
     Facade f = Facade.getInstance();
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
@@ -52,11 +49,6 @@ public class ControllerTelaCadastro implements Initializable, TelaControlada{
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     } 
-
-    @Override
-    public void setarTelaPai(ControladorDeTelas telaPai) {
-        meuControlador = telaPai; 
-    }
     
     @FXML
     protected void cadastrar(ActionEvent e){
@@ -112,7 +104,7 @@ public class ControllerTelaCadastro implements Initializable, TelaControlada{
 
     @FXML
     private void goToScreen1(ActionEvent event){
-       meuControlador.setScreen(Principal.screen1ID);
+       Principal.changeScreen("login");
     }
     
 }

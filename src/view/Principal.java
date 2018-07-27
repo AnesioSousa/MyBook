@@ -3,7 +3,8 @@ package view;
 import facade.Facade;
 import java.io.IOException;
 import javafx.application.Application;
-import javafx.scene.Group;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -12,47 +13,55 @@ import javafx.stage.Stage;
  * @author Anésio Sousa dos Santos Neto
  */
 public class Principal extends Application {
-
     private Facade facade = Facade.getInstance();
     
     private static Stage stage;
 
-    public static String screen1ID = "tela1";
-    public static String screen1File = "Login.fxml";
-
-    public static String screen2ID = "tela2";
-    public static String screen2File = "Cadastro.fxml";
-
-    public static String screen3ID = "tela3";
-    public static String screen3File = "Navegador.fxml";
+    private static Scene loginScene;
+    private static Scene cadastroScene;
+    private static Scene navegadorScene;
 
     @Override
     public void start(Stage primaryStage) throws IOException {
         stage = primaryStage;
         primaryStage.setTitle("Bem vindo ao MyBook!");
-
-        ControladorDeTelas containerPrincipal = new ControladorDeTelas();
-
-        containerPrincipal.guardarTela(screen1ID, screen1File);
-        containerPrincipal.guardarTela(screen2ID, screen2File);
-        containerPrincipal.guardarTela(screen3ID, screen3File);
-
-        containerPrincipal.setScreen(screen1ID);
-
-        Group root = new Group();
-        root.getChildren().addAll(containerPrincipal);
-        Scene scene = new Scene(root);
-        primaryStage.setScene(scene);
+        
+        FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("Login.fxml"));
+        Parent login = loginLoader.load();
+        loginScene = new Scene(login);
+        
+        FXMLLoader cadastroLoader = new FXMLLoader(getClass().getResource("Cadastro.fxml"));
+        Parent cadastro = cadastroLoader.load();
+        cadastroScene = new Scene(cadastro);
+        
+        FXMLLoader navegadorLoader = new FXMLLoader(getClass().getResource("Navegador.fxml"));
+        Parent navegador = navegadorLoader.load();
+        navegadorScene = new Scene(navegador);
+        
+        primaryStage.setScene(loginScene);
         primaryStage.setResizable(false);
         primaryStage.show();
-        
         // Tem que esperar a tela de login retornar o usuário logado.
     }  
 
-    
-    public static void resizeScreen() {
-        stage.sizeToScene();
-        stage.centerOnScreen();
+    public static void changeScreen(String scr){ // É possível receber Enum invés de String
+        switch(scr){
+            case "login":
+                stage.setScene(loginScene);
+                stage.sizeToScene();
+		stage.centerOnScreen();
+                break;
+            case "cadastro":
+                stage.setScene(cadastroScene);
+                stage.sizeToScene();
+		stage.centerOnScreen();
+                break;  
+            case "navegador":
+                stage.setScene(navegadorScene);
+                stage.sizeToScene();
+		stage.centerOnScreen();
+                break;
+        }
     }
 
     /**

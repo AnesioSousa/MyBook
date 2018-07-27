@@ -16,18 +16,14 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import model.Usuario;
-import view.ControladorDeTelas;
 import view.Principal;
-import view.TelaControlada;
 
 /**
  * FXML Controller class
  * 
  * @author Anésio Sousa dos Santos Neto
  */
-public class ControllerTelaNavegador implements TelaControlada{
-    ControladorDeTelas meuControlador;
-    
+public class ControllerTelaNavegador {
     private Usuario user;
     
     Facade f = Facade.getInstance();
@@ -49,13 +45,6 @@ public class ControllerTelaNavegador implements TelaControlada{
         perfilBtn.setText(user.getNome()); // Deixar só o primeiro nome aqui depois.
         // soliciatções
         // notificações
-    }
-    
-    
-    
-    @Override
-    public void setarTelaPai(ControladorDeTelas telaPai) {
-        meuControlador = telaPai;
     }
     
     public void initialize() throws Exception{
@@ -110,6 +99,6 @@ public class ControllerTelaNavegador implements TelaControlada{
      
     @FXML
     private void goToScreen1(ActionEvent event){
-       meuControlador.setScreen(Principal.screen1ID);
+       Principal.changeScreen("login");
     }
 }

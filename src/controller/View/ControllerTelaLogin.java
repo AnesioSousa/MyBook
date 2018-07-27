@@ -13,17 +13,14 @@ import javafx.scene.input.MouseEvent;
 import model.Usuario;
 import model.exceptions.SenhaIncorretaException;
 import model.exceptions.UsuarioNaoCadastradoException;
-import view.ControladorDeTelas;
 import view.Principal;
-import view.TelaControlada;
 
 /**
  * FXML Controller class
  *
  * @author Anésio Sousa dos Santos Neto
  */
-public class ControllerTelaLogin implements Initializable, TelaControlada{
-    ControladorDeTelas meuControlador;
+public class ControllerTelaLogin implements Initializable{
     
     Facade f = Facade.getInstance();
     @FXML private Label status;
@@ -37,11 +34,6 @@ public class ControllerTelaLogin implements Initializable, TelaControlada{
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     } 
-      
-    @Override
-    public void setarTelaPai(ControladorDeTelas telaPai) {
-        meuControlador = telaPai;
-    }
     
     // Tem que tratar campos vazios!
     @FXML
@@ -63,12 +55,12 @@ public class ControllerTelaLogin implements Initializable, TelaControlada{
         
     @FXML
     private void goToScreen2(MouseEvent event){
-       meuControlador.setScreen(Principal.screen2ID);
+       Principal.changeScreen("cadastro");
     }
     
     @FXML
     private void goToScreen3(ActionEvent event){
-       meuControlador.setScreen(Principal.screen3ID);
+       Principal.changeScreen("navegador");
     }
 
 }
