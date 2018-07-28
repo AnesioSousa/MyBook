@@ -54,7 +54,7 @@ public class ControllerTelaLogin implements Initializable{
             Scene navegadorScene = new Scene(navegador);
             
             ControllerTelaNavegador controller = navegadorLoader.getController();
-            controller.initData(usuario);
+            controller.initialize(usuario);
             
             Stage window = (Stage)((Node)e.getSource()).getScene().getWindow();
             

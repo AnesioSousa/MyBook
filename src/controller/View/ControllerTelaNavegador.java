@@ -41,14 +41,6 @@ public class ControllerTelaNavegador {
     private List<Parent> paginas = new ArrayList<>();   
     private final IntegerProperty idDePaginaAtual = new SimpleIntegerProperty(-1);
     
-    // Esse método recebe um usuario para inicializar os dados do usuário logado.
-    public void initData(Usuario usuario){
-        user = usuario;
-        babel.setText(user.getNome());
-        // solicitações
-        // notificações
-    }
-    
     /*@FXML
     public void loadProfile(ActionEvent e) throws IOException{
         
@@ -64,11 +56,18 @@ public class ControllerTelaNavegador {
         proximaPagina();
     }*/
     
-    public void initialize() throws Exception{
+    // Esse método recebe um usuario para inicializar os dados do usuário logado.
+    public void initialize(Usuario usuario) throws IOException{
+        user = usuario;
+        babel.setText(user.getNome());
+        // solicitações
+        // notificações
+        
         construirPaginas();
         inicializarBotoes();
         setConteudoInicial();
         System.out.println(facade.getUsuarioAtual());
+        System.out.println(user);
     }
     
     private void inicializarBotoes() {
@@ -85,7 +84,10 @@ public class ControllerTelaNavegador {
     }
     
     private void construirPaginas() throws IOException {
-        Parent perfil1 = FXMLLoader.load(ControllerTelaNavegador.class.getClassLoader().getResource("view/Perfil.fxml"));
+        FXMLLoader perfilLoader = new FXMLLoader(ControllerTelaNavegador.class.getClassLoader().getResource("view/Perfil.fxml"));
+        Parent perfil1 = perfilLoader.load();
+        
+        //Parent perfil1 = FXMLLoader.load(ControllerTelaNavegador.class.getClassLoader().getResource("view/Perfil.fxml"));
         //Parent perfilteste1 = FXMLLoader.load(ControllerTelaNavegador.class.getClassLoader().getResource("view/PerfilTeste1.fxml"));
         
         paginas.addAll(Arrays.asList(perfil1/*, perfilteste1*/));

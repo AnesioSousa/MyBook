@@ -1,6 +1,9 @@
 package util;
 
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Classe responsável por criar objetos que são vértices de um grafo. 
@@ -47,6 +50,19 @@ public class Vertice {
         return adjacencias;
     }
 
+    /**
+     * Retorna a lista de dados dos vértices adjacentes a este.
+     * @return lista
+     */
+    public List getDadosDeAdjacencias() {
+        List dados = new LinkedList();
+        Iterator<Vertice> itr = adjacencias.keySet().iterator();
+        while(itr.hasNext()){
+            dados.add(itr.next().getElemento());
+        }
+        return dados;
+    }
+    
     @Override
     public String toString() {
         return "Vertice{" + "elemento=" + elemento + '}';

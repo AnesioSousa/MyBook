@@ -91,6 +91,11 @@ public final class Grafo {
         return arestas.size();
     }
     
+    public List getAdjacentsData(Object u){
+        Vertice v = vertices.get(u);
+        return v.getDadosDeAdjacencias();
+    }
+    
     public void removeEdge(Object u, Object v){
         // Verificar antes a existência de u e v no mapa de vértices!
         Vertice aux1 = vertices.get(u);
@@ -104,10 +109,6 @@ public final class Grafo {
         }
     }
     
-    public void removeAllEdges(){
-        arestas.clear();
-    }
-    
     private void removeEdge(Aresta a) {  // Remove a aresta recebida dos vértices adjacentes
         a.getOrigem().getAdjacencias().remove(a.getDestino());
         a.getDestino().getAdjacencias().remove(a.getOrigem());
@@ -115,7 +116,11 @@ public final class Grafo {
         // Remove a aresta da lista de arestas
         arestas.remove(a);
     }
-
+    
+    public void removeAllEdges(){
+        arestas.clear();
+    }
+    
     public Iterator edgesList(Object key) {
         return vertices.get(key).getAdjacencias().values().iterator();
     }

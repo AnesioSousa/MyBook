@@ -1,6 +1,7 @@
 package controller.System;
 
 import java.util.HashMap;
+import java.util.List;
 import model.exceptions.SenhaIncorretaException;
 import model.exceptions.UsuarioJaCadastradoException;
 import model.exceptions.UsuarioNaoCadastradoException;
@@ -53,7 +54,7 @@ public class ControllerUser {
     }*/
     
     public Usuario checarDados(String email, String senha) throws UsuarioNaoCadastradoException, SenhaIncorretaException{
-        Usuario user = obterUser(email);  // TEM QUE VER SE ISSO ESTÁ CORRETO!!!
+        Usuario user = obterUser(email);
         if(user != null){
             if(user.getPassword().equals(senha)){
                 return user;
@@ -63,6 +64,10 @@ public class ControllerUser {
         }else{
             throw new UsuarioNaoCadastradoException();
         }
+    }
+    
+    public List listarAmizades(Usuario user){ // Tem que verificar se o user está no grafo!
+        return grafo.getAdjacentsData(user);
     }
     
     public int getQuantidadeUsers() {

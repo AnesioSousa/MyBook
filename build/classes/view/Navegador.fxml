@@ -27,7 +27,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="pesquisaTxtField" layoutX="98.0" layoutY="8.0" prefHeight="26.0" prefWidth="439.0" promptText="Pesquisar" />
+                  <TextField fx:id="pesquisaTxtField" layoutX="98.0" layoutY="8.0" prefHeight="26.0" prefWidth="343.0" promptText="Pesquisar" />
                   <Button fx:id="perfilBtn" contentDisplay="CENTER" layoutX="540.0" layoutY="8.0" mnemonicParsing="false" text="Pagina Inicial" textAlignment="CENTER" />
                   <Button fx:id="solicitacoesBtn" layoutX="634.0" layoutY="8.0" mnemonicParsing="false" text="Solicita" />
                   <Button fx:id="notificacoesBtn" layoutX="698.0" layoutY="8.0" mnemonicParsing="false" text="Notificações" />
@@ -39,7 +39,8 @@
                     </items>
                   </MenuButton>
                   <Separator layoutX="788.0" layoutY="9.0" maxHeight="-Infinity" minHeight="-Infinity" orientation="VERTICAL" prefHeight="25.0" />
-                  <Label fx:id="babel" layoutX="409.0" layoutY="15.0" text="Label" />
+                  <Label fx:id="babel" layoutX="352.0" layoutY="13.0" text="Label" />
+                  <Button layoutX="450.0" layoutY="8.0" mnemonicParsing="false" text="Buscar" />
                </children>
             </AnchorPane>
          </top>
