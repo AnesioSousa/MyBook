@@ -4,6 +4,8 @@ import facade.Facade;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,6 +18,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import model.Usuario;
 import model.exceptions.SenhaIncorretaException;
 import model.exceptions.UsuarioNaoCadastradoException;
@@ -66,12 +69,22 @@ public class ControllerTelaLogin implements Initializable{
             /*status.setText("OK!");
             status.setVisible(true);*/
 
-        } catch (UsuarioNaoCadastradoException | SenhaIncorretaException ex) {
-            System.out.println(ex);
-            status.setText("NOT OK!");
-            status.setVisible(true);
+        } catch (UsuarioNaoCadastradoException ex) {
+            showContaErro(); // Tentar ver se é possivel deixar por um tempo visível, e depois deixar ele invisível novamente.
+        } catch (SenhaIncorretaException ex) {
+            showSenhaErro(); // Tentar ver se é possivel deixar por um tempo visível, e depois deixar ele invisível novamente.
         }
         return usuario;
+    }
+    
+    private void showContaErro(){
+        status.setText("Não existe registro com esse email!");
+        status.setVisible(true);
+    }
+    
+    private void showSenhaErro(){
+        status.setText("Senha incorreta!");
+        status.setVisible(true);
     }
         
     @FXML

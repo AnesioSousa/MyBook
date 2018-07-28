@@ -111,13 +111,12 @@ public class ControllerTelaNavegador {
     
     @FXML
     public void deslogar(ActionEvent e){
-        f.encerrarSessão();
         goToScreen1(e);
     }
     
     @FXML
     public void excluirConta(ActionEvent e){
-        f.excluirUser();
+        //f.excluirUser(); REVER ISSO!
         goToScreen1(e);
     }
     

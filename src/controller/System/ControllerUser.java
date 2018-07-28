@@ -14,7 +14,7 @@ import util.Grafo;
  */
 public class ControllerUser {
     private Grafo grafo;
-    private static Map<String, Usuario> emailMap;
+    private Map<String, Usuario> emailMap;
 
     public ControllerUser() {
         grafo =  new Grafo();
@@ -32,8 +32,8 @@ public class ControllerUser {
         }
     }
 
-    // Tem que rever isso! esse método é basicamente o "autenticação" do facade!!
-    public Usuario removerUser(Usuario user){
+    public Usuario removerUser(String email, String senha) throws UsuarioNaoCadastradoException, SenhaIncorretaException{
+        Usuario user = checarDados(email, senha);
         grafo.removeVertex(user);
         emailMap.remove(user.getEmail(), user);
         
@@ -51,12 +51,25 @@ public class ControllerUser {
     public void modificarVinculo(Usuario userA, Usuario userB){
         
     }*/
-
+    
+    public Usuario checarDados(String email, String senha) throws UsuarioNaoCadastradoException, SenhaIncorretaException{
+        Usuario user = obterUser(email);  // TEM QUE VER SE ISSO ESTÁ CORRETO!!!
+        if(user != null){
+            if(user.getPassword().equals(senha)){
+                return user;
+            }else{
+                throw new SenhaIncorretaException();
+            }
+        }else{
+            throw new UsuarioNaoCadastradoException();
+        }
+    }
+    
     public int getQuantidadeUsers() {
         return grafo.numVertices();
     }
         
-    public static Usuario obterUser(String email){ 
+    public Usuario obterUser(String email){ 
         return emailMap.get(email);
     }
 }
