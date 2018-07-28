@@ -11,7 +11,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
@@ -28,7 +27,7 @@ import view.Principal;
 public class ControllerTelaNavegador {
     private Usuario user;
     
-    Facade f = Facade.getInstance();
+    Facade facade = Facade.getInstance();
     @FXML private TextField pesquisaTxtField;
     @FXML private Button perfilBtn;
     @FXML private Button solicitacoesBtn;
@@ -69,6 +68,7 @@ public class ControllerTelaNavegador {
         construirPaginas();
         inicializarBotoes();
         setConteudoInicial();
+        System.out.println(facade.getUsuarioAtual());
     }
     
     private void inicializarBotoes() {
@@ -111,6 +111,7 @@ public class ControllerTelaNavegador {
     
     @FXML
     public void deslogar(ActionEvent e){
+        facade.encerrarSessaoAtual();
         goToScreen1(e);
     }
     

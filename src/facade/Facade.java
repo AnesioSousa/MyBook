@@ -49,11 +49,10 @@ public final class Facade {
         usuarioAtual = ctrlUser.checarDados(email, password);
         return usuarioAtual;
     }
-    
-    /* Fazer exceção para se não tiver usar logado!
-    public void encerrarSessão(){
-        ctrlSession.logout();
-    }*/
+
+    public void encerrarSessaoAtual(){
+        usuarioAtual = null;
+    }
     
     public boolean checkEmail(String email){
         return ctrlUser.obterUser(email) != null;
@@ -61,6 +60,10 @@ public final class Facade {
 
     public ControllerUser getCtrlUser() {
         return ctrlUser;
+    }
+
+    public void setUsuarioAtual(Usuario usuarioAtual) {
+        this.usuarioAtual = usuarioAtual;
     }
 
     public Usuario getUsuarioAtual() {

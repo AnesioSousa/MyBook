@@ -47,13 +47,13 @@ public class ControllerTelaLogin implements Initializable{
         Usuario usuario = null;
         try {
             usuario = facade.iniciarSessao(emailTxtField.getText(), senhaField.getText());
+            facade.setUsuarioAtual(usuario);
             
             FXMLLoader navegadorLoader = new FXMLLoader(getClass().getResource("/view/Navegador.fxml"));
             Parent navegador = navegadorLoader.load();
             Scene navegadorScene = new Scene(navegador);
             
             ControllerTelaNavegador controller = navegadorLoader.getController();
-            
             controller.initData(usuario);
             
             Stage window = (Stage)((Node)e.getSource()).getScene().getWindow();
@@ -62,10 +62,6 @@ public class ControllerTelaLogin implements Initializable{
             window.centerOnScreen();
             window.sizeToScene();
             
-            /*System.out.println(facade.getCtrlUser().getQuantidadeUsers());*/
-            /*status.setText("OK!");
-            status.setVisible(true);*/
-
         } catch (UsuarioNaoCadastradoException ex) {
             showContaErro(); // Tentar ver se é possivel deixar por um tempo visível, e depois deixar ele invisível novamente.
         } catch (SenhaIncorretaException ex) {
