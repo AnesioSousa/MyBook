@@ -33,20 +33,19 @@ public class Principal extends Application {
         primaryStage.setScene(loginScene);
         primaryStage.setResizable(false);
         primaryStage.show();
-        // Tem que esperar a tela de login retornar o usuário logado.
     }
 
     public static void changeScreen(String scr) { // É possível receber Enum invés de String
         switch (scr) {
             case "login":
                 stage.setScene(loginScene);
-                stage.sizeToScene();
                 stage.centerOnScreen();
+                stage.sizeToScene();
                 break;
             case "cadastro":
                 stage.setScene(cadastroScene);
-                stage.sizeToScene();
                 stage.centerOnScreen();
+                stage.sizeToScene();
                 break;
         }
     }

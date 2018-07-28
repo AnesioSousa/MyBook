@@ -59,9 +59,9 @@ public class ControllerTelaLogin implements Initializable{
             Stage window = (Stage)((Node)e.getSource()).getScene().getWindow();
             
             window.setScene(navegadorScene);
-            window.sizeToScene();
             window.centerOnScreen();
-            window.show();
+            window.sizeToScene();
+            
             
             status.setText("OK!");
             status.setVisible(true);
