@@ -6,12 +6,14 @@ import model.Usuario;
 import model.exceptions.SenhaIncorretaException;
 import model.exceptions.UsuarioJaCadastradoException;
 import model.exceptions.UsuarioNaoCadastradoException;
+import util.trie.MapTrie;
 
 /**
  *
  * @author Anésio Sousa dos Santos Neto
  */
 public final class Facade {
+    private MapTrie search;
     private ControllerUser ctrlUser;
     private ControllerSessao ctrlSession;
     private static Facade INSTANCE = null;
@@ -19,6 +21,7 @@ public final class Facade {
     private Facade() {
         this.ctrlUser = new ControllerUser();
         this.ctrlSession = new ControllerSessao();
+        this.search = new MapTrie();
     }
     
     public static Facade getInstance(){
@@ -29,12 +32,19 @@ public final class Facade {
     }
       
     public Usuario registrarUser(String nome, String email, String password, String genero, String nascimento, String endereco, String telefone, boolean estadoPerfil) throws UsuarioJaCadastradoException{
-        return ctrlUser.cadastrarUser(nome, email, password, genero, nascimento, endereco, telefone, estadoPerfil);
+        Usuario user = ctrlUser.cadastrarUser(nome, email, password, genero, nascimento, endereco, telefone, estadoPerfil);
+        search.insert(user.getNome(), user);
+        
+        return user;
     }
-
+    
+    // REVER ISSOOOO!!!
     public Usuario excluirUser(){
-        encerrarSessão(); // Verificar isso depois
-        return ctrlUser.removerUser(ctrlSession.getActualUser());
+        encerrarSessão(); 
+        Usuario user = ctrlUser.removerUser(ctrlSession.getActualUser());
+        search.deleteKey(user.getNome());
+        
+        return user;
     }
     
     public Usuario iniciarSessao(String email, String password) throws UsuarioNaoCadastradoException, SenhaIncorretaException{
@@ -57,5 +67,4 @@ public final class Facade {
     public ControllerSessao getCtrlSession() {
         return ctrlSession;
     }
-
 }

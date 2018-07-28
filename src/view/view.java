@@ -1,23 +1,20 @@
 package view;
 
-import controller.System.ControllerSessao;
-import controller.System.ControllerUser;
 import facade.Facade;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import model.exceptions.UsuarioJaCadastradoException;
 import model.Usuario;
 import model.exceptions.SenhaIncorretaException;
 import model.exceptions.UsuarioNaoCadastradoException;
-import util.Grafo;
+import util.trie.MapTrie;
 
 public class view {  
     public static void main(String[] args) {
         Facade f = Facade.getInstance();
         
-        
+        MapTrie map = new MapTrie();
+        Usuario a = null;
         try {
-            Usuario a = f.registrarUser("Anésio Sousa", "anesios98@gmail.com", "123", "Masculino", "17/11/2015", "Rua angico n11", "(75) 99191-6636", true);
+            a = f.registrarUser("Anésio Sousa", "anesios98@gmail.com", "123", "Masculino", "17/11/2015", "Rua angico n11", "(75) 99191-6636", true);
             System.out.println(a.getEmail() +" "+a.getEndereco() );
         } catch (UsuarioJaCadastradoException ex) {
             System.out.println(ex);
@@ -38,5 +35,13 @@ public class view {
         } catch (UsuarioNaoCadastradoException | SenhaIncorretaException ex) {
             System.out.println(ex);
         }
+        
+        map.insert(a.getNome(), a);
+        map.insert("André", "AndréTest");
+        map.insert("Antônio", "AntônioTest");
+        map.insert("Anterior", "AnteriorTest");
+        
+        System.out.println(map.contains("Anésio Sousa"));
+        System.out.println(map.getKeySuggestions("An"));
     }
 }
