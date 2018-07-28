@@ -29,12 +29,12 @@ public class view {
         }
         
         
-        /*try {
-            f.iniciarSessao("anesios98@gmail.com", "123");
+        try {
+            f.iniciarSessao("anesios98@gmail.comm", "123");
             System.out.println("EEEEHhh");
         } catch (UsuarioNaoCadastradoException | SenhaIncorretaException ex) {
             System.out.println(ex);
-        }*/
+        }
         
         map.insert(a.getNome(), a);
         map.insert("André", "AndréTest");

@@ -83,7 +83,7 @@ public class ControllerUserTest {
         ControllerUser ctrl = new ControllerUser();
         ctrl.cadastrarUser("Anésio Sousa", "anesios98@gmail.com", "123", "Masculino", "00/00/00", "Rua dos bobos número 0", "(75) 90000-0000", false);
 
-        //ctrl.removerUser("toinhoEhMaineiro@blogspot.com", "123");
+        ctrl.removerUser("toinhoEhMaineiro@blogspot.com", "123");
 
     }
 
@@ -99,7 +99,7 @@ public class ControllerUserTest {
         ControllerUser ctrl = new ControllerUser();
         ctrl.cadastrarUser("Anésio Sousa", "anesios98@gmail.com", "123", "Masculino", "00/00/00", "Rua dos bobos número 0", "(75) 90000-0000", false);
 
-        //ctrl.removerUser("anesios98@gmail.com", "44587");
+        ctrl.removerUser("anesios98@gmail.com", "44587");
     }
 
     /**
@@ -118,7 +118,7 @@ public class ControllerUserTest {
         int resultado = ctrl.getQuantidadeUsers();
         assertSame(esperado, resultado);
 
-        //ctrl.removerUser("anesios98@gmail.com", "123");
+        ctrl.removerUser("anesios98@gmail.com", "123");
 
         esperado = 0;
         resultado = ctrl.getQuantidadeUsers();
