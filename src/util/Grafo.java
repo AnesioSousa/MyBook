@@ -28,11 +28,14 @@ public final class Grafo {
         return key;
     }
 
-    public Object removeVertex(Object key) {
-        for (Aresta e : vertices.get(key).getAdjacencias().values()) {
+    public Object removeVertex(Object key) { // Rever isso!
+        Vertice v = vertices.get(key);
+        if(v.getAdjacencias() != null || !v.getAdjacencias().isEmpty()){
+           for (Aresta e : v.getAdjacencias().values()) {
             removeEdge(e);
+            }
+            vertices.remove(key);
         }
-        vertices.remove(key);
         return key;
     }
 

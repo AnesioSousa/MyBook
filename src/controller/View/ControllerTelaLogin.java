@@ -62,9 +62,9 @@ public class ControllerTelaLogin implements Initializable{
             window.centerOnScreen();
             window.sizeToScene();
             
-            
-            status.setText("OK!");
-            status.setVisible(true);
+            /*System.out.println(facade.getCtrlUser().getQuantidadeUsers());*/
+            /*status.setText("OK!");
+            status.setVisible(true);*/
 
         } catch (UsuarioNaoCadastradoException | SenhaIncorretaException ex) {
             System.out.println(ex);

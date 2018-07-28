@@ -31,10 +31,11 @@ public final class Facade {
     public Usuario registrarUser(String nome, String email, String password, String genero, String nascimento, String endereco, String telefone, boolean estadoPerfil) throws UsuarioJaCadastradoException{
         return ctrlUser.cadastrarUser(nome, email, password, genero, nascimento, endereco, telefone, estadoPerfil);
     }
-    /* REVER ISSOO!!!!
-    public Usuario excluirUser() throws UsuarioNaoCadastradoException, SenhaIncorretaException{
+
+    public Usuario excluirUser(){
+        encerrarSessão(); // Verificar isso depois
         return ctrlUser.removerUser(ctrlSession.getActualUser());
-    }*/
+    }
     
     public Usuario iniciarSessao(String email, String password) throws UsuarioNaoCadastradoException, SenhaIncorretaException{
         return  ctrlSession.login(email, password);

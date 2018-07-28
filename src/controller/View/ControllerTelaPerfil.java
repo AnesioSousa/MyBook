@@ -42,7 +42,7 @@ public class ControllerTelaPerfil implements Initializable {
             );
         File file = fileChooser.showOpenDialog(null);
         
-            System.out.println(file.getAbsolutePath());
+        System.out.println(file.getAbsolutePath());
         BufferedImage bufferedImage = ImageIO.read(file);
         Image image = SwingFXUtils.toFXImage(bufferedImage, null);
         foto.setImage(image);

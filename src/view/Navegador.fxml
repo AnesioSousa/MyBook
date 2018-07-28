@@ -13,42 +13,47 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.View.ControllerTelaNavegador">
-   <top>
-      <AnchorPane prefHeight="46.0" prefWidth="900.0" style="-fx-background-color: #48A5EA;" BorderPane.alignment="CENTER">
-         <BorderPane.margin>
-            <Insets />
-         </BorderPane.margin>
-         <children>
-            <Label layoutX="16.0" layoutY="8.0" text="MyBook" textFill="WHITE">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <TextField fx:id="pesquisaTxtField" layoutX="98.0" layoutY="8.0" prefHeight="26.0" prefWidth="439.0" promptText="Pesquisar" />
-            <Button fx:id="perfilBtn" layoutX="540.0" layoutY="8.0" mnemonicParsing="false" text="UserName" />
-            <Button fx:id="solicitacoesBtn" layoutX="616.0" layoutY="8.0" mnemonicParsing="false" text="Solicitações" />
-            <Button fx:id="notificacoesBtn" layoutX="698.0" layoutY="8.0" mnemonicParsing="false" text="Notificações" />
-            <MenuButton fx:id="contaMenu" layoutX="800.0" layoutY="8.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="94.0" text="Conta">
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.View.ControllerTelaNavegador">
+   <children>
+      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="900.0">
+         <top>
+            <AnchorPane prefHeight="46.0" prefWidth="900.0" style="-fx-background-color: #48A5EA;" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets />
+               </BorderPane.margin>
+               <children>
+                  <Label layoutX="16.0" layoutY="8.0" text="MyBook" textFill="WHITE">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="pesquisaTxtField" layoutX="98.0" layoutY="8.0" prefHeight="26.0" prefWidth="439.0" promptText="Pesquisar" />
+                  <Button fx:id="perfilBtn" contentDisplay="CENTER" layoutX="540.0" layoutY="8.0" mnemonicParsing="false" text="Pagina Inicial" textAlignment="CENTER" />
+                  <Button fx:id="solicitacoesBtn" layoutX="634.0" layoutY="8.0" mnemonicParsing="false" text="Solicita" />
+                  <Button fx:id="notificacoesBtn" layoutX="698.0" layoutY="8.0" mnemonicParsing="false" text="Notificações" />
+                  <MenuButton fx:id="contaMenu" layoutX="800.0" layoutY="8.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="94.0" text="Conta">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Editar perfil" />
+                      <MenuItem mnemonicParsing="false" onAction="#excluirConta" text="Excluir conta" />
+                      <MenuItem mnemonicParsing="false" onAction="#deslogar" text="Sair" />
+                    </items>
+                  </MenuButton>
+                  <Separator layoutX="788.0" layoutY="9.0" maxHeight="-Infinity" minHeight="-Infinity" orientation="VERTICAL" prefHeight="25.0" />
+                  <Label fx:id="babel" layoutX="409.0" layoutY="15.0" text="Label" />
+               </children>
+            </AnchorPane>
+         </top>
+         <bottom>
+            <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
               <items>
-                  <MenuItem mnemonicParsing="false" text="Editar perfil" />
-                <MenuItem mnemonicParsing="false" text="Excluir conta" />
-                <MenuItem mnemonicParsing="false" onAction="#deslogar" text="Sair" />
+                <Button fx:id="voltarBtn" mnemonicParsing="false" onAction="#paginaAnterior" text="Voltar" />
+                  <Button fx:id="avancarBtn" mnemonicParsing="false" onAction="#proximaPagina" text="Avançar" />
               </items>
-            </MenuButton>
-            <Separator layoutX="788.0" layoutY="9.0" maxHeight="-Infinity" minHeight="-Infinity" orientation="VERTICAL" prefHeight="25.0" />
-         </children>
-      </AnchorPane>
-   </top>
-   <bottom>
-      <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-        <items>
-          <Button fx:id="voltarBtn" mnemonicParsing="false" onAction="#paginaAnterior" text="Voltar" />
-            <Button fx:id="avancarBtn" mnemonicParsing="false" onAction="#proximaPagina" text="Avançar" />
-        </items>
-      </ToolBar>
-   </bottom>
-   <center>
-      <VBox fx:id="contentPanel" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER" />
-   </center>
-</BorderPane>
+            </ToolBar>
+         </bottom>
+         <center>
+            <VBox fx:id="contentPanel" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER" />
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>

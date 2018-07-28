@@ -31,21 +31,13 @@ public class ControllerUser {
             throw new UsuarioJaCadastradoException();
         }
     }
-    
+
     // Tem que rever isso! esse método é basicamente o "autenticação" do facade!!
-    public Usuario removerUser(String email, String password) throws UsuarioNaoCadastradoException, SenhaIncorretaException{
-        Usuario user = obterUser(email);
-        if(user != null){
-            if(!user.getPassword().equals(password)){
-                throw new SenhaIncorretaException();
-            }else{
-                grafo.removeVertex(user);
-                emailMap.remove(email, user);
-                return user;
-            }
-        }else{
-            throw new UsuarioNaoCadastradoException();
-        }
+    public Usuario removerUser(Usuario user){
+        grafo.removeVertex(user);
+        emailMap.remove(user.getEmail(), user);
+        
+        return user;
     }
 
     /*public void adicionarAmizade(Usuario userA, Usuario userB){

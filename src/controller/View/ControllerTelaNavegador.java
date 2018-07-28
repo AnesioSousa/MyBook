@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import javafx.application.Application;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.ActionEvent;
@@ -14,10 +13,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 import model.Usuario;
 import view.Principal;
 
@@ -38,6 +37,7 @@ public class ControllerTelaNavegador {
     @FXML private Button voltarBtn;
     @FXML private Button avancarBtn;
     @FXML private VBox contentPanel;
+    @FXML private Label babel;
     
     private List<Parent> paginas = new ArrayList<>();   
     private final IntegerProperty idDePaginaAtual = new SimpleIntegerProperty(-1);
@@ -45,14 +45,25 @@ public class ControllerTelaNavegador {
     // Esse método recebe um usuario para inicializar os dados do usuário logado.
     public void initData(Usuario usuario){
         user = usuario;
-        perfilBtn.setText(user.getNome()); // Deixar só o primeiro nome aqui depois.
-        // soliciatções
+        babel.setText(user.getNome());
+        // solicitações
         // notificações
     }
     
-    public void loadNewProfile(){
+    /*@FXML
+    public void loadProfile(ActionEvent e) throws IOException{
         
-    }
+        Parent perfil = FXMLLoader.load(ControllerTelaNavegador.class.getClassLoader().getResource("view/Perfil.fxml"));
+        paginas.addAll(Arrays.asList(perfil));
+        System.out.println(paginas.size());
+        
+        /*FXMLLoader perfilLoader = new FXMLLoader(getClass().getResource("view/Perfil.fxml"));
+        Parent perfil = perfilLoader.load();            
+        ControllerTelaPerfil controller = perfilLoader.getController();
+        controller.loadProfile(user);
+        paginas.addAll(Arrays.asList(perfil));
+        proximaPagina();
+    }*/
     
     public void initialize() throws Exception{
         construirPaginas();
@@ -63,6 +74,7 @@ public class ControllerTelaNavegador {
     private void inicializarBotoes() {
         // Desativa o botão de voltar automaticamente caso não haja página atual ou a página atual seja a primeira.
         voltarBtn.disableProperty().bind(idDePaginaAtual.lessThanOrEqualTo(0)); 
+        
         // Desativa o botão de avançar automaticamente caso a página atual seja a última.
         avancarBtn.disableProperty().bind(idDePaginaAtual.greaterThanOrEqualTo(paginas.size()-1)); 
     }
@@ -74,9 +86,9 @@ public class ControllerTelaNavegador {
     
     private void construirPaginas() throws IOException {
         Parent perfil1 = FXMLLoader.load(ControllerTelaNavegador.class.getClassLoader().getResource("view/Perfil.fxml"));
-        Parent perfilteste1 = FXMLLoader.load(ControllerTelaNavegador.class.getClassLoader().getResource("view/PerfilTeste1.fxml"));
+        //Parent perfilteste1 = FXMLLoader.load(ControllerTelaNavegador.class.getClassLoader().getResource("view/PerfilTeste1.fxml"));
         
-        paginas.addAll(Arrays.asList(perfil1, perfilteste1));
+        paginas.addAll(Arrays.asList(perfil1/*, perfilteste1*/));
     }
     
     @FXML
@@ -102,7 +114,13 @@ public class ControllerTelaNavegador {
         f.encerrarSessão();
         goToScreen1(e);
     }
-     
+    
+    @FXML
+    public void excluirConta(ActionEvent e){
+        f.excluirUser();
+        goToScreen1(e);
+    }
+    
     @FXML
     private void goToScreen1(ActionEvent event){
        Principal.changeScreen("login");
