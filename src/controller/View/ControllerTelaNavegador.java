@@ -13,6 +13,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
@@ -29,6 +30,7 @@ public class ControllerTelaNavegador {
     
     Facade facade = Facade.getInstance();
     @FXML private TextField pesquisaTxtField;
+    @FXML private ListView exibirResultados;
     @FXML private Button perfilBtn;
     @FXML private Button solicitacoesBtn;
     @FXML private Button notificacoesBtn;
@@ -36,7 +38,14 @@ public class ControllerTelaNavegador {
     @FXML private Button voltarBtn;
     @FXML private Button avancarBtn;
     @FXML private VBox contentPanel;
-    @FXML private Label babel;
+    
+    
+    // RECEBE UM USER, TOMA ESSE USER COMO SEU, FAZENDO COM QUE AS OPÇÕES DO NAVEGADOR SEJAM USADAS NESSE USER.
+    /* NAVEGADOR DIZ: "pronto, recebi meu usuario logado, vou carregar as opções pra ele. Agora toma ai perfil inicial, e carrega
+       tambem teus campos com as informações desse usuário.
+    */
+    
+    // Tentar primeiro deixar o navegador 100% pra depois ir lidar com coisas dos perfis.
     
     private List<Parent> paginas = new ArrayList<>();   
     private final IntegerProperty idDePaginaAtual = new SimpleIntegerProperty(-1);
@@ -59,15 +68,11 @@ public class ControllerTelaNavegador {
     // Esse método recebe um usuario para inicializar os dados do usuário logado.
     public void initialize(Usuario usuario) throws IOException{
         user = usuario;
-        babel.setText(user.getNome());
         // solicitações
         // notificações
-        
-        construirPaginas();
+        //construirPaginas();
         inicializarBotoes();
-        setConteudoInicial();
-        System.out.println(facade.getUsuarioAtual());
-        System.out.println(user);
+        //setConteudoInicial();
     }
     
     private void inicializarBotoes() {
@@ -126,5 +131,11 @@ public class ControllerTelaNavegador {
     @FXML
     private void goToScreen1(ActionEvent event){
        Principal.changeScreen("login");
+    }
+    
+    @FXML
+    private void buscar(){
+        exibirResultados.getItems().add(user);
+        exibirResultados.setVisible(true);
     }
 }

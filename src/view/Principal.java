@@ -2,6 +2,8 @@ package view;
 
 import java.io.IOException;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -16,6 +18,7 @@ public class Principal extends Application {
     private static Stage stage;
     private static Scene loginScene;
     private static Scene cadastroScene;
+    private static EventHandler<ActionEvent> buttonHandler;
 
     @Override
     public void start(Stage primaryStage) throws IOException {
@@ -34,7 +37,7 @@ public class Principal extends Application {
         primaryStage.setResizable(false);
         primaryStage.show();
     }
-
+        
     public static void changeScreen(String scr) { // É possível receber Enum invés de String
         switch (scr) {
             case "login":
