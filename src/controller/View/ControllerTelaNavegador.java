@@ -5,16 +5,19 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import javafx.application.Application;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import model.Usuario;
 import view.Principal;
 
@@ -45,6 +48,10 @@ public class ControllerTelaNavegador {
         perfilBtn.setText(user.getNome()); // Deixar só o primeiro nome aqui depois.
         // soliciatções
         // notificações
+    }
+    
+    public void loadNewProfile(){
+        
     }
     
     public void initialize() throws Exception{
@@ -79,7 +86,6 @@ public class ControllerTelaNavegador {
             idDePaginaAtual.set(idDePaginaAtual.get()+1); // Move o indicador de página atual para a proxima página.
             contentPanel.getChildren().add(paginas.get(idDePaginaAtual.get())); // Adiciona a visualização a página que o indicador de página atual marca.
         }
-
     }
     
     @FXML

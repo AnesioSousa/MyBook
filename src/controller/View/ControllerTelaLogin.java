@@ -1,15 +1,21 @@
 package controller.View;
 
 import facade.Facade;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import model.Usuario;
 import model.exceptions.SenhaIncorretaException;
 import model.exceptions.UsuarioNaoCadastradoException;
@@ -21,8 +27,8 @@ import view.Principal;
  * @author Anésio Sousa dos Santos Neto
  */
 public class ControllerTelaLogin implements Initializable{
-    
-    Facade f = Facade.getInstance();
+            
+    Facade facade = Facade.getInstance();
     @FXML private Label status;
     @FXML private TextField emailTxtField;
     @FXML private PasswordField senhaField;
@@ -37,30 +43,43 @@ public class ControllerTelaLogin implements Initializable{
     
     // Tem que tratar campos vazios!
     @FXML
-    public Usuario fazerLogin(ActionEvent e){
-        Usuario u = null;
+    public Usuario fazerLogin(ActionEvent e) throws IOException{
+        Usuario usuario = null;
         try {
-            u = f.iniciarSessao(emailTxtField.getText(), senhaField.getText());
+            usuario = facade.iniciarSessao(emailTxtField.getText(), senhaField.getText());
+            
+            FXMLLoader navegadorLoader = new FXMLLoader(getClass().getResource("/view/Navegador.fxml"));
+            Parent navegador = navegadorLoader.load();
+            Scene navegadorScene = new Scene(navegador);
+            
+            ControllerTelaNavegador controller = navegadorLoader.getController();
+            
+            controller.initData(usuario);
+            
+            Stage window = (Stage)((Node)e.getSource()).getScene().getWindow();
+            
+            window.setScene(navegadorScene);
+            window.sizeToScene();
+            window.centerOnScreen();
+            window.show();
+            
             status.setText("OK!");
             status.setVisible(true);
-            goToScreen3(e);
 
         } catch (UsuarioNaoCadastradoException | SenhaIncorretaException ex) {
             System.out.println(ex);
             status.setText("NOT OK!");
             status.setVisible(true);
         }
-        return u;
+        return usuario;
     }
         
     @FXML
     private void goToScreen2(MouseEvent event){
        Principal.changeScreen("cadastro");
     }
-    
-    @FXML
-    private void goToScreen3(ActionEvent event){
-       Principal.changeScreen("navegador");
-    }
 
+    public TextField getEmailTxtField() {
+        return emailTxtField;
+    }
 }

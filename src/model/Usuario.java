@@ -17,7 +17,7 @@ public class Usuario {
     private String telefone;
     private String urlImagemPerfil;
     private LinkedList<String> solicitacoes;
-    
+
     public Usuario(String nome, String email, String password, String genero, String nascimento, String endereco, String telefone, boolean perfilEhPublico) {
         this.nome = nome;
         this.password = password;
