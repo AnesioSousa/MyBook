@@ -72,7 +72,11 @@ public class MainController { // Tentar criar uns métodos estáticos aqui só p
         abrirNavegacao(usuario);
         
         return usuario;
-    }  
+    } 
+    
+    public void deslogarUserAtual(){
+        facade.encerrarSessaoAtual();
+    }
     
     public void abrirNavegacao(Usuario user){ 
         if(!controllerPalco.containsScreen("navegador")){ // SE NINGUEM LOGOU NENHUMA VEZ, SALVA A PÁGINA DE NAVEGAÇÃO E INICIALIZA O NAVEGADOR!

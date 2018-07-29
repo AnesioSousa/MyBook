@@ -1,6 +1,5 @@
 package controller.View;
 
-import facade.Facade;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -26,8 +25,8 @@ import view.Principal;
 public class ControllerTelaNavegador implements TelaControlada{
     private Usuario usuarioAtual;
     private ControllerPalco meuControlador;
+    private MainController mainController = MainController.getInstance();
     
-    Facade facade = Facade.getInstance();
     @FXML private Button perfilBtn;
     @FXML private Button botaoBusca;
     @FXML private Button solicitacoesBtn;
@@ -114,7 +113,7 @@ public class ControllerTelaNavegador implements TelaControlada{
     
     @FXML
     public void deslogar(ActionEvent e){
-        facade.encerrarSessaoAtual();
+        mainController.deslogarUserAtual();
         limparNavegador();
         goToScreen1(e);
     }
@@ -127,7 +126,7 @@ public class ControllerTelaNavegador implements TelaControlada{
     
     @FXML
     private void goToScreen1(ActionEvent e){
-       meuControlador.setScreen(Principal.screen1ID);
+        meuControlador.setScreen(Principal.screen1ID);
     }
         
     @Override
