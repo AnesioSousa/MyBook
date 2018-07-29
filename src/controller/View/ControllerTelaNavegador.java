@@ -23,9 +23,9 @@ import view.Principal;
  * 
  * @author Anésio Sousa dos Santos Neto
  */
-public class ControllerTelaNavegador {
-    private Usuario usuario;
-    private MasterController meuControlador;
+public class ControllerTelaNavegador implements TelaControlada{
+    private Usuario usuarioAtual;
+    private ControllerPalco meuControlador;
     
     Facade facade = Facade.getInstance();
     @FXML private Button perfilBtn;
@@ -36,13 +36,9 @@ public class ControllerTelaNavegador {
     @FXML private Button voltarBtn;
     @FXML private Button avancarBtn;
     @FXML private AnchorPane contentPanel;
-    private Parent conteudoAtual;
     
     @FXML private Label label;
-    
-    // private List<Parent> paginas;  Tem que ser uma HashTable. Se não, quando eu quiser abrir o usuário "Juninho", eu vou ter pesquisar
-    // nessa lista onde que está o perfil dele.
-    
+        
     private Map<Usuario, Parent> perfis;
     private List<Parent> historico = new ArrayList();
     
@@ -51,31 +47,44 @@ public class ControllerTelaNavegador {
     // Esse método recebe um usuario para inicializar os dados do usuário logado.
     public void initialize(Usuario user, HashMap perfis){
         this.perfis = perfis;
-        usuario = user;
-        label.setText(usuario.getNome());
+        usuarioAtual = user;
+        label.setText(usuarioAtual.getNome());
         
         // CARREGOU AS FUNCIONALIDADES DO NAVEGADOR COM AS INFORMAÇÕES DO USER ATUAL
         // configurou botão home
         // solicitações
         // notificações
         
-        carregarPerfil(usuario); // AI DEPOIS FAZER ISSO!
+        carregarPerfilUserLogado(usuarioAtual); // AI DEPOIS FAZER ISSO!
         inicializarBotoes();
     }
-
+    // TESTAR ISSO TUDO QUANDO A CARALHA DE AMIZADES ESTIVER FUNCIONAL!
     
-    public void carregarPerfil(Usuario user){
+    private Parent atualizarActualContent(Usuario user){
         Parent perfil = perfis.get(user);
         contentPanel.getChildren().add(perfil);
         historico.addAll(Arrays.asList(perfil)); // Ver depois se o all é necessário!
         idDePaginaAtual.set(idDePaginaAtual.get()+1); // HISTORICO
-        conteudoAtual = contentPanel;
+        
+        return perfil;
     }
     
-    public void limparHistorico(){
+    private void carregarPerfilUserLogado(Usuario userAtual){
+        atualizarActualContent(userAtual);
+    }
+
+    public void carregarPerfil(Usuario user){ 
+        contentPanel.getChildren().remove(historico.get(idDePaginaAtual.get()));
+        atualizarActualContent(user);
+    }
+    
+    private void limparNavegador(){
+        usuarioAtual = null;
+        contentPanel.getChildren().clear();
         historico.clear();
+        idDePaginaAtual.set(-1);
     }
-    
+        
     private void inicializarBotoes() {
         // Desativa o botão de voltar automaticamente caso não haja página atual ou a página atual seja a primeira.
         voltarBtn.disableProperty().bind(idDePaginaAtual.lessThanOrEqualTo(0)); 
@@ -89,7 +98,7 @@ public class ControllerTelaNavegador {
             contentPanel.getChildren().remove(historico.get(idDePaginaAtual.get())); // Remove da visualização a página atual.
             idDePaginaAtual.set(idDePaginaAtual.get()+1); // Move o indicador de página atual para a proxima página.
             contentPanel.getChildren().add(historico.get(idDePaginaAtual.get())); // Adiciona a visualização a página que o indicador de página atual marca.
-            conteudoAtual = contentPanel;
+            //conteudoAtual = contentPanel;
         }
     }
     
@@ -99,13 +108,14 @@ public class ControllerTelaNavegador {
             contentPanel.getChildren().remove(historico.get(idDePaginaAtual.get()));
             idDePaginaAtual.set(idDePaginaAtual.get() -1);
             contentPanel.getChildren().add(historico.get(idDePaginaAtual.get()));
-            conteudoAtual = contentPanel;
+            //conteudoAtual = contentPanel;
         }
     }
     
     @FXML
     public void deslogar(ActionEvent e){
         facade.encerrarSessaoAtual();
+        limparNavegador();
         goToScreen1(e);
     }
     
@@ -117,16 +127,11 @@ public class ControllerTelaNavegador {
     
     @FXML
     private void goToScreen1(ActionEvent e){
-       Principal.changeScreen("login");
-    }
-    
-    // CHAMA A PÁGINA DE BUSCA
-    @FXML
-    private void irParaPaginaDeBusca(ActionEvent e){ 
-        //meuControlador.
+       meuControlador.setScreen(Principal.screen1ID);
     }
         
-    public void setControlador(MasterController master){
+    @Override
+    public void setControlador(ControllerPalco master){
         meuControlador = master;
     }
 }

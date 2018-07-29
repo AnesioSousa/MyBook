@@ -20,12 +20,12 @@ import model.Usuario;
  *
  * @author Neto
  */
-public class ControllerTelaPerfil {
+public class ControllerTelaPerfil implements TelaControlada{
     private Usuario meuUsuario;
     private String caminhoFoto;
     private ImageView foto;
     
-    private MasterController meuControlador;
+    private ControllerPalco meuControlador;
     
     /**
      * Initializes the controller class.
@@ -36,7 +36,8 @@ public class ControllerTelaPerfil {
         caminhoFoto = meuUsuario.getUrlImagemPerfil();
     }
     
-    public void setControlador(MasterController master){
+    @Override
+    public void setControlador(ControllerPalco master){
         meuControlador = master;
     }
         

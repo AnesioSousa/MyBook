@@ -23,9 +23,9 @@ import view.Principal;
  *
  * @author Anésio Sousa dos Santos Neto
  */
-public class ControllerTelaLogin implements Initializable{
-    
-    private MasterController meuControlador;
+public class ControllerTelaLogin implements Initializable, TelaControlada{
+    private MainController mainController = MainController.getInstance();
+    private ControllerPalco meuControlador;
     
     Facade facade = Facade.getInstance();
     @FXML private Label status;
@@ -43,25 +43,18 @@ public class ControllerTelaLogin implements Initializable{
     
     // Tem que tratar campos vazios!
     @FXML
-    public Usuario fazerLogin(ActionEvent e) throws IOException{
-        Usuario usuario = null;
+    public void fazerLogin(ActionEvent e) throws IOException{
         try {
-            usuario = facade.iniciarSessao(emailTxtField.getText(), senhaField.getText());
-            facade.setUsuarioAtual(usuario);
-            
-            Stage window = (Stage)((Node)e.getSource()).getScene().getWindow();
-            
-            meuControlador.abrirNavegacao(usuario, window);
-             
+            mainController.logarUser(emailTxtField.getText(), senhaField.getText());               
         } catch (UsuarioNaoCadastradoException ex) {
             showContaErro(); // Tentar ver se é possivel deixar por um tempo visível, e depois deixar ele invisível novamente.
         } catch (SenhaIncorretaException ex) {
             showSenhaErro(); // Tentar ver se é possivel deixar por um tempo visível, e depois deixar ele invisível novamente.
         }
-        return usuario;
     }
     
-    public void setControlador(MasterController master){
+    @Override
+    public void setControlador(ControllerPalco master){
         meuControlador = master;
     }
     
@@ -87,7 +80,7 @@ public class ControllerTelaLogin implements Initializable{
         
     @FXML
     private void goToScreen2(MouseEvent event){
-       Principal.changeScreen("cadastro");
+      meuControlador.setScreen(Principal.screen2ID);
     }
 
     public TextField getEmailTxtField() {

@@ -2,10 +2,11 @@ package view;
 
 import controller.View.ControllerTelaCadastro;
 import controller.View.ControllerTelaLogin;
-import controller.View.MasterController;
+import controller.View.MainController;
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -17,47 +18,35 @@ import javafx.stage.Stage;
 public class Principal extends Application {
 
     private static Stage stage;
-    private static Scene loginScene;
-    private static Scene cadastroScene;
-
+    
+    public static String screen1ID = "login";
+    public static String screen1File = "/view/Login.fxml";
+    public static String screen2ID = "cadastro";
+    public static String screen2File = "/view/Cadastro.fxml";
+    
     @Override
     public void start(Stage primaryStage) throws IOException {
         stage = primaryStage;
         primaryStage.setTitle("Bem vindo ao MyBook!");
+
+        MainController controladorPrincipal = MainController.getInstance();
+        controladorPrincipal.getControllerPalco().armazenarTela(Principal.screen1ID, Principal.screen1File);
+        controladorPrincipal.getControllerPalco().armazenarTela(Principal.screen2ID, Principal.screen2File);
         
-        MasterController controllerPrincipal = new MasterController(); // Ver se não da pra meter um singleton aqui
+        controladorPrincipal.getControllerPalco().setScreen("login");
         
-        FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("Login.fxml"));
-        Parent login = loginLoader.load();
-        loginScene = new Scene(login);
-        ControllerTelaLogin a = loginLoader.getController();
-        a.setControlador(controllerPrincipal);
-
-
-        FXMLLoader cadastroLoader = new FXMLLoader(getClass().getResource("Cadastro.fxml"));
-        Parent cadastro = cadastroLoader.load();
-        cadastroScene = new Scene(cadastro);
-        ControllerTelaCadastro b = cadastroLoader.getController();
-        b.setControlador(controllerPrincipal);
-
-        primaryStage.setScene(loginScene);
+        Group root = new Group();
+        root.getChildren().addAll(controladorPrincipal.getControllerPalco());
+        
+        Scene scene = new Scene(root);
+        primaryStage.setScene(scene);
         primaryStage.setResizable(false);
         primaryStage.show();
     }
-        
-    public static void changeScreen(String scr) { // É possível receber Enum invés de String
-        switch (scr) {
-            case "login":
-                stage.setScene(loginScene);
-                stage.centerOnScreen();
-                stage.sizeToScene();
-            break;
-            case "cadastro":
-                stage.setScene(cadastroScene);
-                stage.centerOnScreen();
-                stage.sizeToScene();
-            break;
-        }
+    
+    public static void resizeScreen(){
+	stage.sizeToScene();
+	stage.centerOnScreen();
     }
     
     /**

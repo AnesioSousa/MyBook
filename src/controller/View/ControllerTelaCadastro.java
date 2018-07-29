@@ -1,6 +1,5 @@
 package controller.View;
 
-import facade.Facade;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
@@ -22,12 +21,10 @@ import view.Principal;
  *
  * @author Anésio Sousa dos Santos Neto
  */
-public class ControllerTelaCadastro implements Initializable {
+public class ControllerTelaCadastro implements Initializable, TelaControlada{
+    private MainController mainController = MainController.getInstance();
+    private ControllerPalco meuControlador;
     
-    private MasterController meuControlador;
-    
-    
-    Facade f = Facade.getInstance();
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     @FXML
     private TextField nomeTxtField;
@@ -62,14 +59,15 @@ public class ControllerTelaCadastro implements Initializable {
         // TODO
     }
     
-    public void setControlador(MasterController master){
+    @Override
+    public void setControlador(ControllerPalco master){
         meuControlador = master;
     }
     
     // ESTA TRATANDO ERRO DE USUÁRIO JÁ CADASTRADO?
     
     @FXML
-    protected void cadastrar(ActionEvent e) throws IOException {
+    public void cadastrar(ActionEvent e) throws IOException {
         aniversarioField.setConverter(new StringConverter<LocalDate>() {
             @Override
             public String toString(LocalDate t) {
@@ -97,7 +95,7 @@ public class ControllerTelaCadastro implements Initializable {
         }
 
         try {
-            meuControlador.criarPerfilUser(f.registrarUser(nomeTxtField.getText(), emailTxtField.getText(), senhaField.getText(), genero, formatter.format(aniversarioField.getValue()), endTxtField.getText(), telTextField.getText(), perfilSelect.isSelected()));
+            mainController.criarUser(nomeTxtField.getText(), emailTxtField.getText(), senhaField.getText(), genero, formatter.format(aniversarioField.getValue()), endTxtField.getText(), telTextField.getText(), perfilSelect.isSelected());
         } catch (UsuarioJaCadastradoException ex) {
             System.out.println(ex);
         }
@@ -121,7 +119,7 @@ public class ControllerTelaCadastro implements Initializable {
 
     @FXML
     private void goToScreen1(ActionEvent event) {
-       Principal.changeScreen("login");
+       meuControlador.setScreen(Principal.screen1ID);
     }
 
     public TextField getNomeTxtField() {
