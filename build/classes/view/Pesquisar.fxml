@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="460.0" prefWidth="670.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.System.PesquisarController">
+   <children>
+      <ListView fx:id="resultList" layoutX="177.0" layoutY="140.0" prefHeight="288.0" prefWidth="316.0" />
+      <TextField fx:id="searchTxtField" layoutX="177.0" layoutY="61.0" prefHeight="29.0" prefWidth="316.0" />
+      <Button layoutX="407.0" layoutY="97.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="84.0" text="Buscar" />
+   </children>
+</AnchorPane>

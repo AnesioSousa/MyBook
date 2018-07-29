@@ -13,10 +13,8 @@ import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.scene.control.MenuButton;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.AnchorPane;
 import model.Usuario;
 import view.Principal;
 
@@ -30,15 +28,15 @@ public class ControllerTelaNavegador {
     private MasterController meuControlador;
     
     Facade facade = Facade.getInstance();
-    @FXML private TextField pesquisaTxtField;
-    @FXML private ListView exibirResultados;
     @FXML private Button perfilBtn;
+    @FXML private Button botaoBusca;
     @FXML private Button solicitacoesBtn;
     @FXML private Button notificacoesBtn;
     @FXML private MenuButton contaMenu;
     @FXML private Button voltarBtn;
     @FXML private Button avancarBtn;
-    @FXML private VBox contentPanel;
+    @FXML private AnchorPane contentPanel;
+    private Parent conteudoAtual;
     
     @FXML private Label label;
     
@@ -61,7 +59,7 @@ public class ControllerTelaNavegador {
         // solicitações
         // notificações
         
-        //carregarPerfil(usuario); // AI DEPOIS FAZER ISSO!
+        carregarPerfil(usuario); // AI DEPOIS FAZER ISSO!
         inicializarBotoes();
     }
 
@@ -71,6 +69,7 @@ public class ControllerTelaNavegador {
         contentPanel.getChildren().add(perfil);
         historico.addAll(Arrays.asList(perfil)); // Ver depois se o all é necessário!
         idDePaginaAtual.set(idDePaginaAtual.get()+1); // HISTORICO
+        conteudoAtual = contentPanel;
     }
     
     public void limparHistorico(){
@@ -90,6 +89,7 @@ public class ControllerTelaNavegador {
             contentPanel.getChildren().remove(historico.get(idDePaginaAtual.get())); // Remove da visualização a página atual.
             idDePaginaAtual.set(idDePaginaAtual.get()+1); // Move o indicador de página atual para a proxima página.
             contentPanel.getChildren().add(historico.get(idDePaginaAtual.get())); // Adiciona a visualização a página que o indicador de página atual marca.
+            conteudoAtual = contentPanel;
         }
     }
     
@@ -99,6 +99,7 @@ public class ControllerTelaNavegador {
             contentPanel.getChildren().remove(historico.get(idDePaginaAtual.get()));
             idDePaginaAtual.set(idDePaginaAtual.get() -1);
             contentPanel.getChildren().add(historico.get(idDePaginaAtual.get()));
+            conteudoAtual = contentPanel;
         }
     }
     
@@ -119,13 +120,10 @@ public class ControllerTelaNavegador {
        Principal.changeScreen("login");
     }
     
+    // CHAMA A PÁGINA DE BUSCA
     @FXML
-    private void buscar(ActionEvent e){
-        exibirResultados.getItems().clear();
-        String termo = pesquisaTxtField.getText();
-
-        exibirResultados.getItems().add(facade.buscarUser(termo));
-        exibirResultados.setVisible(true);
+    private void irParaPaginaDeBusca(ActionEvent e){ 
+        //meuControlador.
     }
         
     public void setControlador(MasterController master){

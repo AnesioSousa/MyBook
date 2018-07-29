@@ -6,11 +6,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -34,6 +31,7 @@ public class ControllerTelaLogin implements Initializable{
     @FXML private Label status;
     @FXML private TextField emailTxtField;
     @FXML private PasswordField senhaField;
+    @FXML private Label cadastroLabel;
 
     /**
      * Initializes the controller class.
@@ -53,7 +51,7 @@ public class ControllerTelaLogin implements Initializable{
             
             Stage window = (Stage)((Node)e.getSource()).getScene().getWindow();
             
-            meuControlador.iniciarNavegador(usuario, window);
+            meuControlador.abrirNavegacao(usuario, window);
              
         } catch (UsuarioNaoCadastradoException ex) {
             showContaErro(); // Tentar ver se é possivel deixar por um tempo visível, e depois deixar ele invisível novamente.
@@ -75,6 +73,16 @@ public class ControllerTelaLogin implements Initializable{
     private void showSenhaErro(){
         status.setText("Senha incorreta!");
         status.setVisible(true);
+    }
+    
+    @FXML
+    private void sublinharLabel(){
+        cadastroLabel.setUnderline(true);
+    }
+    
+    @FXML
+    private void desSublinharLabel(){
+        cadastroLabel.setUnderline(false);
     }
         
     @FXML

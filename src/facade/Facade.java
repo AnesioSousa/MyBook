@@ -57,7 +57,7 @@ public final class Facade {
     }
     
     public List buscarUser(String nome){
-        return pesquisa.getKeySuggestions(nome);
+        return pesquisa.getValueSuggestions(nome);
     }
     
     public boolean checkEmail(String email){

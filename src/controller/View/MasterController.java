@@ -16,12 +16,13 @@ import model.Usuario;
  */
 public class MasterController { // Tentar criar uns métodos estáticos aqui só pra ajudar
     HashMap<Usuario, Parent> perfis;
-    ControllerTelaNavegador controlNavegador; 
+    ControllerTelaNavegador controlNavegador;
+     
 
     // é melhor criar um stage pro navegador e esse cara controlar.
     // pq ai o login só pede pro master logar tal conta, e o master passa pro navegador 
     
-    public MasterController() throws IOException {
+    public MasterController(Stage palco) throws IOException {
         perfis = new HashMap<>();  
     }
 
@@ -34,15 +35,18 @@ public class MasterController { // Tentar criar uns métodos estáticos aqui só
         perfis.put(user, perfil);
     }
     
+    /* ACHO QUE É DESNECESSÁRIO.
     public void abrirPerfil(Usuario user){
         controlNavegador.carregarPerfil(user);
     }
-        
+    */  
+    
+    
     // Aqui eu não quero ficar criando novos navegadores toda vez que for pedido pra logar não.
     // quero que ele só abra (inicialize) o navegador pegando as informações desse user.
     // Se não poder ficar "inicializando" um navegador que já foi iniciado previamente, fudeo. Pq foi ter que criar algum método pra 
     // poder atualizar o navegador.
-    public void iniciarNavegador(Usuario user, Stage stage){ 
+    public void abrirNavegacao(Usuario user, Stage stage){ 
         try {
             FXMLLoader navegadorLoader = new FXMLLoader(getClass().getResource("/view/Navegador.fxml"));
             Parent navegador = navegadorLoader.load();
@@ -58,5 +62,11 @@ public class MasterController { // Tentar criar uns métodos estáticos aqui só
         } catch (IOException ex) {
             Logger.getLogger(MasterController.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }    
+    }
+    
+    public void iniciarPesquisa() throws IOException{
+        FXMLLoader navegadorLoader = new FXMLLoader(getClass().getResource("/view/Navegador.fxml"));
+        Parent navegador = navegadorLoader.load();
+        //controlNavegador
+    }
 }
