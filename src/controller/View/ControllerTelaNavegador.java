@@ -61,13 +61,10 @@ public class ControllerTelaNavegador {
         // solicitações
         // notificações
         
-        carregarPerfil(usuario); // AI DEPOIS FAZER ISSO!
+        //carregarPerfil(usuario); // AI DEPOIS FAZER ISSO!
         inicializarBotoes();
     }
-    
-    public void setControlador(MasterController master){
-        meuControlador = master;
-    }
+
     
     public void carregarPerfil(Usuario user){
         Parent perfil = perfis.get(user);
@@ -118,13 +115,20 @@ public class ControllerTelaNavegador {
     }
     
     @FXML
-    private void goToScreen1(ActionEvent event){
+    private void goToScreen1(ActionEvent e){
        Principal.changeScreen("login");
     }
     
     @FXML
-    private void buscar(){
-        exibirResultados.getItems().add(usuario);
+    private void buscar(ActionEvent e){
+        exibirResultados.getItems().clear();
+        String termo = pesquisaTxtField.getText();
+
+        exibirResultados.getItems().add(facade.buscarUser(termo));
         exibirResultados.setVisible(true);
+    }
+        
+    public void setControlador(MasterController master){
+        meuControlador = master;
     }
 }

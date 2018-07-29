@@ -43,7 +43,7 @@
                   <Button layoutX="450.0" layoutY="8.0" mnemonicParsing="false" onAction="#buscar" text="Buscar" />
                   <ListView fx:id="exibirResultados" layoutX="98.0" layoutY="34.0" prefHeight="201.0" prefWidth="340.0" visible="false" AnchorPane.leftAnchor="98.0" AnchorPane.rightAnchor="462.0" AnchorPane.topAnchor="34.0" />
                   <Label fx:id="label" layoutX="307.0" layoutY="13.0" text="Label" />
-                  <Button fx:id="teste" layoutX="506.0" layoutY="12.0" mnemonicParsing="false" text="GO" />
+                  <Button fx:id="teste" layoutX="506.0" layoutY="12.0" mnemonicParsing="false" onAction="#buscar" text="GO" />
                </children>
             </AnchorPane>
          </top>

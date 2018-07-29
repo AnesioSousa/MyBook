@@ -3,45 +3,45 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane fx:id="perfilRoot" prefHeight="415.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.View.ControllerTelaPerfil">
-   <left>
-      <AnchorPane prefHeight="359.0" prefWidth="165.0" BorderPane.alignment="CENTER">
+
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.View.ControllerTelaPerfil">
+   <children>
+      <BorderPane fx:id="perfilRoot" prefHeight="415.0" prefWidth="900.0" />
+      <AnchorPane prefHeight="417.0" prefWidth="178.0">
          <children>
-            <ListView layoutX="20.0" layoutY="149.0" prefHeight="159.0" prefWidth="124.0" />
-            <ImageView fx:id="foto" fitHeight="86.0" fitWidth="90.0" layoutX="39.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
+            <Label layoutX="18.0" layoutY="270.0" text="Arquivos" />
+            <Button layoutX="17.0" layoutY="295.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="121.0" style="-fx-background-color: #48A5EA; -fx-cursor: hand;" text="Visualizar" textFill="WHITE" />
+            <ListView layoutX="17.0" layoutY="32.0" prefHeight="230.0" prefWidth="144.0" />
+            <Label layoutX="18.0" layoutY="9.0" text="Amigos" />
+         </children>
+      </AnchorPane>
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="415.0" prefWidth="563.0">
+         <children>
+            <Label layoutX="107.0" layoutY="9.0" text="Faça uma postagem!" />
+            <ListView layoutX="107.0" layoutY="174.0" prefHeight="232.0" prefWidth="350.0" />
+            <TextArea layoutX="107.0" layoutY="55.0" prefHeight="80.0" prefWidth="350.0" promptText="No que voce está pensando?" />
+            <Button layoutX="107.0" layoutY="135.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="350.0" style="-fx-background-color: #48A5EA; -fx-cursor: hand;" text="Publicar" textFill="WHITE" />
+            <Button layoutX="107.0" layoutY="27.0" mnemonicParsing="false" style="-fx-background-color: #48A5EA;" text="F" textFill="WHITE" />
+            <Button layoutX="130.0" layoutY="27.0" mnemonicParsing="false" style="-fx-background-color: #48A5EA;" text="V" textFill="WHITE" />
+         </children>
+      </AnchorPane>
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="417.0" prefWidth="132.0">
+         <children>
+            <ImageView fx:id="foto" fitHeight="86.0" fitWidth="90.0" layoutX="10.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@Imagens/icons8-usuário-100.png" />
                </image>
             </ImageView>
-            <Label layoutX="53.0" layoutY="104.0" onMouseClicked="#setImage" style="-fx-cursor: hand;" text="alterarFoto" />
-            <Label layoutX="8.0" layoutY="308.0" text="ListView de fotos de amigos" />
+            <Label layoutX="17.0" layoutY="100.0" onMouseClicked="#setImage" style="-fx-cursor: hand;" text="alterarFoto" />
+            <Separator orientation="VERTICAL" prefHeight="415.0" prefWidth="6.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="278.5" AnchorPane.topAnchor="0.0" />
          </children>
       </AnchorPane>
-   </left>
-   <center>
-      <AnchorPane prefHeight="415.0" prefWidth="391.0" BorderPane.alignment="CENTER">
-         <children>
-            <Label layoutX="123.0" layoutY="14.0" text="Faça uma postagem!" />
-            <ListView layoutX="123.0" layoutY="179.0" prefHeight="232.0" prefWidth="350.0" />
-            <TextArea layoutX="123.0" layoutY="60.0" prefHeight="80.0" prefWidth="350.0" promptText="No que voce está pensando?" />
-            <Button layoutX="123.0" layoutY="140.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="350.0" style="-fx-background-color: #48A5EA; -fx-cursor: hand;" text="Publicar" textFill="WHITE" />
-            <Button layoutX="123.0" layoutY="32.0" mnemonicParsing="false" style="-fx-background-color: #48A5EA;" text="F" textFill="WHITE" />
-            <Button layoutX="146.0" layoutY="32.0" mnemonicParsing="false" style="-fx-background-color: #48A5EA;" text="V" textFill="WHITE" />
-         </children>
-      </AnchorPane>
-   </center>
-   <right>
-      <AnchorPane prefHeight="359.0" prefWidth="148.0" BorderPane.alignment="CENTER">
-         <children>
-            <Label layoutX="14.0" layoutY="14.0" text="Arquivos" />
-            <Button layoutX="14.0" layoutY="74.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="121.0" style="-fx-background-color: #48A5EA; -fx-cursor: hand;" text="Visualizar" textFill="WHITE" />
-         </children>
-      </AnchorPane>
-   </right>
-</BorderPane>
+   </children>
+</AnchorPane>

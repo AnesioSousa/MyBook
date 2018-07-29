@@ -1,6 +1,7 @@
 package facade;
 
 import controller.System.ControllerUser;
+import java.util.List;
 import model.Usuario;
 import model.exceptions.SenhaIncorretaException;
 import model.exceptions.UsuarioJaCadastradoException;
@@ -12,6 +13,7 @@ import util.trie.MapTrie;
  * @author Anésio Sousa dos Santos Neto
  */
 public final class Facade {
+    
     private Usuario usuarioAtual;
     private MapTrie pesquisa;
     private ControllerUser ctrlUser;
@@ -52,6 +54,10 @@ public final class Facade {
 
     public void encerrarSessaoAtual(){
         usuarioAtual = null;
+    }
+    
+    public List buscarUser(String nome){
+        return pesquisa.getKeySuggestions(nome);
     }
     
     public boolean checkEmail(String email){

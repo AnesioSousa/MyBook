@@ -16,6 +16,7 @@ import model.Usuario;
  */
 public class MasterController { // Tentar criar uns métodos estáticos aqui só pra ajudar
     HashMap<Usuario, Parent> perfis;
+    ControllerTelaNavegador controlNavegador; 
 
     // é melhor criar um stage pro navegador e esse cara controlar.
     // pq ai o login só pede pro master logar tal conta, e o master passa pro navegador 
@@ -28,12 +29,13 @@ public class MasterController { // Tentar criar uns métodos estáticos aqui só
         FXMLLoader perfilLoader = new FXMLLoader(getClass().getResource("/view/Perfil.fxml"));
         Parent perfil = perfilLoader.load();            
         ControllerTelaPerfil controller = perfilLoader.getController();
+        controller.setControlador(this);
         controller.initialize(user);
         perfis.put(user, perfil);
     }
     
-    public void abrirNavegador(Usuario user){
-        
+    public void abrirPerfil(Usuario user){
+        controlNavegador.carregarPerfil(user);
     }
         
     // Aqui eu não quero ficar criando novos navegadores toda vez que for pedido pra logar não.
@@ -46,8 +48,9 @@ public class MasterController { // Tentar criar uns métodos estáticos aqui só
             Parent navegador = navegadorLoader.load();
             Scene navegadorScene = new Scene(navegador);
             
-            ControllerTelaNavegador controller = navegadorLoader.getController();
-            controller.initialize(user, perfis);
+            controlNavegador = navegadorLoader.getController();
+            controlNavegador.setControlador(this);
+            controlNavegador.initialize(user, perfis);
 
             stage.setScene(navegadorScene);
             stage.centerOnScreen();

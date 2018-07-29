@@ -25,6 +25,8 @@ public class ControllerTelaPerfil {
     private String caminhoFoto;
     private ImageView foto;
     
+    private MasterController meuControlador;
+    
     /**
      * Initializes the controller class.
      */
@@ -32,9 +34,12 @@ public class ControllerTelaPerfil {
     public void initialize(Usuario user) {
         meuUsuario = user;
         caminhoFoto = meuUsuario.getUrlImagemPerfil();
-        
     }
     
+    public void setControlador(MasterController master){
+        meuControlador = master;
+    }
+        
     @FXML
     protected void setImage(MouseEvent e) throws IOException{
         FileChooser fileChooser = new FileChooser();

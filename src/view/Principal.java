@@ -25,7 +25,7 @@ public class Principal extends Application {
         stage = primaryStage;
         primaryStage.setTitle("Bem vindo ao MyBook!");
         
-        MasterController controllerPrincipal = new MasterController();
+        MasterController controllerPrincipal = new MasterController(); // Ver se não da pra meter um singleton aqui
         
         FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("Login.fxml"));
         Parent login = loginLoader.load();
