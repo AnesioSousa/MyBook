@@ -20,15 +20,19 @@ import model.Usuario;
  *
  * @author Neto
  */
-public class ControllerTelaPerfil implements Initializable {
+public class ControllerTelaPerfil {
+    private Usuario meuUsuario;
     private String caminhoFoto;
     private ImageView foto;
+    
     /**
      * Initializes the controller class.
      */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+
+    public void initialize(Usuario user) {
+        meuUsuario = user;
+        caminhoFoto = meuUsuario.getUrlImagemPerfil();
+        
     }
     
     @FXML
@@ -49,9 +53,9 @@ public class ControllerTelaPerfil implements Initializable {
         
         caminhoFoto = file.getAbsolutePath();
     }
-    
-    public void loadProfile(Usuario user){
-        System.out.println("Teste!");
+
+    public Usuario getMeuUsuario() {
+        return meuUsuario;
     }
     
 }

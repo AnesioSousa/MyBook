@@ -1,6 +1,7 @@
 package controller.View;
 
 import facade.Facade;
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -22,7 +23,10 @@ import view.Principal;
  * @author Anésio Sousa dos Santos Neto
  */
 public class ControllerTelaCadastro implements Initializable {
-
+    
+    private MasterController meuControlador;
+    
+    
     Facade f = Facade.getInstance();
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     @FXML
@@ -47,8 +51,9 @@ public class ControllerTelaCadastro implements Initializable {
     /* 
     1-Não deixar cadastrar com itens em branco!
     2-Ver parada de setar o botao OK? visivel e botar uma imagem de certo ou errado nele se o email estiver sem cadastro ou com cadastro.
+    */
     
-     */
+    
     /**
      * Initializes the controller class.
      */
@@ -56,9 +61,15 @@ public class ControllerTelaCadastro implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }
-
+    
+    public void setControlador(MasterController master){
+        meuControlador = master;
+    }
+    
+    // ESTA TRATANDO ERRO DE USUÁRIO JÁ CADASTRADO?
+    
     @FXML
-    protected void cadastrar(ActionEvent e) {
+    protected void cadastrar(ActionEvent e) throws IOException {
         aniversarioField.setConverter(new StringConverter<LocalDate>() {
             @Override
             public String toString(LocalDate t) {
@@ -86,7 +97,7 @@ public class ControllerTelaCadastro implements Initializable {
         }
 
         try {
-            f.registrarUser(nomeTxtField.getText(), emailTxtField.getText(), senhaField.getText(), genero, formatter.format(aniversarioField.getValue()), endTxtField.getText(), telTextField.getText(), perfilSelect.isSelected());
+            meuControlador.criarPerfilUser(f.registrarUser(nomeTxtField.getText(), emailTxtField.getText(), senhaField.getText(), genero, formatter.format(aniversarioField.getValue()), endTxtField.getText(), telTextField.getText(), perfilSelect.isSelected()));
         } catch (UsuarioJaCadastradoException ex) {
             System.out.println(ex);
         }
@@ -110,7 +121,7 @@ public class ControllerTelaCadastro implements Initializable {
 
     @FXML
     private void goToScreen1(ActionEvent event) {
-        Principal.changeScreen("login");
+       Principal.changeScreen("login");
     }
 
     public TextField getNomeTxtField() {

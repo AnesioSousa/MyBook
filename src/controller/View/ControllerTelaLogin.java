@@ -27,7 +27,9 @@ import view.Principal;
  * @author Anésio Sousa dos Santos Neto
  */
 public class ControllerTelaLogin implements Initializable{
-            
+    
+    private MasterController meuControlador;
+    
     Facade facade = Facade.getInstance();
     @FXML private Label status;
     @FXML private TextField emailTxtField;
@@ -49,25 +51,20 @@ public class ControllerTelaLogin implements Initializable{
             usuario = facade.iniciarSessao(emailTxtField.getText(), senhaField.getText());
             facade.setUsuarioAtual(usuario);
             
-            FXMLLoader navegadorLoader = new FXMLLoader(getClass().getResource("/view/Navegador.fxml"));
-            Parent navegador = navegadorLoader.load();
-            Scene navegadorScene = new Scene(navegador);
-            
-            ControllerTelaNavegador controller = navegadorLoader.getController();
-            controller.initialize(usuario);
-            
             Stage window = (Stage)((Node)e.getSource()).getScene().getWindow();
             
-            window.setScene(navegadorScene);
-            window.centerOnScreen();
-            window.sizeToScene();
-            
+            meuControlador.iniciarNavegador(usuario, window);
+             
         } catch (UsuarioNaoCadastradoException ex) {
             showContaErro(); // Tentar ver se é possivel deixar por um tempo visível, e depois deixar ele invisível novamente.
         } catch (SenhaIncorretaException ex) {
             showSenhaErro(); // Tentar ver se é possivel deixar por um tempo visível, e depois deixar ele invisível novamente.
         }
         return usuario;
+    }
+    
+    public void setControlador(MasterController master){
+        meuControlador = master;
     }
     
     private void showContaErro(){

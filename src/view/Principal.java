@@ -1,9 +1,10 @@
 package view;
 
+import controller.View.ControllerTelaCadastro;
+import controller.View.ControllerTelaLogin;
+import controller.View.MasterController;
 import java.io.IOException;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -18,20 +19,26 @@ public class Principal extends Application {
     private static Stage stage;
     private static Scene loginScene;
     private static Scene cadastroScene;
-    private static EventHandler<ActionEvent> buttonHandler;
 
     @Override
     public void start(Stage primaryStage) throws IOException {
         stage = primaryStage;
         primaryStage.setTitle("Bem vindo ao MyBook!");
-
+        
+        MasterController controllerPrincipal = new MasterController();
+        
         FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("Login.fxml"));
         Parent login = loginLoader.load();
         loginScene = new Scene(login);
+        ControllerTelaLogin a = loginLoader.getController();
+        a.setControlador(controllerPrincipal);
+
 
         FXMLLoader cadastroLoader = new FXMLLoader(getClass().getResource("Cadastro.fxml"));
         Parent cadastro = cadastroLoader.load();
         cadastroScene = new Scene(cadastro);
+        ControllerTelaCadastro b = cadastroLoader.getController();
+        b.setControlador(controllerPrincipal);
 
         primaryStage.setScene(loginScene);
         primaryStage.setResizable(false);
@@ -44,15 +51,15 @@ public class Principal extends Application {
                 stage.setScene(loginScene);
                 stage.centerOnScreen();
                 stage.sizeToScene();
-                break;
+            break;
             case "cadastro":
                 stage.setScene(cadastroScene);
                 stage.centerOnScreen();
                 stage.sizeToScene();
-                break;
+            break;
         }
     }
-
+    
     /**
      * @param args the command line arguments
      */
