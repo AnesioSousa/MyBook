@@ -88,11 +88,11 @@
       </ToolBar>
    </top>
    <right>
-      <AnchorPane prefHeight="465.0" prefWidth="225.0">
+      <AnchorPane onMouseExited="#limparPesquisa" prefHeight="465.0" prefWidth="225.0">
          <children>
-            <TextField layoutX="25.0" layoutY="82.0" prefHeight="25.0" prefWidth="177.0" promptText="Vamos lá, digite um nome!" />
-            <ListView layoutX="25.0" layoutY="166.0" prefHeight="286.0" prefWidth="176.0" />
-            <Button fx:id="botaoBusca" layoutX="129.0" layoutY="114.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="26.0" prefWidth="71.0" style="-fx-cursor: hand;" text="Buscar" />
+            <TextField fx:id="pesquisaTxtField" layoutX="25.0" layoutY="82.0" onMouseClicked="#destrancarBotaoPesquisa" prefHeight="25.0" prefWidth="177.0" promptText="Vamos lá, digite um nome!" />
+            <ListView fx:id="listaDeResultados" layoutX="25.0" layoutY="166.0" prefHeight="286.0" prefWidth="176.0" />
+            <Button fx:id="botaoBusca" disable="true" layoutX="129.0" layoutY="114.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#fazerPesquisa" prefHeight="26.0" prefWidth="71.0" style="-fx-cursor: hand;" text="Buscar" />
             <Label layoutX="24.0" layoutY="140.0" text="Resultados" />
             <ImageView fitHeight="66.0" fitWidth="119.0" layoutX="80.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
                <image>

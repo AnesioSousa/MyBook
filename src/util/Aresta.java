@@ -1,10 +1,12 @@
 package util;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Anésio Sousa dos Santos Neto
  */
-public class Aresta {
+public class Aresta implements Serializable{
 
     private Object dado;
     private Vertice origem;

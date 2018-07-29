@@ -1,5 +1,6 @@
 package util;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -10,7 +11,7 @@ import java.util.List;
  * Cada objeto vértice armazena um elemento e tem um mapa de todos os vertices adjacentes a ele.
  * @author Anésio Sousa dos Santos Neto
  */
-public class Vertice {
+public class Vertice implements Serializable{
 
     private Object elemento;
     private HashMap<Vertice, Aresta> adjacencias;

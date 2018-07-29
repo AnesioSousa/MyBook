@@ -12,7 +12,9 @@ import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.MenuButton;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import model.Usuario;
 import view.Principal;
@@ -35,6 +37,8 @@ public class ControllerTelaNavegador implements TelaControlada{
     @FXML private Button voltarBtn;
     @FXML private Button avancarBtn;
     @FXML private AnchorPane contentPanel;
+    @FXML private ListView listaDeResultados;
+    @FXML private TextField pesquisaTxtField;
     
     @FXML private Label label;
         
@@ -112,10 +116,40 @@ public class ControllerTelaNavegador implements TelaControlada{
     }
     
     @FXML
+    public void fazerPesquisa(){
+        List aux = mainController.pesquisar(pesquisaTxtField.getText());
+        
+        if(aux.isEmpty()){
+            listaDeResultados.getItems().add("Nenhum resultado encontrado!");
+        }else{
+            for (Object u : aux) {
+                listaDeResultados.getItems().add(u);
+            }
+        }
+        trancarBotaoPesquisa();
+    }
+    
+    @FXML
+    public void limparPesquisa(){
+        pesquisaTxtField.setText("");
+        listaDeResultados.getItems().clear();
+    }
+    
+    @FXML
     public void deslogar(ActionEvent e){
         mainController.deslogarUserAtual();
         limparNavegador();
         goToScreen1(e);
+    }
+    
+    @FXML
+    public void trancarBotaoPesquisa(){
+        botaoBusca.setDisable(true);
+    }
+    
+    @FXML
+    public void destrancarBotaoPesquisa(){
+        botaoBusca.setDisable(false);
     }
     
     @FXML

@@ -1,33 +1,30 @@
 package model;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.Objects;
 /**
  *
  * @author Anésio Sousa dos Santos Neto
  */
-public class Usuario {
-    private String nome;
-    private String password;
-    private String email; // Tentar fazer uma forma de validação depois (usando Pattern) se possível.
-    private String genero;
-    private Perfil perfil;
-    private String nascimento;
-    private String endereco;
-    private String telefone;
-    private String urlImagemPerfil;
+public class Usuario implements Serializable{
+    private String nome, password, email, genero, nascimento, endereco, telefone, urlImagemPerfil;
     private LinkedList<String> solicitacoes;
+    private LinkedList<String> postagens;
+    private LinkedList<Usuario> amigos;
+    private boolean perfilPrivado;
 
     public Usuario(String nome, String email, String password, String genero, String nascimento, String endereco, String telefone, boolean perfilEhPublico) {
         this.nome = nome;
         this.password = password;
         this.email = email;
         this.genero = genero;
-        this.perfil = new Perfil(this, perfilEhPublico);
         this.nascimento = nascimento;
         this.endereco = endereco;
         this.telefone = telefone;
         solicitacoes = new LinkedList<>();
+        postagens = new LinkedList<>();
+        amigos = new LinkedList<>();
     }
 
     public String getNome() {
@@ -97,6 +94,14 @@ public class Usuario {
     public LinkedList<String> getSolicitacoes() {
         return solicitacoes;
     }
+
+    public boolean isPerfilPrivado() {
+        return perfilPrivado;
+    }
+
+    public void setPerfilPrivado(boolean perfilPrivado) {
+        this.perfilPrivado = perfilPrivado;
+    }
     
     @Override
     public int hashCode() {
@@ -125,7 +130,7 @@ public class Usuario {
 
     @Override
     public String toString() {
-        return "Usuario{" + "nome=" + nome + ", email=" + email + '}';
+        return nome + " | " + email;
     }
     
 }

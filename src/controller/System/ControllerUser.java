@@ -1,6 +1,7 @@
 package controller.System;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import model.exceptions.SenhaIncorretaException;
 import model.exceptions.UsuarioJaCadastradoException;
@@ -70,6 +71,10 @@ public class ControllerUser {
         return grafo.getAdjacentsData(user);
     }
     
+    public Iterator getListaDeUsuarios(){
+        return grafo.getKeySet();
+    }
+    
     public int getQuantidadeUsers() {
         return grafo.numVertices();
     }
@@ -77,4 +82,13 @@ public class ControllerUser {
     public Usuario obterUser(String email){ 
         return emailMap.get(email);
     }
+
+    public Grafo getGrafo() {
+        return grafo;
+    }
+
+    public void setGrafo(Grafo grafo) {
+        this.grafo = grafo;
+    }
+
 }

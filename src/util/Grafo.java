@@ -1,5 +1,6 @@
 package util;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -13,7 +14,7 @@ import java.util.Queue;
  *
  * @author Anésio Sousa dos Santos Neto
  */
-public final class Grafo {
+public final class Grafo implements Serializable{
     
     private Map<Object, Vertice> vertices;
     private List<Aresta> arestas; 
@@ -45,6 +46,10 @@ public final class Grafo {
 
     public int numVertices() {
         return vertices.size();
+    }
+    
+    public Iterator getKeySet(){
+        return vertices.keySet().iterator();
     }
 
     

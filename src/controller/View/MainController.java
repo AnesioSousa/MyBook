@@ -3,6 +3,7 @@ package controller.View;
 import facade.Facade;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import model.Usuario;
@@ -80,6 +81,10 @@ public class MainController { // Tentar criar uns métodos estáticos aqui só p
 
     public void abrirPerfil(Usuario user) {  // SE FOR O MESMO USER LOGADO!
         controlNavegador.carregarPerfil(user);
+    }
+    
+    public List pesquisar(String nome){
+        return facade.buscarUser(nome);
     }
 
     public ControllerPalco getControllerPalco() {

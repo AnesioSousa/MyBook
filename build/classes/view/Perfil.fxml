@@ -29,10 +29,8 @@
          <children>
             <Label layoutX="56.0" layoutY="14.0" text="Faça uma postagem!" />
             <ListView layoutX="56.0" layoutY="194.0" prefHeight="247.0" prefWidth="315.0" />
-            <TextArea layoutX="56.0" layoutY="67.0" prefHeight="86.0" prefWidth="315.0" promptText="No que voce está pensando?" />
-            <Button layoutX="56.0" layoutY="155.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="315.0" style="-fx-background-color: #48A5EA; -fx-cursor: hand;" text="Publicar" textFill="WHITE" />
-            <Button layoutX="56.0" layoutY="40.0" mnemonicParsing="false" style="-fx-background-color: #48A5EA;" text="F" textFill="WHITE" />
-            <Button layoutX="82.0" layoutY="40.0" mnemonicParsing="false" style="-fx-background-color: #48A5EA;" text="V" textFill="WHITE" />
+            <TextArea layoutX="56.0" layoutY="47.0" prefHeight="86.0" prefWidth="315.0" promptText="No que voce está pensando?" />
+            <Button layoutX="56.0" layoutY="137.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="315.0" style="-fx-background-color: #48A5EA; -fx-cursor: hand;" text="Publicar" textFill="WHITE" />
          </children>
       </AnchorPane>
   </items>

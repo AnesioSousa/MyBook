@@ -72,12 +72,22 @@ public class ControllerTelaLogin implements Initializable, TelaControlada{
     private void desSublinharLabel(){
         cadastroLabel.setUnderline(false);
     }
+    
+    @FXML
+    private void esconderStatus(){
+        status.setVisible(false);
+    }
         
     @FXML
     private void goToScreen2(MouseEvent event){
-      meuControlador.setScreen(Principal.screen2ID);
+        limparCampos();
+        meuControlador.setScreen(Principal.screen2ID);
     }
-
+    
+    private void limparCampos(){
+        emailTxtField.setText("");
+        senhaField.setText("");
+    }
     public TextField getEmailTxtField() {
         return emailTxtField;
     }
