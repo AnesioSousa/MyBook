@@ -20,8 +20,8 @@ public class Principal extends Application {
     private static Stage stage;
     
     public static String screen1ID = "login";
-    public static String screen1File = "/view/Login.fxml";
-    public static String screen2ID = "cadastro";
+    public static String screen1File = "/view/Login.fxml";                          // Talvez nem precise que isso daqui fique aqui.
+    public static String screen2ID = "cadastro";                                    // Acho que dá pra carregar tudo no mainController.
     public static String screen2File = "/view/Cadastro.fxml";
     
     @Override
