@@ -3,7 +3,8 @@ package util;
 import java.util.Iterator;
 
 /**
- * 
+ * Classe responsável por ser uma receita de grafos.
+ * Dita as assinaturas que todos os grafos que extendem dela deve ter.
  * @author João B. Rocha Júnior
  */
 public interface IGraph {

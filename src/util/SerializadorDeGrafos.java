@@ -8,7 +8,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 /**
- * Classe para serializar os dados
+ * Classe para serializar os dados.
+ * Classe baseada na solução proposta pelo livro: User a cabeça! Java.
+ * @author Anésio Sousa dos Santos Neto
  */
 public class SerializadorDeGrafos {
 
