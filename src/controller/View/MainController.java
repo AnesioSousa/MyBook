@@ -21,7 +21,7 @@ public class MainController { // Tentar criar uns métodos estáticos aqui só p
     private ControllerPalco controllerPalco;
     private ControllerTelaNavegador controlNavegador;
     private ControllerTelaLogin controlLogin;
-    private Facade facade = Facade.getInstance();
+    private Facade facade = new Facade();
 
     private static MainController INSTANCE = null;
 

@@ -7,7 +7,10 @@ import java.util.List;
 import java.util.Map;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
@@ -37,11 +40,15 @@ public class ControllerTelaNavegador implements TelaControlada{
     @FXML private Button voltarBtn;
     @FXML private Button avancarBtn;
     @FXML private AnchorPane contentPanel;
-    @FXML private ListView listaDeResultados;
+    @FXML private ListView<Usuario> listaDeResultados;
     @FXML private TextField pesquisaTxtField;
+    @FXML private Label lblLimpar;
+    @FXML private Button btnAbrirPerfil;
     
     @FXML private Label label;
-        
+    
+    private Usuario usuarioSelecionado;
+    
     private Map<Usuario, Parent> perfis;
     private List<Parent> historico = new ArrayList();
     
@@ -51,7 +58,7 @@ public class ControllerTelaNavegador implements TelaControlada{
     public void initialize(Usuario user, HashMap perfis){
         this.perfis = perfis;
         usuarioAtual = user;
-        label.setText(usuarioAtual.getNome());
+        label.setText(usuarioAtual.getEmail());
         
         // CARREGOU AS FUNCIONALIDADES DO NAVEGADOR COM AS INFORMAÇÕES DO USER ATUAL
         // configurou botão home
@@ -116,17 +123,35 @@ public class ControllerTelaNavegador implements TelaControlada{
     }
     
     @FXML
-    public void fazerPesquisa(){
-        List aux = mainController.pesquisar(pesquisaTxtField.getText());
+    public void fazerPesquisa(){ // Tentar fazer com matcher depois!
+        ObservableList<Usuario> data = FXCollections.observableArrayList();
+        List<Usuario> aux = mainController.pesquisar(pesquisaTxtField.getText());
         
         if(aux.isEmpty()){
-            listaDeResultados.getItems().add("Nenhum resultado encontrado!");
+            //listaDeResultados.getItems().add("Nenhum resultado encontrado!"); Criar Label de aviso!
         }else{
-            for (Object u : aux) {
-                listaDeResultados.getItems().add(u);
+            for (Usuario u : aux) {
+                data.add(u);
             }
+            listaDeResultados.setItems(data);
+            listaDeResultados.getSelectionModel().selectedItemProperty().addListener(
+                            (observable, oldValue, newValue) -> setUsuarioSelecionado(newValue));
         }
-        trancarBotaoPesquisa();
+        
+        /*listaDeResultados.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        System.out.println(listaDeResultados.getSelectionModel().getSelectedItem());*/
+        
+        btnAbrirPerfil.setVisible(true);
+        btnAbrirPerfil.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                mainController.abrirPerfil(usuarioSelecionado);
+            }
+        });
+    }
+    
+    public void teste(){
+        System.out.println("A");
     }
     
     @FXML
@@ -141,22 +166,13 @@ public class ControllerTelaNavegador implements TelaControlada{
         limparNavegador();
         goToScreen1(e);
     }
-    
-    @FXML
-    public void trancarBotaoPesquisa(){
-        botaoBusca.setDisable(true);
-    }
-    
-    @FXML
-    public void destrancarBotaoPesquisa(){
-        botaoBusca.setDisable(false);
-    }
-    
+        
     @FXML
     public void excluirConta(ActionEvent e){
         //f.excluirUser(); REVER ISSO!
         goToScreen1(e);
     }
+    
     
     @FXML
     private void goToScreen1(ActionEvent e){
@@ -166,5 +182,19 @@ public class ControllerTelaNavegador implements TelaControlada{
     @Override
     public void setControlador(ControllerPalco master){
         meuControlador = master;
+    }
+    
+    @FXML
+    private void sublinharLabel(){
+        lblLimpar.setUnderline(true);
+    }
+    
+    @FXML
+    private void desSublinharLabel(){
+        lblLimpar.setUnderline(false);
+    }
+
+    public void setUsuarioSelecionado(Usuario usuarioSelecionado) {
+        this.usuarioSelecionado = usuarioSelecionado;
     }
 }

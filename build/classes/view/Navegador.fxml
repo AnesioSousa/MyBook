@@ -65,9 +65,9 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="29.0" prefWidth="512.0" style="-fx-background-color: #48A5EA;">
+            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="29.0" prefWidth="471.0" style="-fx-background-color: #48A5EA;">
                <children>
-                  <MenuButton fx:id="contaMenu" layoutX="451.0" layoutY="1.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="26.0" prefWidth="47.0">
+                  <MenuButton fx:id="contaMenu" layoutX="421.0" layoutY="1.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="26.0" prefWidth="47.0">
                     <items>
                         <MenuItem mnemonicParsing="false" text="Editar perfil" />
                       <MenuItem mnemonicParsing="false" onAction="#excluirConta" text="Excluir conta" />
@@ -88,17 +88,19 @@
       </ToolBar>
    </top>
    <right>
-      <AnchorPane onMouseExited="#limparPesquisa" prefHeight="465.0" prefWidth="225.0">
+      <AnchorPane prefHeight="465.0" prefWidth="225.0">
          <children>
-            <TextField fx:id="pesquisaTxtField" layoutX="25.0" layoutY="82.0" onMouseClicked="#destrancarBotaoPesquisa" prefHeight="25.0" prefWidth="177.0" promptText="Vamos lá, digite um nome!" />
-            <ListView fx:id="listaDeResultados" layoutX="25.0" layoutY="166.0" prefHeight="286.0" prefWidth="176.0" />
-            <Button fx:id="botaoBusca" disable="true" layoutX="129.0" layoutY="114.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#fazerPesquisa" prefHeight="26.0" prefWidth="71.0" style="-fx-cursor: hand;" text="Buscar" />
+            <TextField fx:id="pesquisaTxtField" layoutX="25.0" layoutY="82.0" prefHeight="25.0" prefWidth="177.0" promptText="Vamos lá, pesquise!" />
+            <ListView fx:id="listaDeResultados" layoutX="25.0" layoutY="166.0" prefHeight="268.0" prefWidth="176.0" />
+            <Button fx:id="botaoBusca" layoutX="129.0" layoutY="114.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#fazerPesquisa" prefHeight="26.0" prefWidth="71.0" style="-fx-cursor: hand;" text="Buscar" />
             <Label layoutX="24.0" layoutY="140.0" text="Resultados" />
             <ImageView fitHeight="66.0" fitWidth="119.0" layoutX="80.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@Imagens/SearchImage.png" />
                </image>
             </ImageView>
+            <Button fx:id="btnAbrirPerfil" layoutX="25.0" layoutY="438.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="177.0" text="Abrir perfil selecionado" visible="false" />
+            <Label fx:id="lblLimpar" layoutX="157.0" layoutY="13.0" onMouseClicked="#limparPesquisa" onMouseEntered="#sublinharLabel" onMouseExited="#desSublinharLabel" style="-fx-cursor: hand;" text="Limpar" />
          </children>
       </AnchorPane>
    </right>

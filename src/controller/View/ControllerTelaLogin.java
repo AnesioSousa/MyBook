@@ -36,15 +36,15 @@ public class ControllerTelaLogin implements Initializable, TelaControlada{
         // TODO
     } 
     
-    // Tem que tratar campos vazios!
     @FXML
     public void fazerLogin(ActionEvent e) throws IOException{
         try {
-            mainController.logarUser(emailTxtField.getText(), senhaField.getText());               
+            mainController.logarUser(emailTxtField.getText(), senhaField.getText()); 
+            limparCampos();
         } catch (UsuarioNaoCadastradoException ex) {
-            showContaErro(); // Tentar ver se é possivel deixar por um tempo visível, e depois deixar ele invisível novamente.
+            showContaErro(); 
         } catch (SenhaIncorretaException ex) {
-            showSenhaErro(); // Tentar ver se é possivel deixar por um tempo visível, e depois deixar ele invisível novamente.
+            showSenhaErro();
         }
     }
     

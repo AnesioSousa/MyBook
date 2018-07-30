@@ -22,7 +22,7 @@ public final class Facade {
     private SerializadorDeGrafos serializer;
     private static Facade INSTANCE = null;
 
-    private Facade(){
+    public Facade(){
         try {
             this.ctrlUser = new ControllerUser();
             this.serializer = new SerializadorDeGrafos(ctrlUser.getGrafo());
@@ -32,35 +32,39 @@ public final class Facade {
         }
     }
     
-    public static Facade getInstance(){
+    /*public static Facade getInstance(){
         if(INSTANCE == null){
             INSTANCE = new Facade();
         }
         return INSTANCE;
-    }
+    }*/
       
     public Usuario registrarUser(String nome, String email, String password, String genero, String nascimento, String endereco, String telefone, boolean estadoPerfil) throws UsuarioJaCadastradoException{
         Usuario user = ctrlUser.cadastrarUser(nome, email, password, genero, nascimento, endereco, telefone, estadoPerfil);
+        /*
         try {
             //pesquisa.insert(user.getNome(), user);
             serializer.gravar(ctrlUser.getGrafo());
         } catch (IOException ex) {
             System.out.println(ex);
         }
+        */
         return user;
+        
     }
     
     // REVER ISSOOOO!!!
     public Usuario excluirUser(String email, String senha) throws UsuarioNaoCadastradoException, SenhaIncorretaException{
         //encerrarSessão(); 
         Usuario user = ctrlUser.removerUser(email, senha);
+        /*
         try {
             //pesquisa.deleteKey(user.getNome());
-            serializer.gravar(ctrlUser.getGrafo());
+           // serializer.gravar(ctrlUser.getGrafo());
         } catch (IOException ex) {
             System.out.println(ex);
         }
-        
+        */
         return user;
     }
     
