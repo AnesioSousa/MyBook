@@ -172,8 +172,7 @@ public class ControllerTelaNavegador implements TelaControlada{
         //f.excluirUser(); REVER ISSO!
         goToScreen1(e);
     }
-    
-    
+     
     @FXML
     private void goToScreen1(ActionEvent e){
         meuControlador.setScreen(Principal.screen1ID);

@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="cadastroRoot" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="controller.View.ControllerTelaCadastro">
+<AnchorPane id="AnchorPane" fx:id="cadastroRoot" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.View.ControllerTelaCadastro">
    <children>
       <Pane prefHeight="400.0" prefWidth="130.0" style="-fx-background-color: #48A5EA;">
          <children>
@@ -39,7 +39,7 @@
       <Accordion layoutX="382.0" layoutY="214.0" />
       <Accordion layoutX="331.0" layoutY="201.0" />
       <RadioButton fx:id="perfilSelect" layoutX="331.0" layoutY="245.0" mnemonicParsing="false" text="Privado" />
-      <Button layoutX="146.0" layoutY="351.0" mnemonicParsing="false" onAction="#cadastrar" prefHeight="32.0" prefWidth="104.0" style="-fx-background-color: #2FC701; -fx-cursor: hand;" text="Cadastre-se" textFill="WHITE" />
+      <Button fx:id="cadastroBtn" disable="true" layoutX="146.0" layoutY="351.0" mnemonicParsing="false" onAction="#cadastrar" prefHeight="32.0" prefWidth="104.0" style="-fx-background-color: #2FC701; -fx-cursor: hand;" text="Cadastre-se" textFill="WHITE" />
       <Button layoutX="454.0" layoutY="276.0" mnemonicParsing="false" onAction="#limparCampos" style="-fx-background-color: #48A5EA; -fx-cursor: hand;" text="Limpar campos" textFill="WHITE" />
       <Label layoutX="144.0" layoutY="64.0" text="Nome">
          <font>
@@ -86,6 +86,6 @@
             <ToggleGroup fx:id="genero" />
          </toggleGroup></RadioButton>
       <RadioButton fx:id="genFeminino" layoutX="459.0" layoutY="140.0" mnemonicParsing="false" text="Feminino" toggleGroup="$genero" />
-      <Label layoutX="362.0" layoutY="108.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="17.0" prefWidth="232.0" text="Endereço de email já cadastrado! " textFill="RED" />
+      <Label layoutX="362.0" layoutY="108.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="17.0" prefWidth="232.0" text="Endereço de email já cadastrado! " textFill="RED" visible="false" />
    </children>
 </AnchorPane>

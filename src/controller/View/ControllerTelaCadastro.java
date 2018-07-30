@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
@@ -44,12 +45,8 @@ public class ControllerTelaCadastro implements Initializable, TelaControlada{
     private TextField telTextField;
     @FXML
     private RadioButton perfilSelect;
-
-    /* 
-    1-Não deixar cadastrar com itens em branco!
-    2-Ver parada de setar o botao OK? visivel e botar uma imagem de certo ou errado nele se o email estiver sem cadastro ou com cadastro.
-    */
-    
+    @FXML
+    private Button cadastroBtn;
     
     /**
      * Initializes the controller class.
@@ -125,5 +122,4 @@ public class ControllerTelaCadastro implements Initializable, TelaControlada{
     public TextField getNomeTxtField() {
         return nomeTxtField;
     }
-
 }
