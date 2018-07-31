@@ -9,6 +9,7 @@ import model.exceptions.UsuarioNaoCadastradoException;
 import java.util.Map;
 import model.Usuario;
 import util.Grafo;
+import model.GrafoDataBase;
 
 /**
  * Classe responsável por criar objetos capazes de manipular grafos e administrar usuários.
@@ -17,14 +18,17 @@ import util.Grafo;
 public class ControllerUser {
     private Grafo grafo;
     private Map<String, Usuario> emailMap;
+    private GrafoDataBase dados; // Tentar deixar esse cara estático.
 
     /**
      * Construtor da classe que controla os usuários.
      * Nele são inicializados o grafo e uma hashmap que facilita a procura de usuários pelo email.
      */
     public ControllerUser() {
-        grafo =  new Grafo();
+        dados = new GrafoDataBase();
+        grafo =  dados.getData();
         emailMap = new HashMap<>();
+        atualizarEmailMap();
     }
     
     /**
@@ -46,6 +50,7 @@ public class ControllerUser {
             Usuario user = new Usuario(nome, email, password, genero, nascimento, endereco, telefone, perfilEhPublico);
             emailMap.put(email, user);
             grafo.addVertex(user);
+            dados.gravar();
             return user;
         }else{
             throw new UsuarioJaCadastradoException();
@@ -117,7 +122,7 @@ public class ControllerUser {
      * @return iterador.
      */
     public Iterator getListaDeUsuarios(){
-        return grafo.getKeySet();
+        return emailMap.values().iterator();
     }
     
     /**
@@ -136,22 +141,13 @@ public class ControllerUser {
     public Usuario obterUser(String email){ 
         return emailMap.get(email);
     }
-
-    /**
-     * Retorna o grafo que armazena os usuários.
-     * @return grafo
-     */
-    public Grafo getGrafo() {
-        return grafo;
+    
+    private void atualizarEmailMap(){
+        Iterator<Usuario> itr = grafo.getKeySet();
+        
+        while(itr.hasNext()){
+            Usuario user = itr.next();
+            emailMap.put(user.getEmail(), user);
+        }
     }
-
-    /**
-     * Dita o grafo que esse controlador de usuários manipula.
-     * Esse método é mais para fins de serialização. Manter o grafo atualizado.
-     * @param grafo
-     */
-    public void setGrafo(Grafo grafo) {
-        this.grafo = grafo;
-    }
-
 }

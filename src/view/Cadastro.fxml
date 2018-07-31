@@ -39,7 +39,7 @@
       <Accordion layoutX="382.0" layoutY="214.0" />
       <Accordion layoutX="331.0" layoutY="201.0" />
       <RadioButton fx:id="perfilSelect" layoutX="331.0" layoutY="245.0" mnemonicParsing="false" text="Privado" />
-      <Button fx:id="cadastroBtn" disable="true" layoutX="146.0" layoutY="351.0" mnemonicParsing="false" onAction="#cadastrar" prefHeight="32.0" prefWidth="104.0" style="-fx-background-color: #2FC701; -fx-cursor: hand;" text="Cadastre-se" textFill="WHITE" />
+      <Button fx:id="cadastroBtn" layoutX="146.0" layoutY="351.0" mnemonicParsing="false" onAction="#cadastrar" prefHeight="32.0" prefWidth="104.0" style="-fx-background-color: #2FC701; -fx-cursor: hand;" text="Cadastre-se" textFill="WHITE" />
       <Button layoutX="454.0" layoutY="276.0" mnemonicParsing="false" onAction="#limparCampos" style="-fx-background-color: #48A5EA; -fx-cursor: hand;" text="Limpar campos" textFill="WHITE" />
       <Label layoutX="144.0" layoutY="64.0" text="Nome">
          <font>

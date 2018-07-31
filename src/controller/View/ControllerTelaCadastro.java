@@ -23,7 +23,7 @@ import view.Principal;
  * @author Anésio Sousa dos Santos Neto
  */
 public class ControllerTelaCadastro implements Initializable, TelaControlada{
-    private MainController mainController = MainController.getInstance();
+    private MainController mainController;
     private ControllerPalco meuControlador;
     
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
@@ -57,7 +57,7 @@ public class ControllerTelaCadastro implements Initializable, TelaControlada{
     }
     
     @Override
-    public void setControlador(ControllerPalco master){
+    public void setControladorDeTelas(ControllerPalco master){
         meuControlador = master;
     }
     
@@ -116,10 +116,15 @@ public class ControllerTelaCadastro implements Initializable, TelaControlada{
 
     @FXML
     private void goToScreen1(ActionEvent event) {
-       meuControlador.setScreen(Principal.screen1ID);
+       meuControlador.setScreen("login");
     }
 
     public TextField getNomeTxtField() {
         return nomeTxtField;
+    }
+
+    @Override
+    public void setControlador(MainController master) {
+        mainController = master;
     }
 }

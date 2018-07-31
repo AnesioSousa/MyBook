@@ -6,7 +6,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
 import view.Principal;
 
 /**
@@ -15,6 +14,7 @@ import view.Principal;
  */
 public class ControllerPalco extends StackPane{
     private HashMap<String, Node> telas = new HashMap<>(); // Tá node, mas acho que Parent tb funfa
+    private MainController mainController;
 
     public ControllerPalco() {
         super();
@@ -38,7 +38,8 @@ public class ControllerPalco extends StackPane{
             FXMLLoader myLoader = new FXMLLoader(getClass().getResource(caminhoFXML));
             Parent loadScreen = (Parent) myLoader.load();
             TelaControlada myScreenControler = ((TelaControlada) myLoader.getController());
-            myScreenControler.setControlador(this); // Rever isso!
+            myScreenControler.setControladorDeTelas(this); // Rever isso!
+            myScreenControler.setControlador(mainController);
             adicionarTela(nome, loadScreen);
             return myScreenControler;
         } catch (IOException e) {
@@ -80,5 +81,9 @@ public class ControllerPalco extends StackPane{
     
     public boolean containsScreen(String name){
         return telas.containsKey(name);
+    }
+    
+    public void setControlador(MainController master) {
+        mainController = master;
     }
 }

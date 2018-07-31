@@ -3,6 +3,7 @@ package controller.View;
 import facade.Facade;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -23,18 +24,13 @@ public class MainController { // Tentar criar uns métodos estáticos aqui só p
     private ControllerTelaLogin controlLogin;
     private Facade facade = new Facade();
 
-    private static MainController INSTANCE = null;
 
-    private MainController() {
+    public MainController() {
         controllerPalco = new ControllerPalco();
+        controllerPalco.setControlador(this);
         perfis = new HashMap<>();
-    }
-
-    public static MainController getInstance() {
-        if (INSTANCE == null) {
-            INSTANCE = new MainController();
-        }
-        return INSTANCE;
+        initPrimaryScenes();
+        updateProfiles();
     }
   
     public Usuario criarUser(String nome, String email, String password, String genero, String nascimento, String endereco, String telefone, boolean estadoPerfil) throws UsuarioJaCadastradoException {
@@ -43,6 +39,11 @@ public class MainController { // Tentar criar uns métodos estáticos aqui só p
 
         return user;
     }
+    
+    private void initPrimaryScenes(){
+        controllerPalco.armazenarTela("login", "/view/Login.fxml");
+        controllerPalco.armazenarTela("cadastro", "/view/Cadastro.fxml");
+    }
 
     public void criarPerfilUser(Usuario user) {
         FXMLLoader perfilLoader = new FXMLLoader(getClass().getResource("/view/Perfil.fxml"));
@@ -50,10 +51,11 @@ public class MainController { // Tentar criar uns métodos estáticos aqui só p
         try {
             perfil = perfilLoader.load();
         } catch (IOException ex) {
-            System.out.println("Erro ao abrir o arquivo!");
+            System.out.println("Erro ao abrir o arquivo fxml de perfil!");
         }
         ControllerTelaPerfil controller = perfilLoader.getController();
-        controller.setControlador(controllerPalco);
+        controller.setControladorDeTelas(controllerPalco);
+        controller.setControlador(this);
         controller.initialize(user);
         perfis.put(user, perfil);
     }
@@ -87,7 +89,18 @@ public class MainController { // Tentar criar uns métodos estáticos aqui só p
         return facade.buscarUser(nome);
     }
 
+    public final void updateProfiles(){
+        Iterator<Usuario> users = facade.listarUsuarios();
+        
+        while(users.hasNext()){
+            criarPerfilUser(users.next());
+        }
+    }
     public ControllerPalco getControllerPalco() {
         return controllerPalco;
+    }
+    
+    public boolean setScreen(String name){
+        return controllerPalco.setScreen(name);
     }
 }

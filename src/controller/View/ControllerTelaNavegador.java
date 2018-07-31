@@ -30,7 +30,7 @@ import view.Principal;
 public class ControllerTelaNavegador implements TelaControlada{
     private Usuario usuarioAtual;
     private ControllerPalco meuControlador;
-    private MainController mainController = MainController.getInstance();
+    private MainController mainController;
     
     @FXML private Button perfilBtn;
     @FXML private Button botaoBusca;
@@ -69,10 +69,23 @@ public class ControllerTelaNavegador implements TelaControlada{
         inicializarBotoes();
     }
     // TESTAR ISSO TUDO QUANDO A CARALHA DE AMIZADES ESTIVER FUNCIONAL!
+        
+    // (Armazeno previamente os perfis dos users, justamente pra não ter que pegar todos os atributos dele pra formar o perfil.)
+    /* CARA COMO TU É BUUUUUUUUUUUUUUUUUUUUUUURRROOOOOOOOOOO
+        Tu antes tinha um campo de perfil, certo? beleza, ele era um objeto
+        perfil que tu criou. Só que tu deletou ele pq não viu mais sentido em ele existir, 
+        ja que não faria nada com ele dai era só montar um perfil na interface como parent 
+        e mostrar ele, certo? beleza, a parada aqui é que tu se debateu com o fato de que
+        os perfis estão salvos NA MEMÓOOORIAAA, é o mesmo problema do obter user. Mas se 
+        preocupa não, que eu te dou a solução:
+            Trás de volta o campo perfil do usuário, mas salva ali um Parent que é o perfil dele.
+        dai depois tu só exibe esse parent quando for solicitado para abrir o perfil desse cara.
+       *(mas cai no problema de se eu tiver uma view que não seja javafx, não teria como usar, já que Parent é do javafx)
+    */
     
-    private Parent atualizarActualContent(Usuario user){
-        Parent perfil = perfis.get(user);
-        contentPanel.getChildren().add(perfil);
+    private Parent atualizarActualContent(Usuario user){ 
+        Parent perfil = perfis.get(user); // Erro está aqui. Mesmo erro do obterUser.
+        contentPanel.getChildren().add(perfil); // Aqui o java está avisando que o que eu to tentando botar no contentePanel, é null.
         historico.addAll(Arrays.asList(perfil)); // Ver depois se o all é necessário!
         idDePaginaAtual.set(idDePaginaAtual.get()+1); // HISTORICO
         
@@ -90,9 +103,10 @@ public class ControllerTelaNavegador implements TelaControlada{
     
     private void limparNavegador(){
         usuarioAtual = null;
-        contentPanel.getChildren().clear();
+        //contentPanel.getChildren().clear();
         historico.clear();
         idDePaginaAtual.set(-1);
+        contentPanel.getChildren().add(label); //AAQUUIIIIIIIIIIIIIIIIIIIIIIIIIIIII
     }
         
     private void inicializarBotoes() {
@@ -175,11 +189,11 @@ public class ControllerTelaNavegador implements TelaControlada{
      
     @FXML
     private void goToScreen1(ActionEvent e){
-        meuControlador.setScreen(Principal.screen1ID);
+        meuControlador.setScreen("login");
     }
         
     @Override
-    public void setControlador(ControllerPalco master){
+    public void setControladorDeTelas(ControllerPalco master){
         meuControlador = master;
     }
     
@@ -195,5 +209,10 @@ public class ControllerTelaNavegador implements TelaControlada{
 
     public void setUsuarioSelecionado(Usuario usuarioSelecionado) {
         this.usuarioSelecionado = usuarioSelecionado;
+    }
+
+    @Override
+    public void setControlador(MainController master) {
+        mainController = master;
     }
 }

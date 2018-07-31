@@ -20,7 +20,7 @@ import view.Principal;
  * @author Anésio Sousa dos Santos Neto
  */
 public class ControllerTelaLogin implements Initializable, TelaControlada{
-    private MainController mainController = MainController.getInstance();
+    private MainController mainController;
     private ControllerPalco meuControlador;
     
     @FXML private Label status;
@@ -49,7 +49,7 @@ public class ControllerTelaLogin implements Initializable, TelaControlada{
     }
     
     @Override
-    public void setControlador(ControllerPalco master){
+    public void setControladorDeTelas(ControllerPalco master){
         meuControlador = master;
     }
     
@@ -81,7 +81,7 @@ public class ControllerTelaLogin implements Initializable, TelaControlada{
     @FXML
     private void goToScreen2(MouseEvent event){
         limparCampos();
-        meuControlador.setScreen(Principal.screen2ID);
+        meuControlador.setScreen("cadastro");
     }
     
     private void limparCampos(){
@@ -90,5 +90,10 @@ public class ControllerTelaLogin implements Initializable, TelaControlada{
     }
     public TextField getEmailTxtField() {
         return emailTxtField;
+    }
+
+    @Override
+    public void setControlador(MainController master) {
+        mainController = master;
     }
 }

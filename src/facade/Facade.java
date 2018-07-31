@@ -1,7 +1,6 @@
 package facade;
 
 import controller.System.ControllerUser;
-import java.io.IOException;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -9,7 +8,6 @@ import model.Usuario;
 import model.exceptions.SenhaIncorretaException;
 import model.exceptions.UsuarioJaCadastradoException;
 import model.exceptions.UsuarioNaoCadastradoException;
-import util.SerializadorDeGrafos;
 
 /**
  * Classe responsável por facilitar o acesso de interfaces ao sistema.
@@ -19,20 +17,13 @@ public final class Facade {
     
     private Usuario usuarioAtual;
     private ControllerUser ctrlUser;
-    private SerializadorDeGrafos serializer;
-
+    
     /**
      * Construtor da classe Facade.
      * Nele são inicializadas as grandesas do sistema.
      */
     public Facade(){
-        try {
-            this.ctrlUser = new ControllerUser();
-            this.serializer = new SerializadorDeGrafos(ctrlUser.getGrafo());
-            this.ctrlUser.setGrafo(serializer.recuperar());
-        } catch (IOException | ClassNotFoundException ex) {
-            System.out.println(ex);
-        }
+        ctrlUser = new ControllerUser();
     }
           
     /**
@@ -50,15 +41,8 @@ public final class Facade {
      * @throws UsuarioJaCadastradoException
      */
     public Usuario registrarUser(String nome, String email, String password, String genero, String nascimento, String endereco, String telefone, boolean estadoPerfil) throws UsuarioJaCadastradoException{
-        Usuario user = ctrlUser.cadastrarUser(nome, email, password, genero, nascimento, endereco, telefone, estadoPerfil);    
-        try {
-            serializer.gravar(ctrlUser.getGrafo());
-        } catch (IOException ex) {
-            System.out.println(ex);
-        }
-        
+        Usuario user = ctrlUser.cadastrarUser(nome, email, password, genero, nascimento, endereco, telefone, estadoPerfil);            
         return user;
-        
     }
     
     /**
@@ -72,11 +56,6 @@ public final class Facade {
      */
     public Usuario excluirUser(String email, String senha) throws UsuarioNaoCadastradoException, SenhaIncorretaException{
         Usuario user = ctrlUser.removerUser(email, senha);
-        try {
-           serializer.gravar(ctrlUser.getGrafo());
-        } catch (IOException ex) {
-            System.out.println(ex);
-        }
         return user;
     }
     
@@ -133,6 +112,10 @@ public final class Facade {
      */
     public ControllerUser getCtrlUser() {
         return ctrlUser;
+    }
+    
+    public Iterator listarUsuarios(){
+        return ctrlUser.getListaDeUsuarios();
     }
 
     /**
