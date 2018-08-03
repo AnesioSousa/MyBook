@@ -23,7 +23,7 @@ import view.Principal;
  * @author Anésio Sousa dos Santos Neto
  */
 public class ControllerTelaCadastro implements Initializable, TelaControlada{
-    private MainController mainController;
+    private PrincipalController mainController;
     private ControllerPalco meuControlador;
     
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
@@ -92,7 +92,7 @@ public class ControllerTelaCadastro implements Initializable, TelaControlada{
         }
 
         try {
-            mainController.criarUser(nomeTxtField.getText(), emailTxtField.getText(), senhaField.getText(), genero, formatter.format(aniversarioField.getValue()), endTxtField.getText(), telTextField.getText(), perfilSelect.isSelected());
+            mainController.criarUsuario(nomeTxtField.getText(), emailTxtField.getText(), senhaField.getText(), genero, formatter.format(aniversarioField.getValue()), endTxtField.getText(), telTextField.getText(), perfilSelect.isSelected());
         } catch (UsuarioJaCadastradoException ex) {
             System.out.println(ex);
         }
@@ -124,7 +124,7 @@ public class ControllerTelaCadastro implements Initializable, TelaControlada{
     }
 
     @Override
-    public void setControlador(MainController master) {
+    public void setControlador(PrincipalController master) {
         mainController = master;
     }
 }

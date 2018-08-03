@@ -16,36 +16,38 @@ import model.exceptions.UsuarioNaoCadastradoException;
  *
  * @author Anésio Sousa dos Santos Neto
  */
-public class MainController { // Tentar criar uns métodos estáticos aqui só pra ajudar
+public class PrincipalController { 
 
     private HashMap<Usuario, Parent> perfis;
     private ControllerPalco controllerPalco;
     private ControllerTelaNavegador controlNavegador;
+    private Parent navegador;
     private ControllerTelaLogin controlLogin;
     private Facade facade = new Facade();
 
 
-    public MainController() {
+    public PrincipalController() {
         controllerPalco = new ControllerPalco();
         controllerPalco.setControlador(this);
         perfis = new HashMap<>();
-        initPrimaryScenes();
-        updateProfiles();
+        inicializarCenasPrimarias();
+        atualizarPerfis();
     }
   
-    public Usuario criarUser(String nome, String email, String password, String genero, String nascimento, String endereco, String telefone, boolean estadoPerfil) throws UsuarioJaCadastradoException {
-        Usuario user = facade.registrarUser(nome, email, password, genero, nascimento, endereco, telefone, estadoPerfil);
-        criarPerfilUser(user);
-
-        return user;
-    }
-    
-    private void initPrimaryScenes(){
+    private void inicializarCenasPrimarias(){
         controllerPalco.armazenarTela("login", "/view/Login.fxml");
         controllerPalco.armazenarTela("cadastro", "/view/Cadastro.fxml");
     }
+  
+    public Usuario criarUsuario(String nome, String email, String password, String genero, String nascimento, String endereco, String telefone, boolean estadoPerfil) throws UsuarioJaCadastradoException {
+        Usuario user = facade.registrarUser(nome, email, password, genero, nascimento, endereco, telefone, estadoPerfil);
+        criarPerfil(user);
 
-    public void criarPerfilUser(Usuario user) {
+        return user;
+    }
+
+
+    public void criarPerfil(Usuario user) {
         FXMLLoader perfilLoader = new FXMLLoader(getClass().getResource("/view/Perfil.fxml"));
         Parent perfil = null;
         try {
@@ -89,22 +91,22 @@ public class MainController { // Tentar criar uns métodos estáticos aqui só p
         return facade.buscarUser(nome);
     }
 
-    public final void updateProfiles(){
+    public final void atualizarPerfis(){
         Iterator<Usuario> users = facade.listarUsuarios();
         
         while(users.hasNext()){
-            criarPerfilUser(users.next());
+            criarPerfil(users.next());
         }
     }
     public ControllerPalco getControllerPalco() {
         return controllerPalco;
     }
     
-    public boolean setScreen(String name){
+    public boolean exibirTela(String name){
         return controllerPalco.setScreen(name);
     }
     
-    public final void updateDataBase(){
+    public final void atualizarBaseDeDados(){
         facade.salvarAlteracoesGerais();
     }
 }

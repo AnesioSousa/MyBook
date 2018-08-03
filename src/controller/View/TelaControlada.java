@@ -6,5 +6,5 @@ package controller.View;
  */
 public interface TelaControlada {
     public void setControladorDeTelas(ControllerPalco screenMaster);
-    public void setControlador(MainController master);
+    public void setControlador(PrincipalController master);
 }

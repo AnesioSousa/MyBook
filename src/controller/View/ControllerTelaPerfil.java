@@ -22,7 +22,7 @@ public class ControllerTelaPerfil implements TelaControlada{
     private String caminhoFoto;
     private ImageView foto;
     
-    private MainController mainController;
+    private PrincipalController mainController;
     private ControllerPalco meuControlador;
     
     /**
@@ -63,7 +63,7 @@ public class ControllerTelaPerfil implements TelaControlada{
     }
 
     @Override
-    public void setControlador(MainController master) {
+    public void setControlador(PrincipalController master) {
         mainController = master;
     }
     

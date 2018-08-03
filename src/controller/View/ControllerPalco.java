@@ -14,7 +14,7 @@ import view.Principal;
  */
 public class ControllerPalco extends StackPane{
     private HashMap<String, Node> telas = new HashMap<>(); // Tá node, mas acho que Parent tb funfa
-    private MainController mainController;
+    private PrincipalController mainController;
 
     public ControllerPalco() {
         super();
@@ -82,7 +82,7 @@ public class ControllerPalco extends StackPane{
         return telas.containsKey(name);
     }
     
-    public void setControlador(MainController master) {
+    public void setControlador(PrincipalController master) {
         mainController = master;
     }
 }

@@ -1,6 +1,6 @@
 package view;
 
-import controller.View.MainController;
+import controller.View.PrincipalController;
 import java.util.Optional;
 import javafx.application.Application;
 import javafx.scene.Group;
@@ -18,14 +18,14 @@ import javafx.scene.image.ImageView;
 public class Principal extends Application {
 
     private static Stage stage;
-    private static MainController controladorPrincipal;
+    private static PrincipalController controladorPrincipal;
     
     @Override
     public void start(Stage primaryStage){
         stage = primaryStage;
         primaryStage.setTitle("Bem vindo ao MyBook!");
 
-        controladorPrincipal= new MainController();   
+        controladorPrincipal= new PrincipalController();   
         controladorPrincipal.getControllerPalco().setScreen("login");
         
         Group root = new Group();
@@ -54,7 +54,7 @@ public class Principal extends Application {
         alert.setContentText("Você tem certeza?");
         Optional<ButtonType> result = alert.showAndWait();
         if(result.get() == ButtonType.OK){
-            controladorPrincipal.updateDataBase();
+            controladorPrincipal.atualizarBaseDeDados();
             Platform.exit();
         }
     }

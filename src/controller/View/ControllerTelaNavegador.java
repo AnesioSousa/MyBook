@@ -29,7 +29,7 @@ import model.Usuario;
 public class ControllerTelaNavegador implements TelaControlada{
     private Usuario usuarioAtual;
     private ControllerPalco meuControlador;
-    private MainController mainController;
+    private PrincipalController mainController;
     
     @FXML private Button perfilBtn;
     @FXML private Button botaoBusca;
@@ -211,7 +211,7 @@ public class ControllerTelaNavegador implements TelaControlada{
     }
 
     @Override
-    public void setControlador(MainController master) {
+    public void setControlador(PrincipalController master) {
         mainController = master;
     }
 }

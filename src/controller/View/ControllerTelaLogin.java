@@ -20,7 +20,7 @@ import view.Principal;
  * @author Anésio Sousa dos Santos Neto
  */
 public class ControllerTelaLogin implements Initializable, TelaControlada{
-    private MainController mainController;
+    private PrincipalController mainController;
     private ControllerPalco meuControlador;
     
     @FXML private Label status;
@@ -93,7 +93,7 @@ public class ControllerTelaLogin implements Initializable, TelaControlada{
     }
 
     @Override
-    public void setControlador(MainController master) {
+    public void setControlador(PrincipalController master) {
         mainController = master;
     }
 }
