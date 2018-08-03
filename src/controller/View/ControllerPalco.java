@@ -18,7 +18,6 @@ public class ControllerPalco extends StackPane{
 
     public ControllerPalco() {
         super();
-        
     }
 
     // Adiciona uma tela à coleção

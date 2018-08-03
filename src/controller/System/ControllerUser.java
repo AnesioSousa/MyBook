@@ -150,4 +150,8 @@ public class ControllerUser {
             emailMap.put(user.getEmail(), user);
         }
     }
+    
+    public void saveDatabase(){
+        dados.gravar();
+    }
 }

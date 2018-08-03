@@ -20,7 +20,6 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import model.Usuario;
-import view.Principal;
 
 /**
  * FXML Controller class

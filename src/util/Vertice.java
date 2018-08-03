@@ -7,12 +7,11 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Classe responsável por criar objetos que são vértices de um grafo. 
- * Cada objeto vértice armazena um elemento e tem um mapa de todos os vertices adjacentes a ele.
- * @author Anésio Sousa dos Santos Neto
+ *
+ * @author anesio
  */
 public class Vertice implements Serializable{
-
+    
     private Object elemento;
     private HashMap<Vertice, Aresta> adjacencias;
 
@@ -25,7 +24,7 @@ public class Vertice implements Serializable{
     public Vertice(Object elem) {
         elemento = elem;
         adjacencias = new HashMap<>();
-    }
+}
 
     /**
      * Retorna o elemento que esse vértice guarda.

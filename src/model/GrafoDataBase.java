@@ -25,7 +25,7 @@ public final class GrafoDataBase {
     // Tem que ser a primeira coisa a executar! Tem que verificar a existencia.
     // Se não, criar arquivo, criar grafo, grava grafo no arquivo, se existe, só manda recuperar.
     
-    private void checkFile(){ // Esse cara tem que criar o grafo e o arquivo se o arquivo não existir. 
+    private final void checkFile(){ // Esse cara tem que criar o grafo e o arquivo se o arquivo não existir. 
         File f =  new File(FILE_NAME);
         if(!f.exists()){
             try {
@@ -41,7 +41,7 @@ public final class GrafoDataBase {
         }
     }
     
-    private void recuperar() { 
+    private final void recuperar() { 
         try {
             FileInputStream fileInput = new FileInputStream(FILE_NAME);
             ObjectInputStream objectInput = new ObjectInputStream(fileInput);
@@ -54,7 +54,7 @@ public final class GrafoDataBase {
         }
     }
    
-    public boolean gravar(){
+    public final boolean gravar(){
         try {
             FileOutputStream fileOutput = new FileOutputStream(FILE_NAME);
             ObjectOutputStream objectOutput = new ObjectOutputStream(fileOutput);

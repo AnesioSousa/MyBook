@@ -4,10 +4,10 @@ import java.io.Serializable;
 
 /**
  *
- * @author Anésio Sousa dos Santos Neto
+ * @author anesio
  */
 public class Aresta implements Serializable{
-
+    
     private Object dado;
     private Vertice origem;
     private Vertice destino;
@@ -16,7 +16,7 @@ public class Aresta implements Serializable{
         this.origem = origem;
         this.destino = destino;
         this.dado = element;
-    }
+}
 
     public Object getDado() {
         return dado;

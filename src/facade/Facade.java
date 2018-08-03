@@ -20,7 +20,7 @@ public final class Facade {
     
     /**
      * Construtor da classe Facade.
-     * Nele são inicializadas as grandesas do sistema.
+     * Nele são inicializadas as grandezas do sistema.
      */
     public Facade(){
         ctrlUser = new ControllerUser();
@@ -132,5 +132,9 @@ public final class Facade {
      */
     public Usuario getUsuarioAtual() {
         return usuarioAtual;
-    }    
+    }
+    
+    public void salvarAlteracoesGerais(){
+        ctrlUser.saveDatabase();
+    }
 }

@@ -10,7 +10,6 @@ import java.util.Map;
 
 /**
  * Classe responsável por criar objetos que são capazes de armazenar referencias de outros objetos e criar relações entre eles.
- * 
  * @author Anésio Sousa dos Santos Neto
  */
 public final class Grafo implements Serializable{

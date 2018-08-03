@@ -103,4 +103,8 @@ public class MainController { // Tentar criar uns métodos estáticos aqui só p
     public boolean setScreen(String name){
         return controllerPalco.setScreen(name);
     }
+    
+    public final void updateDataBase(){
+        facade.salvarAlteracoesGerais();
+    }
 }
