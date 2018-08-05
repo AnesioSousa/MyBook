@@ -134,7 +134,7 @@ public final class Facade {
         return usuarioAtual;
     }
     
-    public void salvarAlteracoesGerais(){
+    public void atualizarBaseDeDados(){
         ctrlUser.saveDatabase();
     }
 }

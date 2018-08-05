@@ -21,14 +21,14 @@ public class PrincipalController {
     private HashMap<Usuario, Parent> perfis;
     private ControllerPalco controllerPalco;
     private ControllerTelaNavegador controlNavegador;
-    private Parent navegador;
     private ControllerTelaLogin controlLogin;
-    private Facade facade = new Facade();
+    private Facade facade;
 
 
-    public PrincipalController() {
+    public PrincipalController(Facade fachada) {
         controllerPalco = new ControllerPalco();
         controllerPalco.setControlador(this);
+        facade = fachada;
         perfis = new HashMap<>();
         inicializarCenasPrimarias();
         atualizarPerfis();
@@ -83,9 +83,9 @@ public class PrincipalController {
         controllerPalco.setScreen("navegador");
     }
 
-    public void abrirPerfil(Usuario user) {  // SE FOR O MESMO USER LOGADO!
+    /*public void abrirPerfil(Usuario user) {  // SE FOR O MESMO USER LOGADO!
         controlNavegador.carregarPerfil(user);
-    }
+    }*/
     
     public List pesquisar(String nome){
         return facade.buscarUser(nome);
@@ -104,9 +104,5 @@ public class PrincipalController {
     
     public boolean exibirTela(String name){
         return controllerPalco.setScreen(name);
-    }
-    
-    public final void atualizarBaseDeDados(){
-        facade.salvarAlteracoesGerais();
     }
 }

@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.IOException;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -20,7 +21,8 @@ import model.Usuario;
 public class ControllerTelaPerfil implements TelaControlada{
     private Usuario meuUsuario;
     private String caminhoFoto;
-    private ImageView foto;
+    @FXML private ImageView foto;
+    @FXML private Label nome;
     
     private PrincipalController mainController;
     private ControllerPalco meuControlador;
@@ -32,6 +34,7 @@ public class ControllerTelaPerfil implements TelaControlada{
     public void initialize(Usuario user) {
         meuUsuario = user;
         caminhoFoto = meuUsuario.getUrlImagemPerfil();
+        nome.setText(meuUsuario.getNome());
     }
     
     @Override

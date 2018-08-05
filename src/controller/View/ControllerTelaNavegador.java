@@ -3,8 +3,8 @@ package controller.View;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
@@ -18,7 +18,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import model.Usuario;
 
 /**
@@ -38,7 +38,7 @@ public class ControllerTelaNavegador implements TelaControlada{
     @FXML private MenuButton contaMenu;
     @FXML private Button voltarBtn;
     @FXML private Button avancarBtn;
-    @FXML private AnchorPane contentPanel;
+    @FXML private VBox contentPanel;
     @FXML private ListView<Usuario> listaDeResultados;
     @FXML private TextField pesquisaTxtField;
     @FXML private Label lblLimpar;
@@ -48,14 +48,15 @@ public class ControllerTelaNavegador implements TelaControlada{
     
     private Usuario usuarioSelecionado;
     
-    private Map<Usuario, Parent> perfis;
+    private HashMap<Usuario, Parent> perfis;
     private List<Parent> historico = new ArrayList();
     
-    private final IntegerProperty idDePaginaAtual = new SimpleIntegerProperty(-1);
+    private final IntegerProperty idPaginaAtual = new SimpleIntegerProperty(-1);
+    private final IntegerProperty qtdDePaginas = new SimpleIntegerProperty(-1);
     
     // Esse método recebe um usuario para inicializar os dados do usuário logado.
-    public void initialize(Usuario user, HashMap perfis){
-        this.perfis = perfis;
+    public void initialize(Usuario user, HashMap conteudos){
+        this.perfis = conteudos;
         usuarioAtual = user;
         label.setText(usuarioAtual.getEmail());
         
@@ -64,8 +65,11 @@ public class ControllerTelaNavegador implements TelaControlada{
         // solicitações
         // notificações
         
-        carregarPerfilUserLogado(usuarioAtual); // AI DEPOIS FAZER ISSO!
+        inicializarConteudo(usuarioAtual); // AI DEPOIS FAZER ISSO!
+        //construirTelasTeste();
         inicializarBotoes();
+        System.out.println("Subject "+historico.size());
+        
     }
     // TESTAR ISSO TUDO QUANDO A CARALHA DE AMIZADES ESTIVER FUNCIONAL!
         
@@ -81,57 +85,66 @@ public class ControllerTelaNavegador implements TelaControlada{
         dai depois tu só exibe esse parent quando for solicitado para abrir o perfil desse cara.
        *(mas cai no problema de se eu tiver uma view que não seja javafx, não teria como usar, já que Parent é do javafx)
     */
-    
-    private Parent atualizarActualContent(Usuario user){ 
-        Parent perfil = perfis.get(user); // Erro está aqui. Mesmo erro do obterUser.
-        contentPanel.getChildren().add(perfil); // Aqui o java está avisando que o que eu to tentando botar no contentePanel, é null.
-        historico.addAll(Arrays.asList(perfil)); // Ver depois se o all é necessário!
-        idDePaginaAtual.set(idDePaginaAtual.get()+1); // HISTORICO
-        
-        return perfil;
+    private void inicializarConteudo(Usuario user){
+        idPaginaAtual.set(0);
+        Parent perfil = perfis.get(user);
+        historico.add(perfil);
+        qtdDePaginas.set(historico.size());
+        contentPanel.getChildren().add(historico.get(idPaginaAtual.get()));
     }
     
-    private void carregarPerfilUserLogado(Usuario userAtual){
-        atualizarActualContent(userAtual);
+    private void construirTelasTeste(){
+        Iterator<Parent> itr = perfis.values().iterator();
+        while(itr.hasNext()){
+            historico.addAll(Arrays.asList(itr.next()));
+        }
+        qtdDePaginas.set(historico.size());
     }
-
+    
     public void carregarPerfil(Usuario user){ 
-        contentPanel.getChildren().remove(historico.get(idDePaginaAtual.get()));
-        atualizarActualContent(user);
+        Parent perfil = perfis.get(user); 
+        historico.addAll(Arrays.asList(perfil)); // Ver depois se o all é necessário!
+        qtdDePaginas.set(historico.size());
+        System.out.println("Tamanho do histórico:" +historico.size());
+        System.out.println("Qtd de páginas:" +qtdDePaginas.get());
+        proximaPagina();
+    }
+    
+    private void limparHistorico(){
+        historico.clear();
     }
     
     private void limparNavegador(){
         usuarioAtual = null;
-        //contentPanel.getChildren().clear();
-        historico.clear();
-        idDePaginaAtual.set(-1);
-        contentPanel.getChildren().add(label); //AAQUUIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+        contentPanel.getChildren().clear();
+        idPaginaAtual.set(-1);
+        limparHistorico();
+        limparPesquisa();
     }
         
-    private void inicializarBotoes() {
+    private void inicializarBotoes() { // Receber tamanho da lista e atualizar o avançar, caso não de certo.
         // Desativa o botão de voltar automaticamente caso não haja página atual ou a página atual seja a primeira.
-        voltarBtn.disableProperty().bind(idDePaginaAtual.lessThanOrEqualTo(0)); 
+        voltarBtn.disableProperty().bind(idPaginaAtual.lessThanOrEqualTo(0)); 
         // Desativa o botão de avançar automaticamente caso a página atual seja a última.
-        avancarBtn.disableProperty().bind(idDePaginaAtual.greaterThanOrEqualTo(historico.size()-1)); 
+        avancarBtn.disableProperty().bind(idPaginaAtual.greaterThanOrEqualTo(qtdDePaginas.get()-1));
     }
 
     @FXML
     public void proximaPagina() { // Vai percorrer páginas já abertas (HISTÓRICO).
-        if(idDePaginaAtual.get() < (historico.size()-1)){
-            contentPanel.getChildren().remove(historico.get(idDePaginaAtual.get())); // Remove da visualização a página atual.
-            idDePaginaAtual.set(idDePaginaAtual.get()+1); // Move o indicador de página atual para a proxima página.
-            contentPanel.getChildren().add(historico.get(idDePaginaAtual.get())); // Adiciona a visualização a página que o indicador de página atual marca.
-            //conteudoAtual = contentPanel;
+        if(idPaginaAtual.get() < (historico.size()-1)){
+            contentPanel.getChildren().remove(historico.get(idPaginaAtual.get())); // Remove da visualização a página atual.
+            idPaginaAtual.set(idPaginaAtual.get()+1); // Move o indicador de página atual para a proxima página.
+            contentPanel.getChildren().add(historico.get(idPaginaAtual.get())); // Adiciona a visualização a página que o indicador de página atual marca.
+            System.out.println("Página atual: "+idPaginaAtual.get());
         }
     }
     
     @FXML
     public void paginaAnterior() { // Vai percorrer páginas já abertas (HISTÓRICO).
-        if(idDePaginaAtual.get() > 0){
-            contentPanel.getChildren().remove(historico.get(idDePaginaAtual.get()));
-            idDePaginaAtual.set(idDePaginaAtual.get() -1);
-            contentPanel.getChildren().add(historico.get(idDePaginaAtual.get()));
-            //conteudoAtual = contentPanel;
+        if(idPaginaAtual.get() > 0){
+            contentPanel.getChildren().remove(historico.get(idPaginaAtual.get()));
+            idPaginaAtual.set(idPaginaAtual.get() -1);
+            contentPanel.getChildren().add(historico.get(idPaginaAtual.get()));
         }
     }
     
@@ -158,7 +171,8 @@ public class ControllerTelaNavegador implements TelaControlada{
         btnAbrirPerfil.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                mainController.abrirPerfil(usuarioSelecionado);
+                //mainController.abrirPerfil(usuarioSelecionado);
+                carregarPerfil(usuarioSelecionado);
             }
         });
     }
