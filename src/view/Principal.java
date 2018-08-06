@@ -56,7 +56,7 @@ public class Principal extends Application {
         alert.setContentText("Você tem certeza?");
         Optional<ButtonType> result = alert.showAndWait();
         if(result.get() == ButtonType.OK){
-            //facade.atualizarBaseDeDados();
+            facade.atualizarBaseDeDados();
             Platform.exit();
         }
     }

@@ -67,29 +67,15 @@ public class ControllerTelaNavegador implements TelaControlada{
         
         inicializarConteudo(usuarioAtual); // AI DEPOIS FAZER ISSO!
         //construirTelasTeste();
-        inicializarBotoes();
-        System.out.println("Subject "+historico.size());
-        
+        inicializarBotoes();        
     }
     // TESTAR ISSO TUDO QUANDO A CARALHA DE AMIZADES ESTIVER FUNCIONAL!
-        
-    // (Armazeno previamente os perfis dos users, justamente pra não ter que pegar todos os atributos dele pra formar o perfil.)
-    /* CARA COMO TU É BUUUUUUUUUUUUUUUUUUUUUUURRROOOOOOOOOOO
-        Tu antes tinha um campo de perfil, certo? beleza, ele era um objeto
-        perfil que tu criou. Só que tu deletou ele pq não viu mais sentido em ele existir, 
-        ja que não faria nada com ele dai era só montar um perfil na interface como parent 
-        e mostrar ele, certo? beleza, a parada aqui é que tu se debateu com o fato de que
-        os perfis estão salvos NA MEMÓOOORIAAA, é o mesmo problema do obter user. Mas se 
-        preocupa não, que eu te dou a solução:
-            Trás de volta o campo perfil do usuário, mas salva ali um Parent que é o perfil dele.
-        dai depois tu só exibe esse parent quando for solicitado para abrir o perfil desse cara.
-       *(mas cai no problema de se eu tiver uma view que não seja javafx, não teria como usar, já que Parent é do javafx)
-    */
+         
     private void inicializarConteudo(Usuario user){
         idPaginaAtual.set(0);
         Parent perfil = perfis.get(user);
         historico.add(perfil);
-        qtdDePaginas.set(historico.size());
+        qtdDePaginas.set(historico.size()-1);
         contentPanel.getChildren().add(historico.get(idPaginaAtual.get()));
     }
     
@@ -103,10 +89,8 @@ public class ControllerTelaNavegador implements TelaControlada{
     
     public void carregarPerfil(Usuario user){ 
         Parent perfil = perfis.get(user); 
-        historico.addAll(Arrays.asList(perfil)); // Ver depois se o all é necessário!
-        qtdDePaginas.set(historico.size());
-        System.out.println("Tamanho do histórico:" +historico.size());
-        System.out.println("Qtd de páginas:" +qtdDePaginas.get());
+        historico.add(perfil);
+        qtdDePaginas.set(historico.size()-1);
         proximaPagina();
     }
     
@@ -126,7 +110,7 @@ public class ControllerTelaNavegador implements TelaControlada{
         // Desativa o botão de voltar automaticamente caso não haja página atual ou a página atual seja a primeira.
         voltarBtn.disableProperty().bind(idPaginaAtual.lessThanOrEqualTo(0)); 
         // Desativa o botão de avançar automaticamente caso a página atual seja a última.
-        avancarBtn.disableProperty().bind(idPaginaAtual.greaterThanOrEqualTo(qtdDePaginas.get()-1));
+        avancarBtn.disableProperty().bind(qtdDePaginas.lessThanOrEqualTo(idPaginaAtual));//idPaginaAtual.greaterThanOrEqualTo(qtdDePaginas.get()-1));
     }
 
     @FXML
@@ -135,7 +119,6 @@ public class ControllerTelaNavegador implements TelaControlada{
             contentPanel.getChildren().remove(historico.get(idPaginaAtual.get())); // Remove da visualização a página atual.
             idPaginaAtual.set(idPaginaAtual.get()+1); // Move o indicador de página atual para a proxima página.
             contentPanel.getChildren().add(historico.get(idPaginaAtual.get())); // Adiciona a visualização a página que o indicador de página atual marca.
-            System.out.println("Página atual: "+idPaginaAtual.get());
         }
     }
     
