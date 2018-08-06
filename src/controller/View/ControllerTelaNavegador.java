@@ -257,7 +257,7 @@ public class ControllerTelaNavegador implements TelaControlada{
         alert.showAndWait();
         deslogar();
     }
-    
+        
     @FXML
     private void goToScreen1(){
         meuControlador.setScreen("login");

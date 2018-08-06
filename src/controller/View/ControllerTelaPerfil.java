@@ -4,6 +4,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import javafx.embed.swing.SwingFXUtils;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -43,7 +44,7 @@ public class ControllerTelaPerfil implements TelaControlada{
     }
         
     @FXML
-    protected void setImage(MouseEvent e) throws IOException{
+    protected void setImage(ActionEvent e) throws IOException{
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Escolha uma foto");
         fileChooser.getExtensionFilters().addAll(
@@ -68,11 +69,13 @@ public class ControllerTelaPerfil implements TelaControlada{
         foto.setImage(new Image(new File(caminho).toURI().toString()));
     }
     
-    private void showEditBtn(){
+    @FXML
+    public void showEditBtn(){
         btnEdit.setVisible(true);
     }
     
-    private void hideEditBtn(){
+    @FXML
+    public void hideEditBtn(){
         btnEdit.setVisible(false);
     }
     

@@ -8,22 +8,36 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<SplitPane dividerPositions="0.4174174174174174" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="465.0" minWidth="670.0" prefHeight="465.0" prefWidth="670.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="controller.View.ControllerTelaPerfil">
+<SplitPane dividerPositions="0.4174174174174174" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="465.0" minWidth="670.0" prefHeight="465.0" prefWidth="670.0" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml" fx:controller="controller.View.ControllerTelaPerfil">
   <items>
     <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="465.0" minWidth="230.0" prefHeight="465.0" prefWidth="230.0">
          <children>
-            <Label layoutX="27.0" layoutY="374.0" text="Arquivos" />
-            <Button layoutX="27.0" layoutY="399.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="121.0" style="-fx-background-color: #48A5EA; -fx-cursor: hand;" text="Visualizar" textFill="WHITE" />
-            <ListView layoutX="27.0" layoutY="133.0" prefHeight="230.0" prefWidth="178.0" />
-            <Label layoutX="26.0" layoutY="114.0" text="Amigos" />
-            <ImageView fx:id="foto" fitHeight="86.0" fitWidth="90.0" layoutX="73.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
+            <Label layoutX="10.0" layoutY="409.0" text="Arquivos" />
+            <Button layoutX="9.0" layoutY="427.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="121.0" style="-fx-background-color: #48A5EA; -fx-cursor: hand;" text="Visualizar" textFill="WHITE" />
+            <ListView layoutX="8.0" layoutY="139.0" prefHeight="133.0" prefWidth="211.0" />
+            <Label layoutX="9.0" layoutY="121.0" text="Amigos">
+               <font>
+                  <Font name="Lucida Sans Regular" size="13.0" />
+               </font></Label>
+            <ImageView fx:id="foto" fitHeight="112.0" fitWidth="110.0" layoutX="10.0" layoutY="5.0" onMouseEntered="#showEditBtn" onMouseExited="#hideEditBtn" pickOnBounds="true" AnchorPane.bottomAnchor="348.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="110.0" AnchorPane.topAnchor="5.0">
                <image>
                   <Image url="@Imagens/icons8-usuário-100.png" />
                </image>
             </ImageView>
-            <Label layoutX="81.0" layoutY="96.0" onMouseClicked="#setImage" style="-fx-cursor: hand;" text="alterarFoto" />
-            <Label fx:id="nome" layoutX="26.0" layoutY="18.0" text="Label" />
+            <Label fx:id="nome" layoutX="142.0" layoutY="70.0" prefHeight="23.0" prefWidth="48.0" text="Nome" />
+            <Button fx:id="btnEdit" layoutX="119.0" layoutY="5.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#setImage" prefHeight="23.0" prefWidth="23.0">
+               <graphic>
+                  <ImageView fitHeight="25.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Imagens/edit.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Label layoutX="9.0" layoutY="274.0" text="Sobre" />
+            <ListView layoutX="9.0" layoutY="294.0" prefHeight="112.0" prefWidth="211.0" />
          </children>
       </AnchorPane>
     <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="465.0" minWidth="440.0" prefHeight="465.0" prefWidth="440.0">
