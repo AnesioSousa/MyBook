@@ -52,8 +52,9 @@ public class Principal extends Application {
     private static void close(){
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Sair");
-        alert.setGraphic(new ImageView("view/Imagens/sad.png"));
-        alert.setContentText("Você tem certeza?");
+        alert.setHeaderText("Mas já? Fique mais um pouco...");
+        alert.setGraphic(new ImageView("/view/Imagens/exit.png"));
+        alert.setContentText("Deseja mesmo sair?");
         Optional<ButtonType> result = alert.showAndWait();
         if(result.get() == ButtonType.OK){
             facade.atualizarBaseDeDados();

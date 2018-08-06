@@ -5,6 +5,10 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
@@ -12,14 +16,27 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuButton;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.util.Pair;
 import model.Usuario;
+import model.exceptions.SenhaIncorretaException;
+import model.exceptions.UsuarioNaoCadastradoException;
 
 /**
  * FXML Controller class
@@ -102,6 +119,7 @@ public class ControllerTelaNavegador implements TelaControlada{
         usuarioAtual = null;
         contentPanel.getChildren().clear();
         idPaginaAtual.set(-1);
+        qtdDePaginas.set(-1);
         limparHistorico();
         limparPesquisa();
     }
@@ -110,7 +128,7 @@ public class ControllerTelaNavegador implements TelaControlada{
         // Desativa o botão de voltar automaticamente caso não haja página atual ou a página atual seja a primeira.
         voltarBtn.disableProperty().bind(idPaginaAtual.lessThanOrEqualTo(0)); 
         // Desativa o botão de avançar automaticamente caso a página atual seja a última.
-        avancarBtn.disableProperty().bind(qtdDePaginas.lessThanOrEqualTo(idPaginaAtual));//idPaginaAtual.greaterThanOrEqualTo(qtdDePaginas.get()-1));
+        avancarBtn.disableProperty().bind(qtdDePaginas.lessThanOrEqualTo(idPaginaAtual));
     }
 
     @FXML
@@ -171,20 +189,99 @@ public class ControllerTelaNavegador implements TelaControlada{
     }
     
     @FXML
-    public void deslogar(ActionEvent e){
+    public void deslogar(){
         mainController.deslogarUserAtual();
         limparNavegador();
-        goToScreen1(e);
+        goToScreen1();
     }
         
     @FXML
     public void excluirConta(ActionEvent e){
-        //f.excluirUser(); REVER ISSO!
-        goToScreen1(e);
+        // Cria a caixa de diálogo customizada.
+        Dialog<Pair<String, String>> dialog = new Dialog<>();
+        dialog.setTitle("Confirme que é você!");
+        dialog.setHeaderText("Digite os dados correspondentes a conta à ser excluída:");
+
+        // Escolhe o ícone.
+        dialog.setGraphic(new ImageView(this.getClass().getResource("/view/Imagens/login.png").toString()));
+
+        // Escolhe os tipos dos botões.
+        ButtonType deleteButtonType = new ButtonType("Excluir", ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().addAll(deleteButtonType, ButtonType.CANCEL);
+
+        // Cria os campos e as labels de user e senha
+        GridPane grid = new GridPane();
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(20, 150, 10, 10));
+
+        TextField email = new TextField();
+        email.setPromptText("Email");
+        PasswordField password = new PasswordField();
+        password.setPromptText("Password");
+
+        grid.add(new Label("Email:"), 0, 0);
+        grid.add(email, 1, 0);
+        grid.add(new Label("Password:"), 0, 1);
+        grid.add(password, 1, 1);
+
+        // Habilita/Desabilita o botão de exclusão dependendo se o email e a senha foram digitados.
+        Node deleteButton = dialog.getDialogPane().lookupButton(deleteButtonType);
+        deleteButton.setDisable(true);
+
+        // Faz a validação (usando a sintaxe lambda do Java 8).
+        email.textProperty().addListener((observable, oldValue, newValue) -> {
+            deleteButton.setDisable(newValue.trim().isEmpty());
+        });
+
+        dialog.getDialogPane().setContent(grid);
+
+        // Pede foco no campo de email por padrão.
+        Platform.runLater(() -> email.requestFocus());
+
+        // Converte o resultado em um par email-senha quando o botão de exclusão é clicado.
+        dialog.setResultConverter(dialogButton -> {
+            if (dialogButton == deleteButtonType) {
+                return new Pair<>(email.getText(), password.getText());
+            }
+            return null;
+        });
+
+        Optional<Pair<String, String>> result = dialog.showAndWait();
+
+        result.ifPresent(usernamePassword -> {
+            try {
+                mainController.excluirUsuario(usernamePassword.getKey(), usernamePassword.getValue());
+                dialogoDeDadosInseridosCorretamente();
+            } catch (UsuarioNaoCadastradoException | SenhaIncorretaException ex) {
+                dialogoDeDadosInseridosInvalidos();
+                
+            }
+        });
     }
      
+    private void dialogoDeDadosInseridosInvalidos(){
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle("Dados incorretos!");
+        alert.setHeaderText("Por favor, faça login novamente, e tente fazer a exlusão!");
+        alert.setContentText("Clique no botão OK ou feche essa janela para voltar à área de login...");
+
+        alert.showAndWait();
+        deslogar();
+    }
+    
+    private void dialogoDeDadosInseridosCorretamente(){
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("É triste ver você partir...");
+        alert.setHeaderText("Clique no botão OK ou feche essa janela para voltar à área de login:");
+        alert.setContentText("Até uma próxima!");
+        alert.setGraphic(new ImageView("/view/Imagens/cry.png"));
+        alert.showAndWait();
+        deslogar();
+    }
+    
     @FXML
-    private void goToScreen1(ActionEvent e){
+    private void goToScreen1(){
         meuControlador.setScreen("login");
     }
         

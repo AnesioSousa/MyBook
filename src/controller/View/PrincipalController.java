@@ -98,6 +98,17 @@ public class PrincipalController {
             criarPerfil(users.next());
         }
     }
+    
+    public void excluirUsuario(String email, String senha) throws UsuarioNaoCadastradoException, SenhaIncorretaException{
+        Usuario user = facade.excluirUser(email, senha);
+        excluirPerfil(user);
+    }
+    
+    private void excluirPerfil(Usuario user){
+        Parent aRemover = perfis.get(user);
+        perfis.remove(user, aRemover);
+    }
+    
     public ControllerPalco getControllerPalco() {
         return controllerPalco;
     }

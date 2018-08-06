@@ -9,7 +9,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<SplitPane dividerPositions="0.4174174174174174" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="465.0" minWidth="670.0" prefHeight="465.0" prefWidth="670.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.View.ControllerTelaPerfil">
+<SplitPane dividerPositions="0.4174174174174174" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="465.0" minWidth="670.0" prefHeight="465.0" prefWidth="670.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="controller.View.ControllerTelaPerfil">
   <items>
     <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="465.0" minWidth="230.0" prefHeight="465.0" prefWidth="230.0">
          <children>

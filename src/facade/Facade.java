@@ -55,6 +55,7 @@ public final class Facade {
      * @throws SenhaIncorretaException
      */
     public Usuario excluirUser(String email, String senha) throws UsuarioNaoCadastradoException, SenhaIncorretaException{
+        encerrarSessaoAtual();
         Usuario user = ctrlUser.removerUser(email, senha);
         return user;
     }
