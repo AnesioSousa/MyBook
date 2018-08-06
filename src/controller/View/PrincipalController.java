@@ -57,7 +57,7 @@ public class PrincipalController {
         }
         ControllerTelaPerfil controller = perfilLoader.getController();
         controller.setControladorDeTelas(controllerPalco);
-        controller.setControlador(this);
+        //controller.setControlador(this);
         controller.initialize(user);
         perfis.put(user, perfil);
     }
@@ -82,10 +82,6 @@ public class PrincipalController {
         controlNavegador.initialize(user, perfis);
         controllerPalco.setScreen("navegador");
     }
-
-    /*public void abrirPerfil(Usuario user) {  // SE FOR O MESMO USER LOGADO!
-        controlNavegador.carregarPerfil(user);
-    }*/
     
     public List pesquisar(String nome){
         return facade.buscarUser(nome);
