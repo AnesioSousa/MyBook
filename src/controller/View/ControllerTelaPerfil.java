@@ -7,10 +7,9 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javax.imageio.ImageIO;
 import model.Usuario;
@@ -24,8 +23,8 @@ public class ControllerTelaPerfil implements TelaControlada{
     private Usuario meuUsuario;
     private String caminhoFoto;
     @FXML private ImageView foto;
-    @FXML private Label nome;
     @FXML private Button btnEdit;
+    @FXML private ListView sobreView;
     
     private PrincipalController mainController;
     private ControllerPalco meuControlador;
@@ -38,35 +37,44 @@ public class ControllerTelaPerfil implements TelaControlada{
     public void initialize(Usuario user) {
         meuUsuario = user;
         caminhoFoto = meuUsuario.getUrlImagemPerfil();
-        nome.setText(meuUsuario.getNome());
-        if(caminhoFoto != null)
-            loadImage(caminhoFoto);
+        loadImage(caminhoFoto);
+        loadInfo(meuUsuario);
     }
         
     @FXML
-    protected void setImage(ActionEvent e) throws IOException{
+    public void setImage(ActionEvent e) throws IOException{
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Escolha uma foto");
         fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("All Images", "*.*"),
+                new FileChooser.ExtensionFilter("All", "*.*"),
                 new FileChooser.ExtensionFilter("JPG", "*.jpg"),
                 new FileChooser.ExtensionFilter("PNG", "*.png")
             );
         File file = fileChooser.showOpenDialog(null);
-        BufferedImage bufferedImage = ImageIO.read(file);
-        Image image = SwingFXUtils.toFXImage(bufferedImage, null);
-        foto.setImage(image);
         
-        caminhoFoto = file.getCanonicalPath();
-        saveImage(caminhoFoto);
+        if(file != null){
+            BufferedImage bufferedImage = ImageIO.read(file);
+            Image image = SwingFXUtils.toFXImage(bufferedImage, null);
+            foto.setImage(image);
+            caminhoFoto = file.getCanonicalPath();
+            saveImage(meuUsuario, caminhoFoto);
+        }
+        
     }
     
-    private void saveImage(String caminho){
-        meuUsuario.setUrlImagemPerfil(caminho);
+    private void loadInfo(Usuario user){
+        sobreView.getItems().addAll("Nome: "+user.getNome(),"Email: "+user.getEmail(),"Gênero: "+user.getGenero(), 
+        "Data de nascimento: "+user.getNascimento(),"Endereço: "+user.getEndereco(), "Telefone: "+user.getTelefone());
+    }
+    
+    private void saveImage(Usuario user, String caminho){
+        user.setUrlImagemPerfil(caminho);
     }
     
     private void loadImage(String caminho){
-        foto.setImage(new Image(new File(caminho).toURI().toString()));
+        if(caminho != null){
+            foto.setImage(new Image(new File(caminho).toURI().toString()));
+        }
     }
     
     @FXML

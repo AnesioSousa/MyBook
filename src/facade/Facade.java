@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import model.Usuario;
+import model.exceptions.CampoVazioException;
 import model.exceptions.SenhaIncorretaException;
 import model.exceptions.UsuarioJaCadastradoException;
 import model.exceptions.UsuarioNaoCadastradoException;
@@ -39,8 +40,9 @@ public final class Facade {
      * @param estadoPerfil
      * @return
      * @throws UsuarioJaCadastradoException
+     * @throws CampoVazioException
      */
-    public Usuario registrarUser(String nome, String email, String password, String genero, String nascimento, String endereco, String telefone, boolean estadoPerfil) throws UsuarioJaCadastradoException{
+    public Usuario registrarUser(String nome, String email, String password, String genero, String nascimento, String endereco, String telefone, boolean estadoPerfil) throws UsuarioJaCadastradoException, CampoVazioException{
         Usuario user = ctrlUser.cadastrarUser(nome, email, password, genero, nascimento, endereco, telefone, estadoPerfil);            
         return user;
     }

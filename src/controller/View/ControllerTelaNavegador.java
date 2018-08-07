@@ -39,6 +39,7 @@ public class ControllerTelaNavegador implements TelaControlada{
     @FXML private TextField pesquisaTxtField;
     @FXML private Label lblLimpar;
     @FXML private Button btnAbrirPerfil;
+    @FXML private MenuItem menuItemEditar;
     
     @FXML private Label label;
     
@@ -48,7 +49,7 @@ public class ControllerTelaNavegador implements TelaControlada{
     private List<Parent> historico = new ArrayList();
     
     private final IntegerProperty idPaginaAtual = new SimpleIntegerProperty(-1);
-    private final IntegerProperty qtdDePaginas = new SimpleIntegerProperty(-1);
+    private final IntegerProperty indexPaginas = new SimpleIntegerProperty(-1);
     
     // Esse método recebe um usuario para inicializar os dados do usuário logado.
     public void initialize(Usuario user, HashMap conteudos){
@@ -71,7 +72,7 @@ public class ControllerTelaNavegador implements TelaControlada{
         idPaginaAtual.set(0);
         Parent perfil = perfis.get(user);
         historico.add(perfil);
-        qtdDePaginas.set(historico.size()-1);
+        indexPaginas.set(historico.size()-1);
         contentPanel.getChildren().add(historico.get(idPaginaAtual.get()));
     }
     
@@ -80,14 +81,25 @@ public class ControllerTelaNavegador implements TelaControlada{
         while(itr.hasNext()){
             historico.addAll(Arrays.asList(itr.next()));
         }
-        qtdDePaginas.set(historico.size());
+        indexPaginas.set(historico.size());
     }
     
     public void carregarPerfil(Usuario user){ 
-        Parent perfil = perfis.get(user); 
+        Parent perfil = perfis.get(user);
+        
+        if(idPaginaAtual.get() < indexPaginas.get()){
+            removerProximos(); 
+        }
+            
         historico.add(perfil);
-        qtdDePaginas.set(historico.size()-1);
+        indexPaginas.set(historico.size()-1);
         proximaPagina();
+    }
+    
+    private void removerProximos(){
+        for (int i = indexPaginas.get(); i > idPaginaAtual.get() ; i--) {
+            historico.remove(i);
+        }
     }
     
     private void limparHistorico(){
@@ -98,18 +110,20 @@ public class ControllerTelaNavegador implements TelaControlada{
         usuarioAtual = null;
         contentPanel.getChildren().clear();
         idPaginaAtual.set(-1);
-        qtdDePaginas.set(-1);
+        indexPaginas.set(-1);
         limparHistorico();
         limparPesquisa();
     }
         
-    private void inicializarBotoes() { // Receber tamanho da lista e atualizar o avançar, caso não de certo.
+    private void inicializarBotoes() {
         // Desativa o botão de voltar automaticamente caso não haja página atual ou a página atual seja a primeira.
         voltarBtn.disableProperty().bind(idPaginaAtual.lessThanOrEqualTo(0)); 
         // Desativa o botão de avançar automaticamente caso a página atual seja a última.
-        avancarBtn.disableProperty().bind(qtdDePaginas.lessThanOrEqualTo(idPaginaAtual));
+        avancarBtn.disableProperty().bind(indexPaginas.lessThanOrEqualTo(idPaginaAtual));
+        menuItemEditar.visibleProperty().bind(idPaginaAtual.isEqualTo(0));
+        
     }
-
+    
     @FXML
     public void proximaPagina() { // Vai percorrer páginas já abertas (HISTÓRICO).
         if(idPaginaAtual.get() < (historico.size()-1)){
@@ -156,12 +170,8 @@ public class ControllerTelaNavegador implements TelaControlada{
         });
     }
     
-    public void teste(){
-        System.out.println("A");
-    }
-    
     @FXML
-    public void limparPesquisa(){
+    private void limparPesquisa(){
         pesquisaTxtField.setText("");
         listaDeResultados.getItems().clear();
     }
@@ -237,11 +247,16 @@ public class ControllerTelaNavegador implements TelaControlada{
             }
         });
     }
+    
+    @FXML
+    private void editarPerfil(){
+
+    }
      
     private void dialogoDeDadosInseridosInvalidos(){
         Alert alert = new Alert(AlertType.ERROR);
         alert.setTitle("Dados incorretos!");
-        alert.setHeaderText("Por favor, faça login novamente, e tente fazer a exlusão!");
+        alert.setHeaderText("Por favor, faça login de novo, e tente fazer novamente a exlusão!");
         alert.setContentText("Clique no botão OK ou feche essa janela para voltar à área de login...");
 
         alert.showAndWait();

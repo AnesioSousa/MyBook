@@ -7,9 +7,11 @@ import model.exceptions.SenhaIncorretaException;
 import model.exceptions.UsuarioJaCadastradoException;
 import model.exceptions.UsuarioNaoCadastradoException;
 import java.util.Map;
+import java.util.stream.Stream;
 import model.Usuario;
 import util.Grafo;
 import model.GrafoDataBase;
+import model.exceptions.CampoVazioException;
 
 /**
  * Classe responsável por criar objetos capazes de manipular grafos e administrar usuários.
@@ -44,14 +46,20 @@ public class ControllerUser {
      * @param perfilEhPublico identifica se o usuário escolheu deixar o perfil público ou privado.
      * @return o usuário cadastrado caso já não exista um usuário com tal email na coleção.
      * @throws UsuarioJaCadastradoException lança essa exceção caso já não exista um usuário com tal email na coleção.
+     * @throws CampoVazioException
      */
-    public Usuario cadastrarUser(String nome, String email, String password, String genero, String nascimento, String endereco, String telefone, boolean perfilEhPublico) throws UsuarioJaCadastradoException{
+    public Usuario cadastrarUser(String nome, String email, String password, String genero, String nascimento, String endereco, String telefone, boolean perfilEhPublico) throws UsuarioJaCadastradoException, CampoVazioException{
         if(obterUser(email) == null){
-            Usuario user = new Usuario(nome, email, password, genero, nascimento, endereco, telefone, perfilEhPublico);
-            emailMap.put(email, user);
-            grafo.addVertex(user);
-            dados.gravar();
-            return user;
+            if(Stream.of(nome,email,password,genero,nascimento,endereco, telefone).allMatch(x -> x != null)){
+                Usuario user = new Usuario(nome, email, password, genero, nascimento, endereco, telefone, perfilEhPublico);
+                emailMap.put(email, user);
+                grafo.addVertex(user);
+                dados.gravar();
+                
+                return user;
+            }else{
+                throw new CampoVazioException();
+            }
         }else{
             throw new UsuarioJaCadastradoException();
         }

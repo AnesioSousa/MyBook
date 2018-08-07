@@ -8,6 +8,7 @@ import java.util.List;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import model.Usuario;
+import model.exceptions.CampoVazioException;
 import model.exceptions.SenhaIncorretaException;
 import model.exceptions.UsuarioJaCadastradoException;
 import model.exceptions.UsuarioNaoCadastradoException;
@@ -39,7 +40,7 @@ public class PrincipalController {
         controllerPalco.armazenarTela("cadastro", "/view/Cadastro.fxml");
     }
   
-    public Usuario criarUsuario(String nome, String email, String password, String genero, String nascimento, String endereco, String telefone, boolean estadoPerfil) throws UsuarioJaCadastradoException {
+    public Usuario criarUsuario(String nome, String email, String password, String genero, String nascimento, String endereco, String telefone, boolean estadoPerfil) throws UsuarioJaCadastradoException, CampoVazioException {
         Usuario user = facade.registrarUser(nome, email, password, genero, nascimento, endereco, telefone, estadoPerfil);
         criarPerfil(user);
 
