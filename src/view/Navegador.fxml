@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="545.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.View.ControllerTelaNavegador">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="545.0" prefWidth="900.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="controller.View.ControllerTelaNavegador">
    <bottom>
       <ToolBar minHeight="40.0" minWidth="200.0" prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <items>
@@ -30,7 +30,7 @@
    <top>
       <ToolBar minHeight="40.0" minWidth="665.0" prefHeight="40.0" prefWidth="692.0" style="-fx-background-color: #48A5EA;" BorderPane.alignment="CENTER">
          <items>
-            <Pane prefHeight="30.0" prefWidth="255.0">
+            <Pane prefHeight="28.0" prefWidth="406.0">
                <children>
                   <Label layoutX="80.0" layoutY="6.0" text="MyBook" textFill="WHITE">
                      <font>
@@ -66,9 +66,9 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="29.0" prefWidth="471.0" style="-fx-background-color: #48A5EA;">
+            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="29.0" prefWidth="340.0" style="-fx-background-color: #48A5EA;">
                <children>
-                  <MenuButton fx:id="contaMenu" layoutX="421.0" layoutY="1.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="26.0" prefWidth="55.0" style="-fx-cursor: hand;">
+                  <MenuButton fx:id="contaMenu" layoutX="280.0" layoutY="1.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="26.0" prefWidth="55.0" style="-fx-cursor: hand;">
                     <items>
                         <MenuItem fx:id="menuItemEditar" mnemonicParsing="false" text="Editar perfil" />
                       <MenuItem mnemonicParsing="false" onAction="#excluirConta" text="Excluir conta" />
@@ -82,14 +82,13 @@
                         </ImageView>
                      </graphic>
                   </MenuButton>
-                  <Label fx:id="label" layoutX="41.0" layoutY="8.0" text="Label" />
                </children>
             </Pane>
          </items>
       </ToolBar>
    </top>
    <right>
-      <AnchorPane prefHeight="465.0" prefWidth="225.0">
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="465.0" prefWidth="225.0">
          <children>
             <TextField fx:id="pesquisaTxtField" layoutX="25.0" layoutY="82.0" prefHeight="25.0" prefWidth="177.0" promptText="Vamos lá, pesquise!" />
             <ListView fx:id="listaDeResultados" layoutX="25.0" layoutY="166.0" prefHeight="268.0" prefWidth="176.0" />

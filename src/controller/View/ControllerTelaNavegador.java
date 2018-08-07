@@ -55,7 +55,6 @@ public class ControllerTelaNavegador implements TelaControlada{
     public void initialize(Usuario user, HashMap conteudos){
         this.perfis = conteudos;
         usuarioAtual = user;
-        label.setText(usuarioAtual.getEmail());
         
         // CARREGOU AS FUNCIONALIDADES DO NAVEGADOR COM AS INFORMAÇÕES DO USER ATUAL
         // configurou botão home

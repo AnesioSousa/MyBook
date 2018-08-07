@@ -15,7 +15,7 @@
    <center>
       <AnchorPane prefHeight="350.0" prefWidth="330.0" BorderPane.alignment="CENTER">
          <children>
-            <TextField fx:id="emailTxtField" layoutX="76.0" layoutY="114.0" minHeight="-Infinity" onMouseClicked="#esconderStatus" prefHeight="26.0" prefWidth="187.0" />
+            <TextField fx:id="emailTxtField" layoutX="76.0" layoutY="114.0" minHeight="-Infinity" onAction="#fazerLogin" onMouseClicked="#esconderStatus" prefHeight="26.0" prefWidth="187.0" />
             <PasswordField fx:id="senhaField" layoutX="76.0" layoutY="161.0" minHeight="-Infinity" onAction="#fazerLogin" onMouseClicked="#esconderStatus" prefHeight="26.0" prefWidth="188.0">
                <font>
                   <Font size="9.0" />
