@@ -4,10 +4,13 @@
  */
 package controller.System;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.exceptions.SenhaIncorretaException;
 import model.exceptions.UsuarioJaCadastradoException;
 import model.exceptions.UsuarioNaoCadastradoException;
 import model.Usuario;
+import model.exceptions.CampoVazioException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,9 +21,19 @@ import static org.junit.Assert.*;
  * @author Anésio Sousa dos Santos Neto
  */
 public class ControllerUserTest {
-
+    ControllerUser ctrl;
+    
     @Before
-    public void setUp() {
+    public void setUp() throws SenhaIncorretaException, UsuarioJaCadastradoException, CampoVazioException {
+        ctrl = new ControllerUser();
+        try {
+            Usuario u = ctrl.checarDados("teste.com","123");
+            if( u != null){
+                ctrl.removerUser("teste.com", "123");
+            }
+        } catch (UsuarioNaoCadastradoException ex) {
+            ctrl.cadastrarUser("Anésio Sousa", "teste.com", "123", "Masculino", "00/00/00", "Rua dos bobos número 0", "(75) 90000-0000", true);
+        }
     }
 
     @After
@@ -30,13 +43,14 @@ public class ControllerUserTest {
     /**
      * Teste do método cadastrarUser, da classe ControllerUser.
      *
-     * @throws model.exceptions.UsuarioJaCadastradoException
+     * @throws UsuarioJaCadastradoException
+     * @throws CampoVazioException
      */
     @Test(expected = UsuarioJaCadastradoException.class)
 
-    public void testCadastrarUser() throws UsuarioJaCadastradoException {
+    public void testCadastrarUser() throws UsuarioJaCadastradoException, CampoVazioException, UsuarioNaoCadastradoException, SenhaIncorretaException {
         String nome = "Anésio Sousa";
-        String email = "anesios98@gmail.com";
+        String email = "teste.com";
         String password = "123";
         String genero = "Masculino";
         String nascimento = "00/00/00";
@@ -44,19 +58,16 @@ public class ControllerUserTest {
         String telefone = "(75) 90000-0000";
         boolean perfilEhPublico = false;
 
-        ControllerUser ctrl = new ControllerUser();
         Usuario u = ctrl.cadastrarUser(nome, email, password, genero, nascimento, endereco, telefone, perfilEhPublico);
 
         String expResult = "Anésio Sousa";
         String result = u.getNome();
         assertEquals(expResult, result);
-
-        int esperado = 1;
-        int resultado = ctrl.getQuantidadeUsers();
-        assertSame(esperado, resultado);
+        
+        assertNotNull(ctrl.checarDados("teste.com", "123"));
 
         nome = "Gustavo Lima";
-        email = "anesios98@gmail.com";
+        email = "teste.com";
         password = "e voce, tchêrere";
         genero = "Masculino";
         nascimento = "05/12/95";
@@ -65,23 +76,19 @@ public class ControllerUserTest {
         perfilEhPublico = true;
 
         Usuario b = ctrl.cadastrarUser(nome, email, password, genero, nascimento, endereco, telefone, perfilEhPublico);
-
-        esperado = 1;
-        resultado = ctrl.getQuantidadeUsers();
-        assertSame(esperado, resultado);
     }
 
     /**
      * Teste do método removerUser, da classe ControllerUser. Testa o recebimento de um email não cadastrado.
      *
-     * @throws model.exceptions.UsuarioNaoCadastradoException
-     * @throws model.exceptions.SenhaIncorretaException
-     * @throws model.exceptions.UsuarioJaCadastradoException
+     * @throws UsuarioNaoCadastradoException
+     * @throws SenhaIncorretaException
+     * @throws UsuarioJaCadastradoException
+     * @throws CampoVazioException
      */
     @Test(expected = UsuarioNaoCadastradoException.class)
-    public void testRemoverUser1() throws UsuarioNaoCadastradoException, SenhaIncorretaException, UsuarioJaCadastradoException {
-        ControllerUser ctrl = new ControllerUser();
-        ctrl.cadastrarUser("Anésio Sousa", "anesios98@gmail.com", "123", "Masculino", "00/00/00", "Rua dos bobos número 0", "(75) 90000-0000", false);
+    public void testRemoverUser1() throws UsuarioNaoCadastradoException, SenhaIncorretaException, UsuarioJaCadastradoException, CampoVazioException {
+        ctrl.cadastrarUser("Anésio Sousa", "teste.com", "123", "Masculino", "00/00/00", "Rua dos bobos número 0", "(75) 90000-0000", false);
 
         ctrl.removerUser("toinhoEhMaineiro@blogspot.com", "123");
 
@@ -90,55 +97,46 @@ public class ControllerUserTest {
     /**
      * Teste do método removerUser, da classe ControllerUser. Testa o recebimento de uma senha errada para um email cadastrado.
      *
-     * @throws model.exceptions.UsuarioNaoCadastradoException
-     * @throws model.exceptions.SenhaIncorretaException
-     * @throws model.exceptions.UsuarioJaCadastradoException
+     * @throws UsuarioNaoCadastradoException
+     * @throws SenhaIncorretaException
+     * @throws UsuarioJaCadastradoException
+     * @throws CampoVazioException
      */
     @Test(expected = SenhaIncorretaException.class)
-    public void testRemoverUser2() throws SenhaIncorretaException, UsuarioNaoCadastradoException, UsuarioJaCadastradoException {
-        ControllerUser ctrl = new ControllerUser();
-        ctrl.cadastrarUser("Anésio Sousa", "anesios98@gmail.com", "123", "Masculino", "00/00/00", "Rua dos bobos número 0", "(75) 90000-0000", false);
+    public void testRemoverUser2() throws SenhaIncorretaException, UsuarioNaoCadastradoException, UsuarioJaCadastradoException, CampoVazioException {
+        ctrl.cadastrarUser("Anésio Sousa", "teste.com", "123", "Masculino", "00/00/00", "Rua dos bobos número 0", "(75) 90000-0000", false);
 
-        ctrl.removerUser("anesios98@gmail.com", "44587");
+        ctrl.removerUser("teste.com", "44587");
     }
 
     /**
      * Teste do método removerUser, da classe ControllerUser. Testa o recebimento de uma senha correta para um email cadastrado.
      *
-     * @throws model.exceptions.UsuarioJaCadastradoException
-     * @throws model.exceptions.UsuarioNaoCadastradoException
-     * @throws model.exceptions.SenhaIncorretaException
+     * @throws UsuarioJaCadastradoException
+     * @throws UsuarioNaoCadastradoException
+     * @throws SenhaIncorretaException
+     * @throws CampoVazioException
      */
-    @Test
-    public void testRemoverUser3() throws UsuarioJaCadastradoException, UsuarioNaoCadastradoException, SenhaIncorretaException {
-        ControllerUser ctrl = new ControllerUser();
-        ctrl.cadastrarUser("Anésio Sousa", "anesios98@gmail.com", "123", "Masculino", "00/00/00", "Rua dos bobos número 0", "(75) 90000-0000", false);
+    @Test(expected = UsuarioNaoCadastradoException.class)
+    public void testRemoverUser3() throws UsuarioJaCadastradoException, UsuarioNaoCadastradoException, SenhaIncorretaException, CampoVazioException {
+        ctrl.cadastrarUser("Anésio Sousa", "teste.com", "123", "Masculino", "00/00/00", "Rua dos bobos número 0", "(75) 90000-0000", false);
         
-        int esperado = 1;
-        int resultado = ctrl.getQuantidadeUsers();
-        assertSame(esperado, resultado);
+        assertNotNull(ctrl.checarDados("teste.com", "123"));
 
-        ctrl.removerUser("anesios98@gmail.com", "123");
+        ctrl.removerUser("teste.com", "123");
 
-        esperado = 0;
-        resultado = ctrl.getQuantidadeUsers();
-        assertSame(esperado, resultado);
-        
+        assertNull(ctrl.checarDados("teste.com", "123"));
+                
     }
 
     /**
      * Teste do método obterUser, da classe ControllerUser.
-     * @throws model.exceptions.UsuarioJaCadastradoException
+     * @throws UsuarioJaCadastradoException
+     * @throws CampoVazioException
      */
     @Test
-    public void testObterUser() throws UsuarioJaCadastradoException {
-        ControllerUser ctrl = new ControllerUser();
-        Usuario u = ctrl.cadastrarUser("Anésio Sousa", "anesios98@gmail.com", "123", "Masculino", "00/00/00", "Rua dos bobos número 0", "(75) 90000-0000", false);
-        
-        Usuario esperado = u;
-        Usuario resultado = ctrl.obterUser("anesios98@gmail.com");
-        assertEquals(esperado, resultado);
-        
+    public void testObterUser() throws UsuarioJaCadastradoException, CampoVazioException {        
+        assertNull(ctrl.obterUser("teste.com"));        
     }
 
 }
